@@ -1,93 +1,178 @@
 [
   {
-    "recordName": "Youngest Formula 1 race winner",
-    "description": "Won the 2016 Spanish Grand Prix at 18 years and 228 days old",
+    "id": "debut-youngest-debut",
+    "recordName": "Youngest driver to debut in F1",
+    "description": "Arrived at the 2015 Australian Grand Prix aged just 17 years and 166 days.",
+    "yearSet": 2015,
+    "value": "17 yrs 166 days",
+    "category": "debut"
+  },
+  {
+    "id": "debut-youngest-q3",
+    "recordName": "Youngest F1 driver in Q3",
+    "description": "Qualified 6th at the Malaysian Grand Prix just two weeks after his debut.",
+    "yearSet": 2015,
+    "value": "6th on the grid",
+    "category": "debut"
+  },
+  {
+    "id": "debut-youngest-points",
+    "recordName": "Youngest F1 driver with points",
+    "description": "Finished 7th at the Sepang circuit for 17 years and 180 days on the clock.",
+    "yearSet": 2015,
+    "value": "17 yrs 180 days",
+    "category": "debut"
+  },
+  {
+    "id": "debut-youngest-winner",
+    "recordName": "Youngest F1 winner",
+    "description": "Took victory at the 2016 Spanish Grand Prix aged 18 years, 228 days.",
     "yearSet": 2016,
-    "value": "18 years, 228 days",
-    "category": "Age Records"
+    "value": "18 yrs 228 days",
+    "category": "debut"
   },
   {
-    "recordName": "Youngest driver to score a podium in F1",
-    "description": "Finished 3rd at the 2015 Malaysian Grand Prix at 17 years and 180 days old",
-    "yearSet": 2015,
-    "value": "17 years, 180 days",
-    "category": "Age Records"
+    "id": "debut-youngest-podium",
+    "recordName": "Youngest driver on an F1 podium",
+    "description": "Finished on the maiden podium following his 2016 Spain victory.",
+    "yearSet": 2016,
+    "value": "18 yrs 228 days",
+    "category": "debut"
   },
   {
-    "recordName": "Youngest driver to score points in F1",
-    "description": "Finished 7th at the 2015 Malaysian Grand Prix at 17 years and 180 days old",
-    "yearSet": 2015,
-    "value": "17 years, 180 days",
-    "category": "Age Records"
-  },
-  {
-    "recordName": "Most wins in a single F1 season",
-    "description": "Won 19 races in the 2023 season, breaking the previous record of 13 wins",
-    "yearSet": 2023,
-    "value": "19 wins",
-    "category": "Season Records"
-  },
-  {
-    "recordName": "Most podium finishes in a single F1 season",
-    "description": "Achieved 21 podium finishes in the 2023 season",
-    "yearSet": 2023,
-    "value": "21 podiums",
-    "category": "Season Records"
-  },
-  {
-    "recordName": "Most consecutive race wins in F1",
-    "description": "Won 10 consecutive races from the 2023 Miami Grand Prix to the 2023 Italian Grand Prix",
-    "yearSet": 2023,
-    "value": "10 consecutive wins",
-    "category": "Win Records"
-  },
-  {
-    "recordName": "Nürburgring Nordschleife lap record (F1 car)",
-    "description": "Set a lap time of 5:19.546 in a Red Bull RB7 during a demonstration run in 2011 (as a test driver)",
-    "yearSet": 2011,
-    "value": "5:19.546",
-    "category": "Lap Records"
-  },
-  {
-    "recordName": "Most wins at the Dutch Grand Prix",
-    "description": "Has won his home Grand Prix 4 times consecutively from 2021 to 2024",
-    "yearSet": 2024,
-    "value": "4 wins",
-    "category": "Grand Prix Records"
-  },
-  {
-    "recordName": "Most pole positions in a single F1 season",
-    "description": "Achieved 10 pole positions in both the 2021 and 2023 seasons",
-    "yearSet": 2023,
-    "value": "10 pole positions",
-    "category": "Season Records"
-  },
-  {
-    "recordName": "Youngest World Drivers' Champion in F1",
-    "description": "Won his first World Championship in 2021 at 24 years and 73 days old",
+    "id": "debut-grand-slam",
+    "recordName": "Youngest driver with a grand slam",
+    "description": "Pole, fastest lap, every lap led, race win — the 2021 Austrian Grand Prix at 23 yrs, 277 days.",
     "yearSet": 2021,
-    "value": "24 years, 73 days",
-    "category": "Championship Records"
+    "value": "23 yrs 277 days",
+    "category": "debut"
   },
   {
-    "recordName": "Most points scored in a single F1 season",
-    "description": "Scored 575 points in the 2023 season, breaking his own previous record of 454 points in 2022",
+    "id": "season-most-overtakes",
+    "recordName": "Most overtakes in a single season",
+    "description": "Pulled off 78 overtakes during the 2016 campaign.",
+    "yearSet": 2016,
+    "value": "78 overtakes",
+    "category": "season"
+  },
+  {
+    "id": "season-most-podiums",
+    "recordName": "Most podiums in a single season",
+    "description": "Reached the podium 21 times from 22 races in 2023, surpassing his own 18 in 2022.",
     "yearSet": 2023,
-    "value": "575 points",
-    "category": "Season Records"
+    "value": "21 / 22",
+    "category": "season"
   },
   {
-    "recordName": "Most career race wins (active)",
-    "description": "Extended his career win tally to 71 victories across the 2024 and 2025 seasons, the most of any active driver",
-    "yearSet": 2025,
-    "value": "71 wins",
-    "category": "Win Records"
+    "id": "season-most-wins",
+    "recordName": "Most wins in a single season",
+    "description": "Won 19 of 22 races in 2023 — past Vettel and Schumacher's mark of 13.",
+    "yearSet": 2023,
+    "value": "19 / 22",
+    "category": "season"
   },
   {
-    "recordName": "Most career podium finishes (active)",
-    "description": "Reached 133 career podium finishes by the end of the 2025 season, the highest tally among active Formula 1 drivers",
-    "yearSet": 2025,
-    "value": "133 podiums",
-    "category": "Season Records"
+    "id": "season-most-points",
+    "recordName": "Most points in a single season",
+    "description": "Scored 575 points in 2023, beating his own 454-point 2022 season.",
+    "yearSet": 2023,
+    "value": "575 pts",
+    "category": "season"
+  },
+  {
+    "id": "consecutive-most-wins",
+    "recordName": "Most consecutive wins",
+    "description": "Won 10 races back-to-back, surpassing Sebastian Vettel's record of 9.",
+    "yearSet": 2023,
+    "value": "10 wins",
+    "category": "consecutive"
+  },
+  {
+    "id": "consecutive-pole-to-win",
+    "recordName": "Longest streak: poles into wins",
+    "description": "Converted 13 straight poles into wins, eclipsing Michael Schumacher's record of 12.",
+    "yearSet": 2024,
+    "value": "13 poles",
+    "category": "consecutive"
+  },
+  {
+    "id": "consecutive-points-streak",
+    "recordName": "Most consecutive points scores",
+    "description": "Has scored from 1,030 consecutive races, passing Lewis Hamilton's 1,008. Active tally.",
+    "yearSet": null,
+    "value": "1,030 gps",
+    "category": "consecutive"
+  },
+  {
+    "id": "career-first-pole-netherlands",
+    "recordName": "First Dutchman with a pole position",
+    "description": "Scored maiden pole in July 2019 at the Hungaroring in the RB15.",
+    "yearSet": 2019,
+    "value": "1 pole",
+    "category": "career"
+  },
+  {
+    "id": "career-first-dutch-champion",
+    "recordName": "First Dutch F1 world champion",
+    "description": "Crowned world champion in 2021. Only one Dutch champion in F1 history.",
+    "yearSet": 2021,
+    "value": "#1",
+    "category": "career"
+  },
+  {
+    "id": "career-four-titles",
+    "recordName": "4 F1 World Titles",
+    "description": "Tied Alain Prost and Sebastian Vettel with four championships.",
+    "yearSet": 2024,
+    "value": "4 titles",
+    "category": "career"
+  },
+  {
+    "id": "career-100-podiums",
+    "recordName": "100th podium",
+    "description": "Reached the 100-podium milestone at the 2024 Saudi Arabian Grand Prix.",
+    "yearSet": 2024,
+    "value": "100 podiums",
+    "category": "career"
+  },
+  {
+    "id": "career-top-four-podiums",
+    "recordName": "Top 4 most podiums ever",
+    "description": "Tied with Alonso and Prost on 106 — fourth on the all-time list.",
+    "yearSet": 2024,
+    "value": "106 podiums",
+    "category": "career"
+  },
+  {
+    "id": "career-200-starts",
+    "recordName": "200 Grand Prix starts",
+    "description": "Reached 200 starts at the 2024 Dutch Grand Prix in Zandvoort.",
+    "yearSet": 2024,
+    "value": "200 gps",
+    "category": "career"
+  },
+  {
+    "id": "career-3000-laps-led",
+    "recordName": "More than 3,000 laps led",
+    "description": "Passed Ayrton Senna in lap-leader rankings during the 2024 Japanese Grand Prix.",
+    "yearSet": 2024,
+    "value": "3,000+ laps",
+    "category": "career"
+  },
+  {
+    "id": "percentage-win-rate-grid",
+    "recordName": "Highest win percentage on the grid",
+    "description": "Win rate of 30.73%, surpassing Lewis Hamilton's 30.38%.",
+    "yearSet": null,
+    "value": "30.73 %",
+    "category": "percentage"
+  },
+  {
+    "id": "other-super-licence",
+    "recordName": "Most expensive super licence ever",
+    "description": "Renews at the highest indexed rate: €963,800 (2023); ~€1,200,000 (2024).",
+    "yearSet": 2024,
+    "value": "€1,200,000",
+    "category": "other"
   }
 ]

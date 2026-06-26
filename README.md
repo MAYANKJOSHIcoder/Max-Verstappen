@@ -11,8 +11,8 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 | Section | Description |
 |---------|-------------|
 | 🏁 **Hero** | Animated **#33** number with lap-counter stats, chevron speed streak, and championship CTAs |
-| 🎥 **Championship Highlights** | Embedded YouTube highlight videos for each title run (2021–2024) plus the 2025 runner-up season |
-| 🏎️ **Red Bull Cars** | Interactive year selector + card grid for every car Max drove (2016–2025), with season stats (position, wins, podiums, points, poles) |
+| 🏆 **Championship Highlights** | Captioned highlight cards for each title run (2021–2024) plus the 2025 runner-up season |
+| 🏎️ **Red Bull Cars** | Interactive year selector + card grid for every car Max drove (2015–2025), with season stats (position, wins, podiums, points, poles) |
 | 🚀 **Career Journey** | Scroll-animated vertical timeline from go-kart prodigy (2005) through Toro Rosso to 4-time world champion |
 | 🏆 **Records** | Categorized record cards — Age Records, Season Records, Win Records, Lap Records, Grand Prix Records, Championship Records |
 | 🌐 **Dome Gallery** | 3D interactive dome photo viewer (drag/swipe to orbit) with filterable categories and lightbox |
@@ -90,7 +90,7 @@ max-verstappen-site/
 │   │   ├── Home.jsx / .css         # Orchestrator — renders all sections in scroll order
 │   │   ├── Cars.jsx / .css         # Interactive car grid
 │   │   ├── Journey.jsx / .css      # Animated career timeline
-│   │   ├── Records.jsx / .css     # Categorized record cards
+│   │   ├── Records.jsx / .css      # Categorized record cards
 │   │   └── Gallery.jsx / .css      # Filterable gallery with dome viewer
 │   ├── data/                # Static JSON data
 │   │   ├── cars.json        # Cars & season stats (2016–2025)
@@ -123,16 +123,20 @@ max-verstappen-site/
 
 ## 🎨 Theme Tokens
 
-Colors use **oklch** perceptual uniformity for consistent contrast across lightness ranges:
+Colors use **oklch** perceptual uniformity for consistent contrast across lightness ranges. The seven canonical Red Bull brand hex values are defined as the source of truth; the oklch tokens are the perceptually-uniform variants used in the UI.
 
 | Token | Value | Role |
 |-------|-------|------|
-| `--track-black` | oklch(9% 0.02 250) | Page background |
-| `--navy` | oklch(18% 0.06 250) | Deep navy surface |
-| `--red` | oklch(58% 0.19 35) | Hot orange-red accent |
-| `--yellow` | oklch(92% 0.04 70) | Warm gold highlight |
+| `--navy-blue` | `#0600EF` | Brand navy |
+| `--dark-navy` | `#040099` | Brand dark navy |
+| `--light-navy` | `#3a3aff` | Brand light navy |
+| `--red` | `#FF0000` / oklch(58% 0.19 35) | Brand red / hot orange-red accent |
+| `--yellow` | `#FFD700` / oklch(92% 0.04 70) | Brand yellow / warm gold highlight |
+| `--track-black` | oklch(12% 0.015 250) | Page background |
+| `--asphalt` | oklch(16% 0.02 250) | Card / section surfaces |
+| `--carbon` | oklch(20% 0.02 250) | Raised surfaces |
 
-Full token set lives in `src/styles/theme.css`.
+Full token set (including type, spacing, motion, and shadows) lives in `src/styles/theme.css`.
 
 ---
 
