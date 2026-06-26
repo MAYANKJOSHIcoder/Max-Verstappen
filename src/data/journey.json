@@ -1,0 +1,110 @@
+[
+  {
+    "year": 2005,
+    "category": "Go-Kart",
+    "title": "Started Go-Kart Racing",
+    "description": "Began competitive go-kart racing at just 4 years old in Hasselt, Belgium"
+  },
+  {
+    "year": 2008,
+    "category": "Go-Kart",
+    "title": "First Go-Kart Championship",
+    "description": "Won his first go-kart championship in the Belgian Cadet category"
+  },
+  {
+    "year": 2010,
+    "category": "Go-Kart",
+    "title": "European Go-Kart Champion",
+    "description": "Won the European KF3 Go-Kart Championship"
+  },
+  {
+    "year": 2011,
+    "category": "Go-Kart",
+    "title": "World Go-Kart Champion",
+    "description": "Won the WSK World Cup in the KF3 category, establishing himself as one of the top young drivers in the world"
+  },
+  {
+    "year": 2012,
+    "category": "Go-Kart",
+    "title": "KF2 European Champion",
+    "description": "Won the KF2 European Championship, moving up to more powerful go-karts"
+  },
+  {
+    "year": 2013,
+    "category": "F3",
+    "title": "FIA European F3 Championship Debut",
+    "description": "Made his debut in single-seater racing in the FIA European Formula 3 Championship, finishing 6th overall"
+  },
+  {
+    "year": 2014,
+    "category": "F3",
+    "title": "FIA European F3 Champion",
+    "description": "Won the FIA European Formula 3 Championship with 10 wins, 6 pole positions, and 16 podiums"
+  },
+  {
+    "year": 2015,
+    "category": "F1",
+    "title": "F1 Debut with Toro Rosso",
+    "description": "Made his Formula 1 debut with Scuderia Toro Rosso at just 17 years old, becoming the youngest driver in F1 history"
+  },
+  {
+    "year": 2016,
+    "category": "F1",
+    "title": "Promoted to Red Bull Racing",
+    "description": "Promoted to Red Bull Racing mid-season, winning his first race for the team at the Spanish Grand Prix"
+  },
+  {
+    "year": 2017,
+    "category": "F1",
+    "title": "First Full Season with Red Bull",
+    "description": "Completed his first full season with Red Bull Racing, finishing 6th in the championship with 1 win"
+  },
+  {
+    "year": 2018,
+    "category": "F1",
+    "title": "Breakthrough Season",
+    "description": "Finished 4th in the championship with 2 wins and 8 podiums, establishing himself as a top F1 driver"
+  },
+  {
+    "year": 2019,
+    "category": "F1",
+    "title": "First Championship Contender Season",
+    "description": "Finished 3rd in the championship with 3 wins and 9 podiums, winning his first World Championship contention"
+  },
+  {
+    "year": 2020,
+    "category": "F1",
+    "title": "Consistent Contender",
+    "description": "Finished 3rd in the championship with 2 wins and 11 podiums, continuing to challenge for the title"
+  },
+  {
+    "year": 2021,
+    "category": "F1",
+    "title": "First World Championship",
+    "description": "Won his first Formula 1 World Drivers' Championship, beating Lewis Hamilton in a dramatic final race"
+  },
+  {
+    "year": 2022,
+    "category": "F1",
+    "title": "Second World Championship",
+    "description": "Won his second World Championship with 15 wins, breaking the record for most wins in a single season"
+  },
+  {
+    "year": 2023,
+    "category": "F1",
+    "title": "Third World Championship",
+    "description": "Won his third World Championship with 19 wins, breaking his own record for most wins in a single season"
+  },
+  {
+    "year": 2024,
+    "category": "F1",
+    "title": "Fourth World Championship",
+    "description": "Won his fourth consecutive World Championship, cementing his status as one of the greatest F1 drivers of all time"
+  },
+  {
+    "year": 2025,
+    "category": "F1",
+    "title": "Runner-up in a title fight to the final races",
+    "description": "Finished second in the 2025 World Championship with 8 wins and 15 podiums, pushing Lando Norris to the final rounds in one of the closest battles of the modern era"
+  }
+]

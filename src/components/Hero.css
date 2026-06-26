@@ -1,0 +1,233 @@
+/* ============================================================
+   Hero — the signature element.
+   Giant red F1 race-number "33" + yellow chevron streak +
+   live lap-time counter + orchestrated page-load sequence.
+   ============================================================ */
+
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--spacing-xl) 0 var(--spacing-lg);
+}
+
+/* ---- Background treatment ---- */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(oklch(58% 0.19 35 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(92% 0.04 70 / 0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at 70% 40%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at 70% 40%, #000 0%, transparent 70%);
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, oklch(18% 0.06 250 / 0.45), transparent 55%),
+    radial-gradient(ellipse at 80% 30%, oklch(58% 0.19 35 / 0.18), transparent 50%),
+    linear-gradient(180deg, transparent 50%, var(--track-black) 100%);
+}
+
+/* ---- Layout ---- */
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+/* ---- Copy ---- */
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.hero-title br { display: block; }
+
+.hero-lead {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: var(--smoke);
+  max-width: 46ch;
+  line-height: 1.6;
+}
+
+/* ---- CTAs ---- */
+.hero-cta {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-sm);
+  transition: transform var(--dur-fast) var(--ease-out-quint),
+    background var(--dur-fast) var(--ease-out-quint),
+    box-shadow var(--dur-fast) var(--ease-out-quint);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.btn--primary {
+  background: var(--red);
+  color: var(--white);
+  box-shadow: var(--glow-red);
+}
+
+.btn--primary:hover {
+  background: var(--red-deep);
+  transform: translateY(-2px);
+  color: var(--white);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.btn--ghost:hover {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  transform: translateY(-2px);
+}
+
+/* ---- The "33" race number ---- */
+.hero-number-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+}
+
+.hero-streak {
+  position: absolute;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120%;
+  height: 220px;
+  opacity: 0.9;
+}
+
+.hero-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(10rem, 22vw, 20rem);
+  line-height: 0.85;
+  color: var(--red);
+  text-shadow:
+    0 0 60px oklch(58% 0.19 35 / 0.45),
+    0 30px 60px oklch(0% 0 0 / 0.6);
+  position: relative;
+  z-index: 1;
+  /* racing number panel */
+  -webkit-text-stroke: 2px oklch(92% 0.04 70 / 0.35);
+}
+
+/* ---- Stats strip (timing-board feel) ---- */
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--grid-line);
+}
+
+.hero-stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: var(--spacing-sm);
+  border-left: 2px solid var(--navy-soft);
+}
+
+.hero-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--yellow);
+  line-height: 1;
+}
+
+.hero-stat-suffix {
+  color: var(--signal);
+  margin-left: 2px;
+}
+
+.hero-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+/* ---- Responsive (breakpoints per CLAUDE.md: 360 / 768 / 1280) ---- */
+@media (max-width: 1280px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-lead { margin: 0 auto; }
+  .hero-cta { justify-content: center; }
+
+  .hero-number-wrap {
+    min-height: 240px;
+    order: -1;
+  }
+
+  .hero-stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-stats-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}

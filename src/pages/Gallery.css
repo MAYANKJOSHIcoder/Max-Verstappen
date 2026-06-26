@@ -1,0 +1,63 @@
+/* ============================================================
+   Gallery page — header, category filters, dome wrapper.
+   DomeGallery itself is styled in components/DomeGallery.css.
+   ============================================================ */
+
+.home-section-gallery {
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+.gallery-head {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .gallery-head {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: var(--spacing-xs) 0;
+  max-width: var(--maxw);
+}
+
+.filter-button {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.1rem;
+  background: var(--carbon);
+  color: var(--smoke);
+  border: 1px solid var(--grid-line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out-quint);
+}
+
+.filter-button:hover {
+  color: var(--white);
+  border-color: var(--navy-soft);
+}
+
+.filter-button.is-active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  box-shadow: var(--glow-red);
+}
+
+.gallery-head .section-lead {
+  max-width: 60ch;
+}

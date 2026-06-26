@@ -1,0 +1,260 @@
+/* ============================================================
+   Theme — F1 broadcast × Red Bull Racing
+   Palette, type, spacing, motion tokens
+   ============================================================ */
+
+/* ---- Typefaces ----
+   Formula1 Display is the official F1 typeface, served from the
+   F1 CDN. Bold for numbers/headings, Regular for sub-headings.
+   Inter for body copy. ui-monospace for telemetry-style figures. */
+@font-face {
+  font-family: 'Formula1 Display';
+  src: url('https://media.formula1.com/fonts/Formula1-Display-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Formula1 Display';
+  src: url('https://media.formula1.com/fonts/Formula1-Display-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
+  font-weight: 400 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Palette: F1 broadcast × Red Bull ----
+     The seven canonical brand hex values (per CLAUDE.md) are defined
+     first as the source of truth; the oklch tokens below are the
+     perceptually-uniform variants used in the UI. */
+
+  --navy-blue: #0600EF;          /* brand: Navy Blue */
+  --red: #FF0000;                /* brand: Red */
+  --yellow: #FFD700;             /* brand: Yellow */
+  --white: #FFFFFF;              /* brand: White */
+  --black: #000000;              /* brand: Black */
+  --dark-navy: #040099;          /* brand: Dark Navy */
+  --light-navy: #3a3aff;         /* brand: Light Navy */
+
+  /* oklch variants — tuned against the reference UI.
+     The hex brand tokens above are the canonical values; these are
+     the oklch equivalents used throughout the component styles. */
+  --track-black: oklch(9% 0.02 250);    /* page background — near-black with cool bias */
+  --asphalt: oklch(14% 0.025 250);     /* card / section surfaces */
+  --carbon: oklch(18% 0.025 250);      /* raised surfaces */
+  --grid-line: oklch(28% 0.02 250);    /* subtle track-grid texture + borders */
+
+  --navy: oklch(18% 0.06 250);        /* deep navy surface */
+  --navy-deep: oklch(14% 0.05 250);
+  --navy-soft: oklch(24% 0.07 250);
+  --red: oklch(58% 0.19 35);           /* hot orange-red accent — primary action */
+  --red-deep: oklch(48% 0.17 35);
+  --yellow: oklch(92% 0.04 70);        /* warm gold highlight */
+  --signal: oklch(96% 0.02 70);        /* brighter warm accent */
+  --smoke: oklch(72% 0.012 250);
+  --mist: oklch(52% 0.012 250);
+
+  /* ---- Type ---- */
+  --font-display: 'Formula1 Display', 'Arial Black', sans-serif;
+  --font-body: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Consolas, monospace;
+
+  /* ---- Spacing ---- */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* ---- Radius ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 2px 4px oklch(0% 0 0 / 0.45);
+  --shadow-md: 0 8px 20px oklch(0% 0 0 / 0.55);
+  --shadow-lg: 0 20px 50px oklch(0% 0 0 / 0.65);
+  --glow-red: 0 0 30px oklch(58% 0.19 35 / 0.35);
+  --glow-yellow: 0 0 30px oklch(92% 0.04 70 / 0.25);
+
+  /* ---- Motion ---- */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.3s;
+  --dur-med: 0.6s;
+
+  /* ---- Layout ---- */
+  --maxw: 1280px;
+  --rail: 4px; /* left accent rail width */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--track-black);
+  color: var(--white);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* faint track-grid texture */
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+  overflow-x: hidden;
+}
+
+/* ---- Type roles ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-weight: 700; }
+h2, h3, h4 { font-weight: 400; }
+
+p { color: var(--smoke); }
+
+a {
+  color: var(--yellow);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out-quint);
+}
+
+a:hover { color: var(--signal); }
+
+::selection {
+  background: var(--red);
+  color: var(--white);
+}
+
+/* ---- Responsive breakpoints (per CLAUDE.md) ----
+   Mobile: 360px  /  Tablet: 768px  /  Desktop: 1280px
+   The shared .container and typography rules below use these
+   three breakpoints so every page aligns to the same grid. */
+
+@media (max-width: 1280px) {
+  :root {
+    --maxw: 1024px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --maxw: 720px;
+    --spacing-lg: 3rem;
+    --spacing-xl: 5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --maxw: 320px;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+  }
+}
+
+/* ---- Shared layout ---- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 var(--spacing-sm); }
+}
+
+/* Eyebrow label — the small uppercase track-label used to tag sections */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  background: var(--red);
+  display: inline-block;
+}
+
+/* Section heading block */
+.section-head {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.section-head .section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Red left accent rail — the signature structural device */
+.rail {
+  position: relative;
+}
+
+.rail::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--rail);
+  background: linear-gradient(var(--red), var(--yellow));
+  border-radius: 0 2px 2px 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--track-black); }
+::-webkit-scrollbar-thumb { background: var(--navy-deep); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--red); }

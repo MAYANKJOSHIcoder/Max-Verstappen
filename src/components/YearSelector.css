@@ -1,0 +1,46 @@
+.year-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.year-selector-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.year-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.year-chip {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  background: var(--carbon);
+  color: var(--smoke);
+  border: 1px solid var(--grid-line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out-quint);
+}
+
+.year-chip:hover {
+  color: var(--white);
+  border-color: var(--navy-soft);
+}
+
+.year-chip.is-active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  box-shadow: var(--glow-red);
+}

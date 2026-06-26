@@ -1,0 +1,99 @@
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+.car-card { position: relative; }
+
+.car-image-frame {
+  margin: calc(-1 * var(--spacing-md));
+  margin-bottom: var(--spacing-sm);
+  overflow: hidden;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: var(--carbon);
+}
+
+.car-image-frame .card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0;
+  margin: 0;
+  transition: transform var(--dur-med) var(--ease-out-quint);
+}
+
+.car-card:hover .card-image {
+  transform: scale(1.04);
+}
+
+.champion-badge {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--track-black);
+  background: var(--yellow);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.car-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+}
+
+.position-pill {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.position-pill.gold {
+  background: var(--yellow);
+  color: var(--track-black);
+}
+
+.position-pill.silver {
+  background: oklch(78% 0.01 250);
+  color: var(--track-black);
+}
+
+.position-pill.bronze {
+  background: oklch(55% 0.08 50);
+  color: var(--white);
+}
+
+.position-pill.default {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.car-team {
+  color: var(--mist);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+@media (max-width: 1280px) {
+  .cars-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .cars-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 360px) {
+  .year-chip { padding: 0.25rem 0.5rem; font-size: 0.7rem; }
+}

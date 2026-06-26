@@ -1,0 +1,134 @@
+[
+  {
+    "year": 2015,
+    "carModel": "Toro Rosso STR10",
+    "team": "Scuderia Toro Rosso",
+    "championshipPosition": 12,
+    "points": 49,
+    "podiums": 0,
+    "wins": 0,
+    "polePositions": 0,
+    "imageUrl": "/images/cars/2015-verstappen-toro-rosso.webp"
+  },
+  {
+    "year": 2016,
+    "carModel": "Toro Rosso STR11",
+    "team": "Scuderia Toro Rosso",
+    "championshipPosition": 14,
+    "points": 62,
+    "podiums": 0,
+    "wins": 0,
+    "polePositions": 0,
+    "imageUrl": "/images/cars/2016-verstappen-toro-rosso.webp"
+  },
+  {
+    "year": 2016,
+    "carModel": "Red Bull Racing RB12",
+    "team": "Red Bull Racing",
+    "championshipPosition": 5,
+    "points": 147,
+    "podiums": 1,
+    "wins": 1,
+    "polePositions": 0,
+    "imageUrl": "/images/cars/2016-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2017,
+    "carModel": "Red Bull Racing RB13",
+    "team": "Red Bull Racing",
+    "championshipPosition": 6,
+    "points": 168,
+    "podiums": 4,
+    "wins": 1,
+    "polePositions": 0,
+    "imageUrl": "/images/cars/2017-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2018,
+    "carModel": "Red Bull Racing RB14",
+    "team": "Red Bull Racing",
+    "championshipPosition": 4,
+    "points": 249,
+    "podiums": 8,
+    "wins": 2,
+    "polePositions": 0,
+    "imageUrl": "/images/cars/2018-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2019,
+    "carModel": "Red Bull Racing RB15",
+    "team": "Red Bull Racing",
+    "championshipPosition": 3,
+    "points": 278,
+    "podiums": 9,
+    "wins": 3,
+    "polePositions": 1,
+    "imageUrl": "/images/cars/2019-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2020,
+    "carModel": "Red Bull Racing RB16",
+    "team": "Red Bull Racing",
+    "championshipPosition": 3,
+    "points": 214,
+    "podiums": 11,
+    "wins": 2,
+    "polePositions": 1,
+    "imageUrl": "/images/cars/2020-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2021,
+    "carModel": "Red Bull Racing RB16B",
+    "team": "Red Bull Racing",
+    "championshipPosition": 1,
+    "points": 395.5,
+    "podiums": 18,
+    "wins": 10,
+    "polePositions": 10,
+    "imageUrl": "/images/cars/2021-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2022,
+    "carModel": "Red Bull Racing RB18",
+    "team": "Red Bull Racing",
+    "championshipPosition": 1,
+    "points": 454,
+    "podiums": 17,
+    "wins": 15,
+    "polePositions": 7,
+    "imageUrl": "/images/cars/2022-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2023,
+    "carModel": "Red Bull Racing RB19",
+    "team": "Red Bull Racing",
+    "championshipPosition": 1,
+    "points": 575,
+    "podiums": 21,
+    "wins": 19,
+    "polePositions": 10,
+    "imageUrl": "/images/cars/2023-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2024,
+    "carModel": "Red Bull Racing RB20",
+    "team": "Red Bull Racing",
+    "championshipPosition": 1,
+    "points": 437,
+    "podiums": 16,
+    "wins": 9,
+    "polePositions": 8,
+    "imageUrl": "/images/cars/2024-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2025,
+    "carModel": "Red Bull Racing RB21",
+    "team": "Red Bull Racing",
+    "championshipPosition": 2,
+    "points": 415,
+    "podiums": 15,
+    "wins": 8,
+    "polePositions": 8,
+    "imageUrl": "/images/cars/2025-verstappen-red-bull.webp"
+  }
+]

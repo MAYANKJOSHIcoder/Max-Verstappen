@@ -1,0 +1,185 @@
+/* Home — sections below the hero */
+
+.home-section {
+  padding: var(--spacing-xl) 0;
+  position: relative;
+}
+
+.home-section + .home-section {
+  border-top: 1px solid var(--grid-line);
+}
+
+/* Interior pages, now rendered as scrollable sections of the single page */
+.home-section-section {
+  position: relative;
+  padding-top: var(--spacing-xl);
+}
+
+.home-section-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--grid-line), transparent);
+}
+
+/* Each interior page already ships its own .container, so we just
+   make sure the section itself doesn't double up padding. */
+.home-section-section .container {
+  padding-top: 0;
+}
+
+.section-lead {
+  color: var(--smoke);
+  font-size: 1.05rem;
+  max-width: 56ch;
+  margin-top: var(--spacing-xs);
+}
+
+/* ---- Highlights ---- */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+.highlight-card {
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--dur-med) var(--ease-out-quint),
+    border-color var(--dur-med) var(--ease-out-quint);
+}
+
+.highlight-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--red);
+}
+
+.highlight-year {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--track-black);
+  background: var(--yellow);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.highlight-caption {
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--smoke);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--grid-line);
+}
+
+/* ---- Feature nav ---- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+}
+
+.feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  color: var(--white);
+  overflow: hidden;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: transform var(--dur-med) var(--ease-out-quint),
+    border-color var(--dur-med) var(--ease-out-quint);
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(var(--red), var(--yellow));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--dur-med) var(--ease-out-quint);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: transparent;
+  color: var(--white);
+}
+
+.feature-card:hover::before {
+  transform: scaleY(1);
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--carbon);
+  color: var(--yellow);
+  border: 1px solid var(--grid-line);
+}
+
+.feature-card h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--white);
+}
+
+.feature-card p {
+  color: var(--smoke);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.feature-arrow {
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--red);
+  transition: transform var(--dur-fast) var(--ease-out-quint);
+}
+
+.feature-card:hover .feature-arrow {
+  transform: translateX(6px);
+  color: var(--yellow);
+}
+
+/* ---- Responsive (breakpoints per CLAUDE.md: 360 / 768 / 1280) ---- */
+@media (max-width: 1280px) {
+  .highlights-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 360px) {
+  .feature-card { padding: 1rem; }
+  .feature-card h3 { font-size: 1rem; }
+}

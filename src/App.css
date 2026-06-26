@@ -1,0 +1,63 @@
+/* Shared page-level layout — theme tokens come from styles/theme.css */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+main {
+  flex: 1;
+  padding: var(--spacing-xl) 0;
+}
+
+@media (max-width: 768px) {
+  main { padding: var(--spacing-lg) 0; }
+}
+
+/* Page header block — used on every interior page */
+.page-head {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.page-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--white);
+}
+
+.page-subtitle {
+  font-size: 1.15rem;
+  color: var(--smoke);
+  max-width: 60ch;
+}
+
+/* Generic card surface */
+.card-surface {
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+}
+
+/* Count-up stat figure */
+.stat-figure {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--yellow);
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Telemetry-style mono readout (lap times, points) */
+.telemetry {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}

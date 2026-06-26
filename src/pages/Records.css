@@ -1,0 +1,89 @@
+.record-category {
+  margin-bottom: var(--spacing-xl);
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 2px solid var(--red);
+  display: inline-block;
+}
+
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+}
+
+.record-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.record-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.record-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.record-year {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: bold;
+  color: var(--track-black);
+  background: var(--yellow);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.record-description {
+  color: var(--smoke);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  flex: 1;
+  margin-bottom: var(--spacing-sm);
+}
+
+.record-value {
+  background: var(--carbon);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm);
+  text-align: center;
+}
+
+.record-value-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--yellow);
+}
+
+@media (max-width: 1280px) {
+  .records-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .records-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 360px) {
+  .record-top { flex-direction: column; gap: 0.25rem; align-items: flex-start; }
+}

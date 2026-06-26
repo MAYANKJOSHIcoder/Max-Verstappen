@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode
+.idea
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Vite cache
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Claude project context
+CLAUDE.md
+IMPLEMENTATION.md
