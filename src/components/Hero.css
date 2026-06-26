@@ -6,12 +6,12 @@
 
 .hero {
   position: relative;
-  min-height: 88vh;
+  min-height: calc(100vh - 72px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  padding: var(--spacing-xl) 0 var(--spacing-lg);
+  padding: var(--spacing-lg) 0;
 }
 
 /* ---- Background treatment ---- */
@@ -21,23 +21,11 @@
   z-index: 0;
 }
 
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(oklch(58% 0.19 35 / 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(92% 0.04 70 / 0.05) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(circle at 70% 40%, #000 0%, transparent 70%);
-  -webkit-mask-image: radial-gradient(circle at 70% 40%, #000 0%, transparent 70%);
-}
-
 .hero-vignette {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, oklch(18% 0.06 250 / 0.45), transparent 55%),
-    radial-gradient(ellipse at 80% 30%, oklch(58% 0.19 35 / 0.18), transparent 50%),
+    radial-gradient(ellipse at 15% 50%, oklch(58% 0.19 35 / 0.12), transparent 55%),
     linear-gradient(180deg, transparent 50%, var(--track-black) 100%);
 }
 
@@ -118,7 +106,7 @@
 .btn--ghost {
   background: transparent;
   color: var(--white);
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: var(--grid-line);
 }
 
 .btn--ghost:hover {
@@ -133,7 +121,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 360px;
+  min-height: clamp(200px, 30vh, 360px);
 }
 
 .hero-streak {
@@ -149,6 +137,7 @@
 .hero-number {
   font-family: var(--font-display);
   font-weight: 700;
+  font-style: italic;
   font-size: clamp(10rem, 22vw, 20rem);
   line-height: 0.85;
   color: var(--red);
@@ -166,7 +155,7 @@
   position: relative;
   z-index: 1;
   margin-top: auto;
-  padding-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
   border-top: 1px solid var(--grid-line);
 }
 
@@ -181,7 +170,7 @@
   flex-direction: column;
   gap: 4px;
   padding-left: var(--spacing-sm);
-  border-left: 2px solid var(--navy-soft);
+  border-left: 2px solid var(--red);
 }
 
 .hero-stat-value {
@@ -216,7 +205,6 @@
   .hero-cta { justify-content: center; }
 
   .hero-number-wrap {
-    min-height: 240px;
     order: -1;
   }
 

@@ -86,7 +86,6 @@ const Hero = () => {
   return (
     <section className="hero" aria-label="Max Verstappen">
       <div className="hero-bg" aria-hidden="true">
-        <div className="hero-grid" />
         <div className="hero-vignette" />
       </div>
 
@@ -139,7 +138,7 @@ const Hero = () => {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            33
+            3
           </motion.span>
         </div>
       </div>

@@ -9,11 +9,6 @@
 
 main {
   flex: 1;
-  padding: var(--spacing-xl) 0;
-}
-
-@media (max-width: 768px) {
-  main { padding: var(--spacing-lg) 0; }
 }
 
 /* Page header block — used on every interior page */

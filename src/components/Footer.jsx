@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './Footer.css';
 
 const navLinks = [
-  { id: 'highlights', label: 'Championship Highlights' },
+  { id: 'highlights', label: 'Title runs' },
   { id: 'cars', label: 'Red Bull Cars' },
   { id: 'journey', label: 'Career Journey' },
   { id: 'records', label: 'Records' },

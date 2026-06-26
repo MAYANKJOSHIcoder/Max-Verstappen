@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: oklch(9% 0.02 250 / 0.72);
+  background: oklch(12% 0.015 250 / 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
@@ -29,8 +29,9 @@
 /* ---- Brand ---- */
 .navbar-brand {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
   color: var(--white);
   background: none;
   border: none;
@@ -39,31 +40,6 @@
   padding: 0;
   text-align: left;
 }
-
-.navbar-brand:hover .brand-number {
-  box-shadow: var(--glow-yellow);
-  transform: scale(1.05);
-}
-
-
-.brand-number {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.4rem;
-  color: var(--yellow);
-  background: var(--red);
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  box-shadow: var(--glow-red);
-  transition: box-shadow var(--dur-fast) var(--ease-out-quint),
-    transform var(--dur-fast) var(--ease-out-quint);
-}
-
 
 .brand-text {
   display: flex;
@@ -74,8 +50,9 @@
 .brand-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .brand-tag {
@@ -173,7 +150,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: oklch(9% 0.02 250 / 0.96);
+    background: oklch(12% 0.015 250 / 0.96);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--grid-line);
     padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);

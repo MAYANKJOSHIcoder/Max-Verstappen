@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './Navbar.css';
 
 const links = [
-  { id: 'highlights', label: 'Highlights' },
+  { id: 'highlights', label: 'Title runs' },
   { id: 'cars', label: 'Cars' },
   { id: 'journey', label: 'Journey' },
   { id: 'records', label: 'Records' },
@@ -48,6 +48,17 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Clear active link when the user scrolls back to the top of the page
+  // so that no nav item is highlighted while the hero is in view.
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY < 200) setActiveId('');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const scrollTo = (id) => {
     setIsMenuOpen(false);
     const el = document.getElementById(id);
@@ -64,11 +75,8 @@ const Navbar = () => {
           aria-label="Max Verstappen — back to top"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <span className="brand-number" aria-hidden="true">33</span>
-          <span className="brand-text">
-            <span className="brand-name">Max Verstappen</span>
-            <span className="brand-tag">4× World Champion</span>
-          </span>
+          <span className="brand-name">Max Verstappen</span>
+          <span className="brand-tag">4× World Champion</span>
         </button>
 
         <ul className={`navbar-links ${isMenuOpen ? 'is-open' : ''}`}>

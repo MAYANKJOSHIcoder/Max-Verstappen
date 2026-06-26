@@ -22,10 +22,10 @@ const features = [
 ];
 
 const highlights = [
-  { year: '2021', caption: 'First World Championship — a dramatic final-race duel with Lewis Hamilton.' },
-  { year: '2022', caption: 'Second title, clinched in Japan with a record 15 wins in a season.' },
-  { year: '2023', caption: 'Third consecutive crown, breaking his own record with 19 wins.' },
-  { year: '2024', caption: 'Fourth straight championship, sealed under the Las Vegas lights.' },
+  { year: '2021', caption: 'First World Championship — a dramatic final-race duel with Lewis Hamilton.', img: '/images/championships/2021-verstappen-championship.webp' },
+  { year: '2022', caption: 'Second title, clinched in Japan with a record 15 wins in a season.', img: '/images/championships/2022-verstappen-championship.webp' },
+  { year: '2023', caption: 'Third consecutive crown, breaking his own record with 19 wins.', img: '/images/championships/2023-verstappen-championship.webp' },
+  { year: '2024', caption: 'Fourth straight championship, sealed under the Las Vegas lights.', img: '/images/championships/2024-verstappen-championship.webp' },
   { year: '2025', caption: 'Runner-up in one of the closest modern battles, pushing to the final rounds.' },
 ];
 
@@ -74,28 +74,35 @@ const Home = () => {
 
       {/* Championship Highlights — the #highlights target the nav scrolls to */}
       <section id="highlights" className="home-section" aria-label="Championship highlights">
-        <motion.div className="section-head" {...fadeUp}>
-          <span className="eyebrow">Championships</span>
-          <h2 className="section-title">Title runs</h2>
-          <p className="section-lead">
-            Four consecutive world championships — the seasons that made Max a legend.
-          </p>
-        </motion.div>
+        <div className="container">
+          <motion.div className="section-head" {...fadeUp}>
+            <span className="eyebrow">Championships</span>
+            <h2 className="section-title">Title runs</h2>
+            <p className="section-lead">
+              Four consecutive world championships — the seasons that made Max a legend.
+            </p>
+          </motion.div>
 
-        <div className="highlights-grid">
-          {highlights.map((h, i) => (
-            <motion.article
-              key={h.year}
-              className="highlight-card"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span className="highlight-year">{h.year}</span>
-              <span className="highlight-caption">{h.caption}</span>
-            </motion.article>
-          ))}
+          <div className="highlights-grid">
+            {highlights.map((h, i) => (
+              <motion.article
+                key={h.year}
+                className="highlight-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {h.img ? (
+                  <img className="highlight-img" src={h.img} alt={h.caption} loading="lazy" />
+                ) : (
+                  <div className="highlight-img highlight-img--fallback" aria-hidden="true" />
+                )}
+                <span className="highlight-year">{h.year}</span>
+                <span className="highlight-caption">{h.caption}</span>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </section>
 

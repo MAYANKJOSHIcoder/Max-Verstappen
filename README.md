@@ -31,7 +31,7 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 
 | Tool | Purpose |
 |------|---------|
-| **React 19** | UI framework |
+| **React 18** | UI framework |
 | **Vite 8** | Build & dev server |
 | **Framer Motion** | Scroll & layout animations |
 | **@use-gesture/react** | Drag/swipe interaction for dome gallery |
@@ -79,20 +79,19 @@ npm run preview
 max-verstappen-site/
 ├── src/
 │   ├── components/          # Reusable UI components
-│   │   ├── Navbar.jsx       # Sticky top nav with smooth-scroll links
-│   │   ├── Footer.jsx       # Site disclaimer, quick links, credits
-│   │   ├── Hero.jsx         # #33 hero with lap-counter stats + chevron streak
-│   │   ├── Card.jsx         # Reusable card (cars, records, timeline)
-│   │   ├── YearSelector.jsx # Dropdown for filtering cars by season
-│   │   ├── VideoEmbed.jsx   # Responsive 16:9 YouTube embed
-│   │   ├── DomeGallery.jsx  # 3D dome photo viewer with drag interaction
-│   │   └── Icons.jsx        # SVG icon components
+│   │   ├── Navbar.jsx / .css       # Sticky top nav with smooth-scroll links
+│   │   ├── Footer.jsx / .css       # Site disclaimer, quick links, credits
+│   │   ├── Hero.jsx / .css         # #33 hero with lap-counter stats + chevron streak
+│   │   ├── Card.jsx / .css         # Reusable card (cars, records, timeline)
+│   │   ├── YearSelector.jsx / .css # Dropdown for filtering cars by season
+│   │   ├── DomeGallery.jsx / .css  # 3D dome photo viewer with drag interaction
+│   │   └── Icons.jsx               # SVG icon components
 │   ├── pages/               # Page sections (rendered by Home as scroll sections)
-│   │   ├── Home.jsx         # Orchestrator — renders all sections in scroll order
-│   │   ├── Cars.jsx         # Interactive car grid
-│   │   ├── Journey.jsx      # Animated career timeline
-│   │   ├── Records.jsx      # Categorized record cards
-│   │   └── Gallery.jsx      # Filterable gallery with dome viewer
+│   │   ├── Home.jsx / .css         # Orchestrator — renders all sections in scroll order
+│   │   ├── Cars.jsx / .css         # Interactive car grid
+│   │   ├── Journey.jsx / .css      # Animated career timeline
+│   │   ├── Records.jsx / .css     # Categorized record cards
+│   │   └── Gallery.jsx / .css      # Filterable gallery with dome viewer
 │   ├── data/                # Static JSON data
 │   │   ├── cars.json        # Cars & season stats (2016–2025)
 │   │   ├── journey.json     # Career timeline events (2005–2025)
@@ -100,10 +99,21 @@ max-verstappen-site/
 │   │   └── gallery.json     # Image URLs, captions, categories, credits
 │   ├── styles/
 │   │   └── theme.css        # Global tokens: palette, type, spacing, motion
-│   ├── App.jsx              # Root component (Navbar → Home → Footer)
-│   ├── App.css              # Layout shell styles
+│   ├── assets/              # Static images bundled by Vite
+│   │   └── hero.png         # Hero background image
+│   ├── main.jsx             # React DOM entry point
+│   ├── App.jsx / .css       # Root component (Navbar → Home → Footer)
 │   └── index.css            # Reset & base styles
-├── public/                  # Static assets (favicon, icons sprite)
+├── public/                  # Static assets served as-is
+│   ├── favicon.png
+│   ├── favicon.svg
+│   ├── icons.svg
+│   └── images/              # Gallery images by category
+│       ├── championships/
+│       ├── races/
+│       ├── podiums/
+│       ├── cars/
+│       └── behind-the-scenes/
 ├── .oxlintrc.json           # OxLint config (React + oxc plugins)
 ├── vite.config.js           # Vite + React plugin
 └── package.json

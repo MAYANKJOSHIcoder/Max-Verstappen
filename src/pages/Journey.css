@@ -47,7 +47,7 @@
   border-radius: 50%;
   border: 4px solid var(--track-black);
   z-index: 2;
-  box-shadow: 0 0 0 2px oklch(96% 0.005 250 / 0.1);
+  box-shadow: 0 0 0 2px var(--grid-line);
 }
 
 .timeline-item.left .timeline-marker { right: -11px; }
