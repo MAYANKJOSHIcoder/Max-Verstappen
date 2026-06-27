@@ -1,6 +1,6 @@
 # Max Verstappen — Unofficial Fan Site
 
-An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verstappen. Built with React + Vite and deployed to Vercel. Features an F1 broadcast-inspired design with Red Bull Racing branding, his complete Red Bull car collection, career timeline, records, and a 3D dome photo gallery.
+An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verstappen. Built with React + Vite and deployed to Vercel. Features an F1 broadcast-inspired design with Red Bull Racing branding, his complete Red Bull car collection, career timeline, records, and an interactive sphere photo gallery.
 
 **Live site:** deployed to Vercel (auto-deploys from `main`)
 
@@ -10,12 +10,12 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 
 | Section | Description |
 |---------|-------------|
-| 🏁 **Hero** | Animated **#33** number with lap-counter stats, chevron speed streak, and championship CTAs |
+| 🏁 **Hero** | Poster-style text composition with masked image overlay, eyebrow tag, and career stats strip |
 | 🏆 **Championship Highlights** | Captioned highlight cards for each title run (2021–2024) plus the 2025 runner-up season |
 | 🏎️ **Red Bull Cars** | Interactive year selector + card grid for every car Max drove (2015–2025), with season stats (position, wins, podiums, points, poles) |
 | 🚀 **Career Journey** | Scroll-animated vertical timeline from go-kart prodigy (2005) through Toro Rosso to 4-time world champion |
 | 🏆 **Records** | Categorized record cards — Age Records, Season Records, Win Records, Lap Records, Grand Prix Records, Championship Records |
-| 🌐 **Dome Gallery** | 3D interactive dome photo viewer (drag/swipe to orbit) with filterable categories and lightbox |
+| 🌐 **Sphere Gallery** | Interactive sphere photo wall (drag/swipe to orbit) with filterable categories and lightbox |
 
 ### Design
 
@@ -81,33 +81,27 @@ max-verstappen-site/
 │   ├── components/          # Reusable UI components
 │   │   ├── Navbar.jsx / .css       # Sticky top nav with smooth-scroll links
 │   │   ├── Footer.jsx / .css       # Site disclaimer, quick links, credits
-│   │   ├── Hero.jsx / .css         # #33 hero with lap-counter stats + chevron streak
-│   │   ├── Card.jsx / .css         # Reusable card (cars, records, timeline)
-│   │   ├── YearSelector.jsx / .css # Dropdown for filtering cars by season
-│   │   ├── DomeGallery.jsx / .css  # 3D dome photo viewer with drag interaction
-│   │   └── Icons.jsx               # SVG icon components
+│   │   ├── Hero.jsx / .css         # Poster-style hero with masked text + stats
+│   │   └── DomeGallery.jsx / .css  # Sphere photo wall with drag interaction
 │   ├── pages/               # Page sections (rendered by Home as scroll sections)
 │   │   ├── Home.jsx / .css         # Orchestrator — renders all sections in scroll order
-│   │   ├── Cars.jsx / .css         # Interactive car grid
+│   │   ├── Cars.jsx / .css         # Interactive car grid (includes Card + YearSelector)
 │   │   ├── Journey.jsx / .css      # Animated career timeline
-│   │   ├── Records.jsx / .css      # Categorized record cards
-│   │   └── Gallery.jsx / .css      # Filterable gallery with dome viewer
+│   │   ├── Records.jsx / .css      # Categorized record rows with search + filter
+│   │   └── Gallery.jsx / .css      # Filterable gallery with sphere viewer
 │   ├── data/                # Static JSON data
 │   │   ├── cars.json        # Cars & season stats (2016–2025)
 │   │   ├── journey.json     # Career timeline events (2005–2025)
 │   │   ├── records.json     # Record entries by category
 │   │   └── gallery.json     # Image URLs, captions, categories, credits
 │   ├── styles/
-│   │   └── theme.css        # Global tokens: palette, type, spacing, motion
+│   │   └── theme.css        # Global tokens: palette, type, spacing, motion, reset
 │   ├── assets/              # Static images bundled by Vite
-│   │   └── hero.png         # Hero background image
+│   │   └── Hero.png         # Hero background image
 │   ├── main.jsx             # React DOM entry point
-│   ├── App.jsx / .css       # Root component (Navbar → Home → Footer)
-│   └── index.css            # Reset & base styles
+│   └── App.jsx / .css       # Root component (Navbar → Home → Footer)
 ├── public/                  # Static assets served as-is
-│   ├── favicon.png
 │   ├── favicon.svg
-│   ├── icons.svg
 │   └── images/              # Gallery images by category
 │       ├── championships/
 │       ├── races/

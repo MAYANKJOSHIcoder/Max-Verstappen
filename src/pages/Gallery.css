@@ -21,33 +21,6 @@
   padding: var(--spacing-xs) 0;
 }
 
-.filter-button {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0.5rem 1.1rem;
-  background: var(--carbon);
-  color: var(--smoke);
-  border: 1px solid var(--grid-line);
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all var(--dur-fast) var(--ease-out-quint);
-}
-
-.filter-button:hover {
-  color: var(--white);
-  border-color: var(--navy-soft);
-}
-
-.filter-button.is-active {
-  background: var(--red);
-  color: var(--white);
-  border-color: var(--red);
-  box-shadow: var(--glow-red);
-}
-
 .gallery-head .section-lead {
   max-width: 60ch;
 }

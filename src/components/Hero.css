@@ -85,11 +85,6 @@
   display: block;
 }
 
-/* Lines stack centred — no horizontal split */
-.hero-line--max,
-.hero-line--verstappen {
-  transform: none;
-}
 
 /* White text behind image */
 .hero-title-fill {
@@ -98,7 +93,7 @@
   text-shadow: none;
 }
 
-/* Red outline offset forward — racing-motion parallax */
+/* Red outline — overlaps the fill text, creating a masked cutout effect */
 .hero-title-outline {
   z-index: 3;
   color: transparent;
@@ -194,9 +189,6 @@
     font-size: clamp(3rem, 10vw, 6rem);
     transform: translate(calc(-50% - 21px), -50%);
   }
-
-  .hero-line--max,
-  .hero-line--verstappen { transform: none; }
 
   .hero-overlap {
     min-height: clamp(180px, 28vh, 260px);

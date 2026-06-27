@@ -129,9 +129,3 @@
   .highlights-grid { grid-template-columns: 1fr; }
   .highlight-card:last-child:nth-child(odd) { max-width: none; }
 }
-
-@media (max-width: 768px) {
-}
-
-@media (max-width: 360px) {
-}

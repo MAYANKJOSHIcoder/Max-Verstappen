@@ -128,8 +128,4 @@
 
 @media (max-width: 360px) {
   .footer-cols { grid-template-columns: 1fr; }
-
-  .footer-cols {
-    grid-template-columns: 1fr;
-  }
 }

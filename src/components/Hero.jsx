@@ -28,7 +28,6 @@ const Hero = () => {
 
     <div className="hero-inner container">
       <div className="hero-top">
-        {/* MOVED: Eyebrow now sits at the very top */}
         <span className="eyebrow">4× World Champion · Red Bull Racing</span>
 
         <div className="hero-overlap" aria-hidden="true">

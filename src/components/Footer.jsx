@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './Footer.css';
 
 const navLinks = [
@@ -10,22 +9,9 @@ const navLinks = [
 ];
 
 const Footer = () => {
-  const [isTop, setIsTop] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => setIsTop(window.scrollY <= 0);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   const handleClick = (id) => {
-    if (id === 'top' || isTop) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
