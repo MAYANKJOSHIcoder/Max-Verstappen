@@ -3,23 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import recordsData from '../data/records.json';
 import './Records.css';
 
-const CATEGORY_LABELS = {
-  debut: 'Debut & Age',
-  season: 'Season',
-  consecutive: 'Consecutive',
-  career: 'Career Milestones',
-  percentage: 'Percentage',
-  other: 'Other',
+const CATEGORIES = {
+  debut: { label: 'Debut & Age', color: 'var(--red)' },
+  season: { label: 'Season', color: 'var(--yellow)' },
+  consecutive: { label: 'Consecutive', color: 'var(--navy-soft)' },
+  career: { label: 'Career Milestones', color: 'var(--signal)' },
+  percentage: { label: 'Percentage', color: 'oklch(60% 0.12 280)' },
+  other: { label: 'Other', color: 'var(--mist)' },
 };
-
-const CATEGORY_COLORS = {
-  debut: 'var(--red)',
-  season: 'var(--yellow)',
-  consecutive: 'var(--navy-soft)',
-  career: 'var(--signal)',
-  percentage: 'oklch(60% 0.12 280)',
-  other: 'var(--mist)',
-};
+const categoryLabel = (c) => CATEGORIES[c]?.label || c;
+const categoryColor = (c) => CATEGORIES[c]?.color || 'var(--red)';
 
 const Records = () => {
   const [search, setSearch] = useState('');
@@ -44,26 +37,18 @@ const Records = () => {
   }, [search, activeCategory]);
 
   const filteredBySection = useMemo(() => {
-    const sects = {};
-    categories
-      .filter((c) => c !== 'all')
-      .forEach((c) => {
-        sects[c] = [];
-      });
-    filteredRecords.forEach((r) => {
-      if (!sects[r.category]) sects[r.category] = [];
-      sects[r.category].push(r);
-    });
-    return Object.fromEntries(
-      Object.entries(sects).filter(([, arr]) => arr.length)
-    );
-  }, [filteredRecords, categories]);
+    const out = {};
+    for (const r of filteredRecords) {
+      (out[r.category] ||= []).push(r);
+    }
+    return out;
+  }, [filteredRecords]);
 
   const renderRow = (r) => (
     <li key={r.id} className="stat-row">
       <span
         className="stat-row__cat"
-        style={{ background: CATEGORY_COLORS[r.category] || 'var(--red)' }}
+        style={{ background: categoryColor(r.category) }}
         aria-hidden
       />
       <div className="stat-row__body">
@@ -100,7 +85,7 @@ const Records = () => {
               }`}
               onClick={() => setActiveCategory(cat)}
             >
-              {cat === 'all' ? 'All' : CATEGORY_LABELS[cat] || cat}
+              {cat === 'all' ? 'All' : categoryLabel(cat)}
             </button>
           ))}
         </div>
@@ -142,10 +127,10 @@ const Records = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              {CATEGORY_LABELS[cat] || cat}
+              {categoryLabel(cat)}
             </motion.h2>
             <ul className="stat-rows">
-              <AnimatePresence mode="wait">
+              <AnimatePresence>
                 {records.map(renderRow)}
               </AnimatePresence>
             </ul>
@@ -154,7 +139,7 @@ const Records = () => {
       ) : (
         <section className="record-category">
           <ul className="stat-rows">
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {filteredRecords.map(renderRow)}
             </AnimatePresence>
           </ul>

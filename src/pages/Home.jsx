@@ -4,7 +4,6 @@ import Cars from './Cars';
 import Journey from './Journey';
 import Records from './Records';
 import Gallery from './Gallery';
-import { CarIcon, JourneyIcon, TrophyIcon, CameraIcon } from '../components/Icons';
 import './Home.css';
 
 const fadeUp = {
@@ -13,13 +12,6 @@ const fadeUp = {
   viewport: { once: true, margin: '-80px' },
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
 };
-
-const features = [
-  { id: 'cars', icon: <CarIcon />, title: 'Red Bull Cars', body: 'Every car Max has driven for Red Bull Racing, with season stats.' },
-  { id: 'journey', icon: <JourneyIcon />, title: 'Career Journey', body: 'From go-kart prodigy at four to 4-time world champion.' },
-  { id: 'records', icon: <TrophyIcon />, title: 'Records', body: 'The records Max holds — including the Nürburgring lap.' },
-  { id: 'gallery', icon: <CameraIcon />, title: 'Gallery', body: 'Races, podiums, and behind the scenes.' },
-];
 
 const highlights = [
   { year: '2021', caption: 'First World Championship — a dramatic final-race duel with Lewis Hamilton.', img: '/images/championships/2021-verstappen-championship.webp' },
@@ -39,40 +31,31 @@ const Home = () => {
     <div className="home">
       <Hero />
 
-      <div className="container">
-        {/* Feature nav */}
-        <section className="home-section" aria-label="Explore Max's career">
-          <motion.div className="section-head" {...fadeUp}>
-            <span className="eyebrow">Explore</span>
-            <h2 className="section-title">Go deeper</h2>
-          </motion.div>
-
-          <div className="features-grid">
-            {features.map((f, i) => (
-              <motion.button
-                key={f.id}
-                className="feature-card"
-                onClick={() => scrollTo(f.id)}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{
-                  duration: 0.55,
-                  delay: i * 0.08,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <span className="feature-icon" aria-hidden="true">{f.icon}</span>
-                <h3>{f.title}</h3>
-                <p>{f.body}</p>
-                <span className="feature-arrow" aria-hidden="true">→</span>
-              </motion.button>
-            ))}
-          </div>
-        </section>
+      <div className="home-lead container">
+        <p>
+          From go-kart prodigy at four years old to the most dominant force
+          in modern Formula 1. Four consecutive world championships and a
+          record books rewritten.
+        </p>
+        <div className="home-lead-actions">
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={() => scrollTo('records')}
+          >
+            See the records
+          </button>
+          <button
+            type="button"
+            className="btn btn--ghost"
+            onClick={() => scrollTo('journey')}
+          >
+            Follow the journey
+          </button>
+        </div>
       </div>
 
-      {/* Championship Highlights — the #highlights target the nav scrolls to */}
+      {/* Championship Highlights */}
       <section id="highlights" className="home-section" aria-label="Championship highlights">
         <div className="container">
           <motion.div className="section-head" {...fadeUp}>

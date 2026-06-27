@@ -14,8 +14,13 @@ const Navbar = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [activeId, setActiveId] = useState('');
 
+  // Track scroll position for the sticky nav style + clear active link
+  // when the user returns to the top (hero has no matching link).
   useEffect(() => {
-    const onScroll = () => setHasScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      setHasScrolled(window.scrollY > 12);
+      if (window.scrollY < 200) setActiveId('');
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -46,17 +51,6 @@ const Navbar = () => {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
-
-  // Clear active link when the user scrolls back to the top of the page
-  // so that no nav item is highlighted while the hero is in view.
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY < 200) setActiveId('');
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const scrollTo = (id) => {

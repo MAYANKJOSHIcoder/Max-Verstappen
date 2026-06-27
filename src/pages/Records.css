@@ -199,17 +199,7 @@
 }
 
 /* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 1280px) {
-  .records-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
-  .records-grid {
-    grid-template-columns: 1fr;
-  }
-
   .records-toolbar {
     flex-direction: column;
     align-items: stretch;
@@ -253,10 +243,3 @@
   }
 }
 
-@media (max-width: 360px) {
-  .record-top {
-    flex-direction: column;
-    gap: 0.25rem;
-    align-items: flex-start;
-  }
-}

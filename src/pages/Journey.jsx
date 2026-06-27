@@ -34,6 +34,7 @@ const Journey = () => {
         {journeyData.map((item, index) => {
           const color = catColor[item.category] || 'var(--navy)';
           const isLeft = index % 2 === 0;
+          const hasImage = !!item.image;
           return (
             <motion.div
               key={index}
@@ -55,13 +56,23 @@ const Journey = () => {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               />
-              <div className="timeline-card" style={{ borderColor: `${color}` }}>
-                <span className="timeline-category" style={{ color }}>
-                  {item.category}
-                </span>
-                <h3 className="timeline-year telemetry">{item.year}</h3>
-                <h4 className="timeline-title">{item.title}</h4>
-                <p className="timeline-description">{item.description}</p>
+              <div
+                className={`timeline-card ${hasImage ? 'has-image' : ''}`}
+                style={{ borderColor: `${color}` }}
+              >
+                {hasImage && (
+                  <div className={`timeline-card-image ${isLeft ? 'image-left' : 'image-right'}`}>
+                    <img src={item.image} alt={item.title} loading="lazy" />
+                  </div>
+                )}
+                <div className="timeline-card-content">
+                  <span className="timeline-category" style={{ color }}>
+                    {item.category}
+                  </span>
+                  <h3 className="timeline-year telemetry">{item.year}</h3>
+                  <h4 className="timeline-title">{item.title}</h4>
+                  <p className="timeline-description">{item.description}</p>
+                </div>
               </div>
             </motion.div>
           );

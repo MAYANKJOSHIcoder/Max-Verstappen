@@ -41,12 +41,6 @@
   text-align: left;
 }
 
-.brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-
 .brand-name {
   font-family: var(--font-display);
   font-weight: 700;
