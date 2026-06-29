@@ -3,6 +3,8 @@ import './Navbar.css';
 
 const links = [
   { id: 'highlights', label: 'Title runs' },
+  { id: 'telemetry', label: 'Live Telemetry' },
+  { id: 'calendar', label: 'Calendar' },
   { id: 'cars', label: 'Cars' },
   { id: 'journey', label: 'Journey' },
   { id: 'records', label: 'Records' },

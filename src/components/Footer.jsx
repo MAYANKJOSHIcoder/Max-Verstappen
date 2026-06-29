@@ -2,6 +2,8 @@ import './Footer.css';
 
 const navLinks = [
   { id: 'highlights', label: 'Title runs' },
+  { id: 'telemetry', label: 'Live Telemetry' },
+  { id: 'calendar', label: '2026 Calendar' },
   { id: 'cars', label: 'Red Bull Cars' },
   { id: 'journey', label: 'Career Journey' },
   { id: 'records', label: 'Records' },

@@ -3,7 +3,13 @@ import { motion } from 'framer-motion';
 import carsData from '../data/cars.json';
 import './Cars.css';
 
-const suffix = (n) => (n === 1 ? '1st' : n === 2 ? '2nd' : n === 3 ? '3rd' : `${n}th`);
+const suffix = (n) => {
+  if (n === null || n === undefined) return '—';
+  if (n === 1) return '1st';
+  if (n === 2) return '2nd';
+  if (n === 3) return '3rd';
+  return `${n}th`;
+};
 const posClass = (p) =>
   p === 1 ? 'gold' : p === 2 ? 'silver' : p === 3 ? 'bronze' : 'default';
 
@@ -109,19 +115,19 @@ const Cars = () => {
             <p className="car-team">{car.team}</p>
             <div className="card-stats">
               <div className="stat-item">
-                <span className="stat-value">{car.wins}</span>
+                <span className="stat-value">{car.wins ?? '—'}</span>
                 <span className="stat-label">Wins</span>
               </div>
               <div className="stat-item">
-                <span className="stat-value">{car.podiums}</span>
+                <span className="stat-value">{car.podiums ?? '—'}</span>
                 <span className="stat-label">Podiums</span>
               </div>
               <div className="stat-item">
-                <span className="stat-value">{car.polePositions}</span>
+                <span className="stat-value">{car.polePositions ?? '—'}</span>
                 <span className="stat-label">Poles</span>
               </div>
               <div className="stat-item">
-                <span className="stat-value telemetry">{car.points}</span>
+                <span className="stat-value telemetry">{car.points ?? '—'}</span>
                 <span className="stat-label">Points</span>
               </div>
             </div>

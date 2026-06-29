@@ -1,0 +1,140 @@
+import { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import calendarData from '../data/calendar2026.json';
+import './Calendar.css';
+
+const flagEmoji = (code) => {
+  if (!code) return '';
+  const codePoints = code
+    .toUpperCase()
+    .split('')
+    .map((c) => 127397 + c.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
+};
+
+const statusOf = (race, now) => {
+  if (race.isCancelled) return 'cancelled';
+  const raceDate = new Date(race.date);
+  const diff = raceDate - now;
+  if (diff < 0) return 'completed';
+  if (diff < 7 * 24 * 60 * 60 * 1000) return 'soon';
+  return 'upcoming';
+};
+
+const countdown = (dateStr) => {
+  const target = new Date(dateStr);
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) return null;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  return { days, hours, mins };
+};
+
+const formatDate = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+};
+
+const Calendar = () => {
+  const now = new Date();
+
+  const upcomingRound = useMemo(
+    () => calendarData.find((r) => !r.isCancelled && new Date(r.date) >= now) || null,
+    [now],
+  );
+
+  const sortedRaces = useMemo(
+    () => [...calendarData].sort((a, b) => a.round - b.round),
+    [],
+  );
+
+  return (
+    <div className="calendar-page container">
+      <header className="page-head">
+        <span className="eyebrow">2026 Season</span>
+        <h1 className="page-title">Calendar</h1>
+        <p className="page-subtitle">
+          Max Verstappen's 2026 Formula 1 season — every round, every circuit.
+        </p>
+      </header>
+
+      {upcomingRound && (
+        <motion.div
+          className="cal-hero"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="cal-hero-inner">
+            <div className="cal-hero-left">
+              <span className="cal-hero-eyebrow">Next Race</span>
+              <h2 className="cal-hero-name">{upcomingRound.raceName}</h2>
+              <p className="cal-hero-circuit">
+                {flagEmoji(upcomingRound.countryCode)} {upcomingRound.circuit}
+              </p>
+              <p className="cal-hero-date">{formatDate(upcomingRound.date)}</p>
+            </div>
+            <div className="cal-hero-countdown">
+              {(() => {
+                const cd = countdown(upcomingRound.date);
+                if (!cd) return <span className="cal-countdown-live">RACE WEEK</span>;
+                return (
+                  <div className="cal-countdown-grid">
+                    <div className="cal-countdown-cell">
+                      <span className="cal-countdown-value telemetry">{cd.days}</span>
+                      <span className="cal-countdown-label">Days</span>
+                    </div>
+                    <div className="cal-countdown-cell">
+                      <span className="cal-countdown-value telemetry">{cd.hours}</span>
+                      <span className="cal-countdown-label">Hrs</span>
+                    </div>
+                    <div className="cal-countdown-cell">
+                      <span className="cal-countdown-value telemetry">{cd.mins}</span>
+                      <span className="cal-countdown-label">Min</span>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      <div className="cal-grid">
+        {sortedRaces.map((race, i) => {
+          const status = statusOf(race, now);
+          return (
+            <motion.div
+              key={race.round}
+              className={`cal-card cal-card--${status}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.4, delay: (i % 6) * 0.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="cal-card-top">
+                <span className="cal-round">R{race.round}</span>
+                <span className={`cal-status-badge cal-status-badge--${status}`}>
+                  {status === 'cancelled' && 'Cancelled'}
+                  {status === 'completed' && (race.maxPosition ? `P${race.maxPosition}` : 'TBD')}
+                  {status === 'soon' && 'Soon'}
+                  {status === 'upcoming' && 'Upcoming'}
+                </span>
+              </div>
+              <h3 className="cal-race-name">{race.raceName}</h3>
+              <p className="cal-circuit-name">
+                {flagEmoji(race.countryCode)} {race.circuit}
+              </p>
+              <p className="cal-date">{formatDate(race.date)}</p>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default Calendar;

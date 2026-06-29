@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
+import LiveTelemetry from './LiveTelemetry';
+import Calendar from './Calendar';
 import Cars from './Cars';
 import Journey from './Journey';
 import Records from './Records';
@@ -55,6 +57,11 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Live Telemetry */}
+      <section id="telemetry" className="home-section-section">
+        <LiveTelemetry />
+      </section>
+
       {/* Championship Highlights */}
       <section id="highlights" className="home-section" aria-label="Championship highlights">
         <div className="container">
@@ -104,6 +111,11 @@ const Home = () => {
 
       <section id="gallery" className="home-section-section">
         <Gallery />
+      </section>
+
+      {/* 2026 Calendar */}
+      <section id="calendar" className="home-section-section">
+        <Calendar />
       </section>
     </div>
   );

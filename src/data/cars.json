@@ -130,5 +130,16 @@
     "wins": 8,
     "polePositions": 8,
     "imageUrl": "/images/cars/2025-verstappen-red-bull.webp"
+  },
+  {
+    "year": 2026,
+    "carModel": "Red Bull Racing RB22",
+    "team": "Red Bull Racing",
+    "championshipPosition": null,
+    "points": null,
+    "podiums": null,
+    "wins": null,
+    "polePositions": null,
+    "imageUrl": "/images/cars/2026-verstappen-red-bull.webp"
   }
 ]

@@ -1,0 +1,238 @@
+/* ───────────────────────────────────────────────────────────
+   Calendar page — upcoming hero + round grid
+   ──────────────────────────────────────────────────────────═ */
+
+.cal-hero {
+  background: linear-gradient(135deg, var(--navy-deep), var(--navy-soft));
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.cal-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--rail);
+  height: 100%;
+  background: linear-gradient(180deg, var(--red), var(--yellow));
+}
+
+.cal-hero-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.cal-hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cal-hero-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cal-hero-circuit {
+  color: var(--smoke);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cal-hero-date {
+  color: var(--mist);
+  font-size: 0.9rem;
+}
+
+.cal-hero-countdown {
+  flex-shrink: 0;
+}
+
+.cal-countdown-grid {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.cal-countdown-cell {
+  text-align: center;
+  min-width: 56px;
+}
+
+.cal-countdown-value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+.cal-countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-top: 4px;
+  display: block;
+}
+
+.cal-countdown-live {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--red);
+  letter-spacing: 0.08em;
+  animation: pulse-live 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ---- Round grid ---- */
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.cal-card {
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition: transform var(--dur-med) var(--ease-out-quint),
+    border-color var(--dur-med) var(--ease-out-quint);
+}
+
+.cal-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--navy-soft);
+}
+
+.cal-card--cancelled {
+  opacity: 0.45;
+}
+
+.cal-card--soon {
+  border-color: var(--yellow);
+  background: oklch(20% 0.03 70);
+}
+
+.cal-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cal-round {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--mist);
+}
+
+.cal-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.cal-status-badge--cancelled {
+  background: var(--carbon);
+  color: var(--mist);
+}
+
+.cal-status-badge--completed {
+  background: var(--navy);
+  color: var(--smoke);
+}
+
+.cal-status-badge--soon {
+  background: var(--yellow);
+  color: var(--track-black);
+}
+
+.cal-status-badge--upcoming {
+  background: var(--carbon);
+  color: var(--smoke);
+}
+
+.cal-race-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.cal-circuit-name {
+  color: var(--mist);
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+
+.cal-date {
+  color: var(--mist);
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 1280px) {
+  .cal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cal-hero {
+    padding: var(--spacing-md);
+  }
+
+  .cal-hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cal-countdown-grid {
+    gap: var(--spacing-xs);
+  }
+
+  .cal-countdown-cell {
+    min-width: 48px;
+  }
+
+  .cal-countdown-value {
+    font-size: 1.4rem;
+  }
+}
