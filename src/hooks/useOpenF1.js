@@ -174,16 +174,16 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1, pollMs = 4000 } = {
       const ctrl = new AbortController();
       abortRef.current = ctrl;
 
-      const baseUrl = `${OPENF1}?session_key=${sessionKey}&driver_number=${driverNum}`;
+      const base = (path) => `${OPENF1}/${path}?session_key=${sessionKey}&driver_number=${driverNum}`;
 
       try {
         const [laps, positions, intervals, carData, weather, pits] = await Promise.all([
-          fetchJSON(`${baseUrl}&lap_number>=0`, ctrl.signal),
-          fetchJSON(`${baseUrl}`, ctrl.signal),
-          fetchJSON(`${baseUrl}`, ctrl.signal),
-          fetchJSON(`${baseUrl}`, ctrl.signal),
-          fetchJSON(`${baseUrl}`, ctrl.signal),
-          fetchJSON(`${baseUrl}`, ctrl.signal),
+          fetchJSON(`${base('laps')}&lap_number>=0`, ctrl.signal),
+          fetchJSON(base('position'), ctrl.signal),
+          fetchJSON(base('intervals'), ctrl.signal),
+          fetchJSON(base('car_data'), ctrl.signal),
+          fetchJSON(`${OPENF1}/weather?session_key=${sessionKey}`, ctrl.signal),
+          fetchJSON(`${OPENF1}/pit?session_key=${sessionKey}`, ctrl.signal),
         ]);
 
         // Sort laps by lap_number

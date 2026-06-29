@@ -1,6 +1,6 @@
 # Max Verstappen — Unofficial Fan Site
 
-An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verstappen. Built with React + Vite and deployed to Vercel. Features an F1 broadcast-inspired design with Red Bull Racing branding, his complete Red Bull car collection, career timeline, records, and an interactive sphere photo gallery.
+An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verstappen. Built with React + Vite and deployed to Vercel. Features an F1 broadcast-inspired design with Red Bull Racing branding, his complete Red Bull car collection, career timeline, records, an interactive sphere photo gallery, live F1 telemetry, and the 2026 race calendar.
 
 **Live site:** deployed to Vercel (auto-deploys from `main`)
 
@@ -16,6 +16,8 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 | 🚀 **Career Journey** | Scroll-animated vertical timeline from go-kart prodigy (2005) through Toro Rosso to 4-time world champion |
 | 🏆 **Records** | Categorized record cards — Age Records, Season Records, Win Records, Lap Records, Grand Prix Records, Championship Records |
 | 🌐 **Sphere Gallery** | Interactive sphere photo wall (drag/swipe to orbit) with filterable categories and lightbox |
+| 📡 **Live Telemetry** (`/telemetry`) | F1 broadcast-style live race dashboard powered by OpenF1 API — speed, gear, throttle, brake, DRS, lap times for Max (driver #1) |
+| 📅 **2026 Calendar** (`/calendar`) | Full 22-round 2026 F1 season calendar with dates, circuits, and results |
 
 ### Design
 
@@ -33,6 +35,7 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 |------|---------|
 | **React 18** | UI framework |
 | **Vite 8** | Build & dev server |
+| **React Router 6** | SPA routing (`/`, `/telemetry`, `/calendar`) |
 | **Framer Motion** | Scroll & layout animations |
 | **@use-gesture/react** | Drag/swipe interaction for dome gallery |
 | **OxLint** | Fast linting (React rules, hooks enforcement) |
@@ -83,24 +86,30 @@ max-verstappen-site/
 │   │   ├── Footer.jsx / .css       # Site disclaimer, quick links, credits
 │   │   ├── Hero.jsx / .css         # Poster-style hero with masked text + stats
 │   │   └── DomeGallery.jsx / .css  # Sphere photo wall with drag interaction
-│   ├── pages/               # Page sections (rendered by Home as scroll sections)
-│   │   ├── Home.jsx / .css         # Orchestrator — renders all sections in scroll order
+│   ├── pages/               # Route pages
+│   │   ├── Home.jsx / .css         # Orchestrator — renders all scroll sections
+│   │   ├── LiveTelemetry.jsx/.css  # F1 broadcast-style live dashboard (/telemetry)
+│   │   ├── Calendar.jsx/.css       # 2026 F1 season calendar (/calendar)
 │   │   ├── Cars.jsx / .css         # Interactive car grid (includes Card + YearSelector)
 │   │   ├── Journey.jsx / .css      # Animated career timeline
 │   │   ├── Records.jsx / .css      # Categorized record rows with search + filter
 │   │   └── Gallery.jsx / .css      # Filterable gallery with sphere viewer
+│   ├── hooks/               # Custom React hooks
+│   │   └── useOpenF1.js     # OpenF1 API polling for live telemetry
 │   ├── data/                # Static JSON data
-│   │   ├── cars.json        # Cars & season stats (2016–2025)
+│   │   ├── cars.json        # Cars & season stats (2016–2026)
 │   │   ├── journey.json     # Career timeline events (2005–2025)
 │   │   ├── records.json     # Record entries by category
-│   │   └── gallery.json     # Image URLs, captions, categories, credits
+│   │   ├── gallery.json     # Image URLs, captions, categories, credits
+│   │   └── calendar2026.json # 2026 F1 calendar (22 rounds)
 │   ├── styles/
 │   │   └── theme.css        # Global tokens: palette, type, spacing, motion, reset
 │   ├── assets/              # Static images bundled by Vite
 │   │   └── Hero.png         # Hero background image
-│   ├── main.jsx             # React DOM entry point
-│   └── App.jsx / .css       # Root component (Navbar → Home → Footer)
+│   ├── main.jsx             # React DOM entry point (BrowserRouter)
+│   └── App.jsx / .css       # Root component (Navbar → Routes → Footer)
 ├── public/                  # Static assets served as-is
+│   ├── _redirects           # Vercel SPA redirect rule
 │   ├── favicon.svg
 │   └── images/              # Gallery images by category
 │       ├── championships/
@@ -151,6 +160,8 @@ vercel
 ```
 
 Build command: `npm run build` · Output directory: `dist`
+
+The `public/_redirects` file ensures Vercel serves `index.html` for all routes (required for SPA client-side routing).
 
 ---
 
