@@ -1,19 +1,29 @@
+import { useNavigate } from 'react-router-dom';
 import './Footer.css';
 
 const navLinks = [
-  { id: 'highlights', label: 'Title runs' },
-  { id: 'telemetry', label: 'Live Telemetry' },
-  { id: 'calendar', label: '2026 Calendar' },
-  { id: 'cars', label: 'Red Bull Cars' },
-  { id: 'journey', label: 'Career Journey' },
+  { id: 'telemetry', label: 'Live Telemetry', route: '/telemetry' },
+  { id: 'calendar', label: '2026 Calendar', route: '/calendar' },
+  { id: 'highlights', label: 'Title Runs' },
+  { id: 'cars', label: 'Cars' },
+  { id: 'journey', label: 'Journey' },
   { id: 'records', label: 'Records' },
   { id: 'gallery', label: 'Gallery' },
 ];
 
 const Footer = () => {
-  const handleClick = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const navigate = useNavigate();
+
+  const handleClick = (link) => {
+    if (link.route) {
+      navigate(link.route);
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(link.id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
   };
 
   return (
@@ -36,7 +46,7 @@ const Footer = () => {
                   <li key={l.id}>
                     <button
                       className="footer-link"
-                      onClick={() => handleClick(l.id)}
+                      onClick={() => handleClick(l)}
                     >
                       {l.label}
                     </button>

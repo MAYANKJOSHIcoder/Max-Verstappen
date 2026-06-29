@@ -1,7 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
-import LiveTelemetry from './LiveTelemetry';
-import Calendar from './Calendar';
 import Cars from './Cars';
 import Journey from './Journey';
 import Records from './Records';
@@ -23,12 +22,9 @@ const highlights = [
   { year: '2025', caption: 'Runner-up in one of the closest modern battles, pushing to the final rounds.' },
 ];
 
-const scrollTo = (id) => {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
-
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="home">
       <Hero />
@@ -43,24 +39,19 @@ const Home = () => {
           <button
             type="button"
             className="btn btn--primary"
-            onClick={() => scrollTo('records')}
+            onClick={() => navigate('/telemetry')}
           >
-            See the records
+            Live Telemetry
           </button>
           <button
             type="button"
             className="btn btn--ghost"
-            onClick={() => scrollTo('journey')}
+            onClick={() => navigate('/calendar')}
           >
-            Follow the journey
+            Calendar
           </button>
         </div>
       </div>
-
-      {/* Live Telemetry */}
-      <section id="telemetry" className="home-section-section">
-        <LiveTelemetry />
-      </section>
 
       {/* Championship Highlights */}
       <section id="highlights" className="home-section" aria-label="Championship highlights">
@@ -111,11 +102,6 @@ const Home = () => {
 
       <section id="gallery" className="home-section-section">
         <Gallery />
-      </section>
-
-      {/* 2026 Calendar */}
-      <section id="calendar" className="home-section-section">
-        <Calendar />
       </section>
     </div>
   );
