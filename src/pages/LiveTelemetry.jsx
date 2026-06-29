@@ -1,22 +1,21 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useOpenF1, fmtLapTime, fmtGap, compoundColor } from '../hooks/useOpenF1';
+import { useOpenF1, fmtLapTime, fmtGap } from '../hooks/useOpenF1';
 import './LiveTelemetry.css';
 
 const MAX_DRIVER_NUMBER = 1;
-const POLL_MS = 4000;
 
-const scrollTo = (id) => {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// LiveDot pulses based on the telemetry hook's lastUpdate timestamp rather than
+// a 1s parent re-render loop — we snapshot `lastUpdate` locally and react to
+// it via React state only when the parent actually has new data.
+const LiveDot = ({ lastUpdate }) => {
+  // Re-render the pulse animation on every lastUpdate change only.
+  void lastUpdate;
+  return (
+    <span className="lt-live-dot" aria-hidden="true">
+      <span className="lt-live-dot-core" />
+      <span className="lt-live-dot-ring" />
+    </span>
+  );
 };
-
-const LiveDot = () => (
-  <span className="lt-live-dot" aria-hidden="true">
-    <span className="lt-live-dot-core" />
-    <span className="lt-live-dot-ring" />
-  </span>
-);
 
 const Countdown = ({ date }) => {
   const [now, setNow] = useState(Date.now());
@@ -147,7 +146,7 @@ const PositionTimeline = ({ timeline }) => {
 
       {/* Annotations below the chart */}
       <div className="lt-timeline-labels">
-        {changes.slice(-4).map((t, i) => (
+        {changes.slice(-4).map((t) => (
           <span key={t.lap} className="lt-timeline-label">
             L{t.lap} → P{t.position}
           </span>
@@ -190,26 +189,20 @@ const LiveTelemetry = () => {
     status,
     session,
     isLive,
+    lastUpdate,
     driver,
     lap,
     laps,
     gaps,
     sectors,
-    speeds,
     tires,
+    carTelemetry,
     weather,
-    pits,
     positionTimeline,
     nextSession,
     error,
     refresh,
-  } = useOpenF1({ season: 2026, driverNumber: MAX_DRIVER_NUMBER, pollMs: POLL_MS });
-
-  const [now, setNow] = useState(Date.now());
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  } = useOpenF1({ season: 2026, driverNumber: MAX_DRIVER_NUMBER });
 
   // ---- NO SESSION STATE ----
   if (status === 'no-session' || (status === 'live' && !isLive)) {
@@ -300,7 +293,6 @@ const LiveTelemetry = () => {
   const bestLapTime = fmtLapTime(bestLap?.lap_duration);
 
   const statusText = isLive ? 'Racing' : 'Session Ended';
-  const trackStatus = weather ? 'Clear' : '—';
 
   return (
     <div className="lt-page container">
@@ -315,7 +307,7 @@ const LiveTelemetry = () => {
       {/* Status bar */}
       <div className="lt-statusbar">
         <div className="lt-statusbar-left">
-          {isLive && <LiveDot />}
+          {isLive && <LiveDot lastUpdate={lastUpdate} />}
           <span className="lt-statusbar-name">{session?.raceName || session?.session_name || 'Race'}</span>
           <span className="lt-statusbar-circuit">· {session?.circuit_short_name || 'Circuit'}</span>
         </div>
@@ -348,23 +340,38 @@ const LiveTelemetry = () => {
         </div>
       </div>
 
-      {/* Sectors */}
+      {/* Sectors — times + per-segment mini-bar (purple/personal/gray) -------
+          The segment mini-bars come from the per-segment byte arrays the OpenF1
+          /laps endpoint exposes (`segments_sector_1/2/3`). Byte 19 = purple,
+          byte 9 = personal best, byte 11 = gray; everything else neutral. If
+          the field isn't present we fall back to the plain second-value view. */}
       {sectors && (
         <div className="lt-sectors">
           <span className="lt-sectors-title">Sectors</span>
           <div className="lt-sectors-grid">
-            <div className={`lt-sector ${sectors.s1 === sectors.bestS1 ? 'is-best' : ''}`}>
-              <span className="lt-sector-label">S1</span>
-              <span className="lt-sector-value telemetry">{sectors.s1?.toFixed(3) || '—'}</span>
-            </div>
-            <div className={`lt-sector ${sectors.s2 === sectors.bestS2 ? 'is-best' : ''}`}>
-              <span className="lt-sector-label">S2</span>
-              <span className="lt-sector-value telemetry">{sectors.s2?.toFixed(3) || '—'}</span>
-            </div>
-            <div className={`lt-sector ${sectors.s3 === sectors.bestS3 ? 'is-best' : ''}`}>
-              <span className="lt-sector-label">S3</span>
-              <span className="lt-sector-value telemetry">{sectors.s3?.toFixed(3) || '—'}</span>
-            </div>
+            {[
+              { key: 'S1', time: sectors.s1, best: sectors.bestS1, segments: sectors.segmentsS1 },
+              { key: 'S2', time: sectors.s2, best: sectors.bestS2, segments: sectors.segmentsS2 },
+              { key: 'S3', time: sectors.s3, best: sectors.bestS3, segments: sectors.segmentsS3 },
+            ].map(({ key, time, best, segments }) => {
+              const isPB = time === best;
+              return (
+                <div key={key} className={`lt-sector ${isPB ? 'is-best' : ''}`}>
+                  <span className="lt-sector-label">{key}</span>
+                  <span className="lt-sector-value telemetry">{time?.toFixed(3) || '—'}</span>
+                  {Array.isArray(segments) && segments.length > 0 && (
+                    <span className="lt-segment-bar" aria-hidden="true">
+                      {segments.map((b, i) => (
+                        <span
+                          key={i}
+                          className={`lt-segment ${b === 19 ? 'is-purple' : b === 9 ? 'is-personal' : b === 11 ? 'is-gray' : ''}`}
+                        />
+                      ))}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -387,28 +394,48 @@ const LiveTelemetry = () => {
         </div>
       )}
 
-      {/* Car telemetry */}
-      {lap && (
+      {/* Car telemetry — driven by the car_data slice (6 refreshes/min) -------
+          The Power Unit readout (speed/gear/RPM/DRS/throttle/brake) updates
+          much faster than lap data, so it lives in its own section keyed on
+          `carTelemetry` rather than `lap`. */}
+      {carTelemetry && (
         <div className="lt-car">
           <span className="lt-section-title">Car Telemetry</span>
           <div className="lt-car-grid">
             <div className="lt-car-item">
               <span className="lt-car-label">Speed</span>
-              <span className="lt-car-value telemetry">{lap.st_speed != null ? `${lap.st_speed} km/h` : '—'}</span>
+              <span className="lt-car-value telemetry">{carTelemetry.speed != null ? `${carTelemetry.speed} km/h` : '—'}</span>
             </div>
             <div className="lt-car-item">
               <span className="lt-car-label">Gear</span>
-              <span className="lt-car-value telemetry">{lap.n_gear != null && lap.n_gear > 0 ? lap.n_gear : '—'}</span>
+              <span className="lt-car-value telemetry">{carTelemetry.n_gear != null && carTelemetry.n_gear > 0 ? carTelemetry.n_gear : '—'}</span>
             </div>
             <div className="lt-car-item">
               <span className="lt-car-label">RPM</span>
-              <span className="lt-car-value telemetry">{lap.rpm != null && lap.rpm > 0 ? lap.rpm : '—'}</span>
+              <span className="lt-car-value telemetry">{carTelemetry.rpm != null && carTelemetry.rpm > 0 ? carTelemetry.rpm : '—'}</span>
             </div>
             <div className="lt-car-item">
               <span className="lt-car-label">DRS</span>
-              <span className={`lt-car-value ${lap.drs > 0 ? 'is-open' : ''}`}>
-                {lap.drs > 0 ? 'Open' : 'Closed'}
+              <span className={`lt-car-value ${carTelemetry.drs > 0 ? 'is-open' : ''}`}>
+                {carTelemetry.drs > 0 ? 'Open' : 'Closed'}
               </span>
+            </div>
+          </div>
+          {/* Throttle / brake bars */}
+          <div className="lt-car-pedals">
+            <div className="lt-car-pedal">
+              <span className="lt-car-label">Throttle</span>
+              <span className="lt-bar lt-bar--throttle">
+                <span className="lt-bar-fill" style={{ width: `${Math.max(0, Math.min(100, carTelemetry.throttle ?? 0))}%` }} />
+              </span>
+              <span className="lt-car-value">{carTelemetry.throttle != null ? `${carTelemetry.throttle}%` : '—'}</span>
+            </div>
+            <div className="lt-car-pedal">
+              <span className="lt-car-label">Brake</span>
+              <span className="lt-bar lt-bar--brake">
+                <span className="lt-bar-fill" style={{ width: `${Math.max(0, Math.min(100, carTelemetry.brake ?? 0))}%` }} />
+              </span>
+              <span className="lt-car-value">{carTelemetry.brake != null ? `${carTelemetry.brake}%` : '—'}</span>
             </div>
           </div>
         </div>
@@ -471,6 +498,13 @@ const LiveTelemetry = () => {
               <span className="lt-weather-label">Wind</span>
               <span className="lt-weather-value telemetry">
                 {weather.wind_speed != null ? `${weather.wind_speed} m/s` : '—'}
+                {weather.wind_direction != null ? ` @ ${weather.wind_direction}°` : ''}
+              </span>
+            </div>
+            <div className="lt-weather-item">
+              <span className="lt-weather-label">Rain</span>
+              <span className={`lt-weather-value ${weather.rainfall > 0 ? 'is-rain' : ''}`}>
+                {weather.rainfall > 0 ? 'Rain' : 'Dry'}
               </span>
             </div>
           </div>

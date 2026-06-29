@@ -16,7 +16,7 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 | 🚀 **Career Journey** | Scroll-animated vertical timeline from go-kart prodigy (2005) through Toro Rosso to 4-time world champion |
 | 🏆 **Records** | Categorized record cards — Age Records, Season Records, Win Records, Lap Records, Grand Prix Records, Championship Records |
 | 🌐 **Sphere Gallery** | Interactive sphere photo wall (drag/swipe to orbit) with filterable categories and lightbox |
-| 📡 **Live Telemetry** (`/telemetry`) | F1 broadcast-style live race dashboard powered by OpenF1 API — speed, gear, throttle, brake, DRS, lap times for Max (driver #1) |
+| 📡 **Live Telemetry** (`/telemetry`) | F1 broadcast-style live race dashboard powered by the OpenF1 API — speed, gear, RPM, throttle, brake, DRS, gaps (leader/ahead/behind), last + best lap, sector times with PB coloring, tyre compound/age, pit windows, weather (air/track temp, humidity, wind, rain), and a race-long position timeline. All data is for Max Verstappen (driver #1). |
 | 📅 **2026 Calendar** (`/calendar`) | Full 22-round 2026 F1 season calendar with dates, circuits, and results |
 
 ### Design
@@ -95,7 +95,9 @@ max-verstappen-site/
 │   │   ├── Records.jsx / .css      # Categorized record rows with search + filter
 │   │   └── Gallery.jsx / .css      # Filterable gallery with sphere viewer
 │   ├── hooks/               # Custom React hooks
-│   │   └── useOpenF1.js     # OpenF1 API polling for live telemetry
+│   │   └── useOpenF1.js     # OpenF1 API telemetry hook (5s slot scheduler, cursor
+│   │                          #  fetching, rate-limit-safe per-endpoint cadence, 
+│   │                          #  visibility throttling, 30-min session rollover)
 │   ├── data/                # Static JSON data
 │   │   ├── cars.json        # Cars & season stats (2016–2026)
 │   │   ├── journey.json     # Career timeline events (2005–2025)
@@ -140,6 +142,48 @@ Colors use **oklch** perceptual uniformity for consistent contrast across lightn
 | `--carbon` | oklch(20% 0.02 250) | Raised surfaces |
 
 Full token set (including type, spacing, motion, and shadows) lives in `src/styles/theme.css`.
+
+---
+
+## 📡 Live Telemetry — How It Works
+
+The `/telemetry` dashboard is built on the public [OpenF1 API](https://openf1.org), called
+**directly from the visitor's browser** — there is no server, proxy, or auth token. Vercel
+serves only the static bundle; every client hits `api.openf1.org` on its own IP.
+
+OpenF1's free tier allows **3 requests/second and 30 requests/minute per IP**. A naïve
+implementation (polling every 4 seconds a bundle of 6–7 endpoints at once) trips 429s
+immediately. The telemetry hook (`src/hooks/useOpenF1.js`) is therefore designed around a
+**deterministic slot scheduler** that keeps every visitor safely under both limits:
+
+- **One request every 5 seconds**, round-robin across a 12-slot / 60-second cycle.
+- **Per-endpoint cadence matches how fast the data actually changes:**
+  `car_data` (speed / gear / RPM / DRS / throttle / brake) × 6/min — keeps a
+  "live feel"; `intervals` (gaps) × 2/min; `laps` / `position` / `weather` / `pit`
+  × 1/min — they only change per-lap or slower. Total: **12 requests/min**, one-third
+  of the free-tier ceiling, with 3× headroom left for user-triggered manual
+  refreshes.
+- **Cursor-based incremental fetching** for `car_data` (the heaviest endpoint, ~34k
+  samples for a full race): the first pull fetches the history, every subsequent pull
+  sends `date>=<lastSampleTime>` so only the new samples come back. This drops
+  bandwidth from hundreds of MB per race to a few KB per poll.
+- **Ring buffer caps `car_data` at 500 samples** so memory stays bounded over a long
+  weekend.
+- **Startup priming burst** (4 sequential requests, 1 per second, under the 3/s limit)
+  draws the dashboard into a ready state in ~3 seconds instead of waiting for the
+  next slow-slot cycle.
+- **Visibility-aware throttling**: when the tab is backgrounded, cadence drops to 1
+  request / 60 seconds; returning fires an instant catch-up tick and restores 5s.
+- **Session management**: the hook discovers the current/recent race session on
+  mount, re-resolves the session list every 30 minutes to pick up rollovers, and
+  automatically stops polling when a session is more than 30 minutes past its end
+  or returns 3 consecutive empty responses.
+- **Per-slot AbortController** with an unused-slot carry trap — each tick cancels any
+  in-flight request before dispatching the next, fixing the stale-abort leak that
+  existed in the original polling design.
+
+End result for the visitor: one request landing every 5 seconds on their own IP,
+never bulldozing OpenF1's free tier.
 
 ---
 
