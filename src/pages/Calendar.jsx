@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import calendarData from '../data/calendar2026.json';
+import CircuitMap from '../components/CircuitMap';
 import './Calendar.css';
 
 const flagEmoji = (code) => {
@@ -37,8 +38,20 @@ const formatDate = (dateStr) => {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
+/** Format a session time to local */
+const fmtSessionTime = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+};
+
+const fmtSessionDay = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString(undefined, { weekday: 'short' });
+};
+
 const Calendar = () => {
   const now = new Date();
+  const [expandedCard, setExpandedCard] = useState(null);
 
   const upcomingRound = useMemo(
     () => calendarData.find((r) => !r.isCancelled && new Date(r.date) >= now) || null,
@@ -56,7 +69,7 @@ const Calendar = () => {
         <span className="eyebrow">2026 Season</span>
         <h1 className="page-title">Calendar</h1>
         <p className="page-subtitle">
-          Max Verstappen's 2026 Formula 1 season — every round, every circuit.
+          Max Verstappen&apos;s 2026 Formula 1 season — every round, every circuit.
         </p>
       </header>
 
@@ -76,28 +89,48 @@ const Calendar = () => {
                 {flagEmoji(upcomingRound.countryCode)} {upcomingRound.circuit}
               </p>
               <p className="cal-hero-date">{formatDate(upcomingRound.date)}</p>
+              {/* Weekend sessions */}
+              {upcomingRound.sessions && (
+                <div className="cal-hero-sessions">
+                  {upcomingRound.sessions.map((s) => (
+                    <span key={s.name} className="cal-hero-session-chip">
+                      <span className="cal-hero-session-name">{s.name}</span>
+                      <span className="cal-hero-session-time">
+                        {fmtSessionDay(s.date)} {fmtSessionTime(s.date)}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="cal-hero-countdown">
-              {(() => {
-                const cd = countdown(upcomingRound.date);
-                if (!cd) return <span className="cal-countdown-live">RACE WEEK</span>;
-                return (
-                  <div className="cal-countdown-grid">
-                    <div className="cal-countdown-cell">
-                      <span className="cal-countdown-value telemetry">{cd.days}</span>
-                      <span className="cal-countdown-label">Days</span>
+            <div className="cal-hero-right">
+              <CircuitMap
+                circuit={upcomingRound.circuit}
+                size={140}
+                className="circuit-map--hero"
+              />
+              <div className="cal-hero-countdown">
+                {(() => {
+                  const cd = countdown(upcomingRound.date);
+                  if (!cd) return <span className="cal-countdown-live">RACE WEEK</span>;
+                  return (
+                    <div className="cal-countdown-grid">
+                      <div className="cal-countdown-cell">
+                        <span className="cal-countdown-value telemetry">{cd.days}</span>
+                        <span className="cal-countdown-label">Days</span>
+                      </div>
+                      <div className="cal-countdown-cell">
+                        <span className="cal-countdown-value telemetry">{cd.hours}</span>
+                        <span className="cal-countdown-label">Hrs</span>
+                      </div>
+                      <div className="cal-countdown-cell">
+                        <span className="cal-countdown-value telemetry">{cd.mins}</span>
+                        <span className="cal-countdown-label">Min</span>
+                      </div>
                     </div>
-                    <div className="cal-countdown-cell">
-                      <span className="cal-countdown-value telemetry">{cd.hours}</span>
-                      <span className="cal-countdown-label">Hrs</span>
-                    </div>
-                    <div className="cal-countdown-cell">
-                      <span className="cal-countdown-value telemetry">{cd.mins}</span>
-                      <span className="cal-countdown-label">Min</span>
-                    </div>
-                  </div>
-                );
-              })()}
+                  );
+                })()}
+              </div>
             </div>
           </div>
         </motion.div>
@@ -106,6 +139,7 @@ const Calendar = () => {
       <div className="cal-grid">
         {sortedRaces.map((race, i) => {
           const status = statusOf(race, now);
+          const isExpanded = expandedCard === race.round;
           return (
             <motion.div
               key={race.round}
@@ -114,6 +148,7 @@ const Calendar = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: (i % 6) * 0.05, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => setExpandedCard(isExpanded ? null : race.round)}
             >
               <div className="cal-card-top">
                 <span className="cal-round">R{race.round}</span>
@@ -124,11 +159,32 @@ const Calendar = () => {
                   {status === 'upcoming' && 'Upcoming'}
                 </span>
               </div>
-              <h3 className="cal-race-name">{race.raceName}</h3>
-              <p className="cal-circuit-name">
-                {flagEmoji(race.countryCode)} {race.circuit}
-              </p>
-              <p className="cal-date">{formatDate(race.date)}</p>
+              <div className="cal-card-body">
+                <div className="cal-card-info">
+                  <h3 className="cal-race-name">{race.raceName}</h3>
+                  <p className="cal-circuit-name">
+                    {flagEmoji(race.countryCode)} {race.circuit}
+                  </p>
+                  <p className="cal-date">{formatDate(race.date)}</p>
+                </div>
+                <div className="cal-card-map">
+                  <CircuitMap circuit={race.circuit} size={56} />
+                </div>
+              </div>
+
+              {/* Expanded session schedule */}
+              {isExpanded && race.sessions && (
+                <div className="cal-card-sessions">
+                  {race.sessions.map((s) => (
+                    <div key={s.name} className="cal-card-session-row">
+                      <span className="cal-card-session-name">{s.name}</span>
+                      <span className="cal-card-session-time">
+                        {fmtSessionDay(s.date)} {fmtSessionTime(s.date)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           );
         })}

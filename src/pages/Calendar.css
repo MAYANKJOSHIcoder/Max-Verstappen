@@ -30,6 +30,19 @@
   flex-wrap: wrap;
 }
 
+.cal-hero-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.cal-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
 .cal-hero-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -58,6 +71,41 @@
 .cal-hero-date {
   color: var(--mist);
   font-size: 0.9rem;
+}
+
+/* Hero session chips */
+.cal-hero-sessions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--spacing-sm);
+}
+
+.cal-hero-session-chip {
+  display: flex;
+  flex-direction: column;
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  min-width: 72px;
+  text-align: center;
+}
+
+.cal-hero-session-name {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 2px;
+}
+
+.cal-hero-session-time {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--white);
+  font-weight: 700;
 }
 
 .cal-hero-countdown {
@@ -122,6 +170,7 @@
   padding: var(--spacing-sm) var(--spacing-md);
   transition: transform var(--dur-med) var(--ease-out-quint),
     border-color var(--dur-med) var(--ease-out-quint);
+  cursor: pointer;
 }
 
 .cal-card:hover {
@@ -181,6 +230,29 @@
   color: var(--smoke);
 }
 
+/* Card body — info + circuit map side by side */
+.cal-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.cal-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cal-card-map {
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity var(--dur-fast) var(--ease-out-quint);
+}
+
+.cal-card:hover .cal-card-map {
+  opacity: 0.8;
+}
+
 .cal-race-name {
   font-family: var(--font-display);
   font-weight: 700;
@@ -200,6 +272,38 @@
   color: var(--mist);
   font-size: 0.8rem;
   font-family: var(--font-mono);
+}
+
+/* Expanded session schedule */
+.cal-card-sessions {
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--grid-line);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cal-card-session-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+}
+
+.cal-card-session-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.cal-card-session-time {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--white);
+  font-weight: 700;
 }
 
 /* ---- Responsive ---- */
@@ -224,6 +328,13 @@
     align-items: flex-start;
   }
 
+  .cal-hero-right {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .cal-countdown-grid {
     gap: var(--spacing-xs);
   }
@@ -234,5 +345,20 @@
 
   .cal-countdown-value {
     font-size: 1.4rem;
+  }
+
+  .cal-hero-sessions {
+    gap: 4px;
+  }
+
+  .cal-hero-session-chip {
+    min-width: 60px;
+    padding: 4px 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cal-countdown-live {
+    animation: none;
   }
 }

@@ -8,7 +8,14 @@
     "date": "2026-03-08",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-03-06T01:30:00Z" },
+      { "name": "FP2", "date": "2026-03-06T05:00:00Z" },
+      { "name": "FP3", "date": "2026-03-07T01:30:00Z" },
+      { "name": "Qualifying", "date": "2026-03-07T05:00:00Z" },
+      { "name": "Race", "date": "2026-03-08T04:00:00Z" }
+    ]
   },
   {
     "round": 2,
@@ -19,7 +26,14 @@
     "date": "2026-03-15",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-03-13T03:30:00Z" },
+      { "name": "FP2", "date": "2026-03-13T07:00:00Z" },
+      { "name": "FP3", "date": "2026-03-14T03:30:00Z" },
+      { "name": "Qualifying", "date": "2026-03-14T07:00:00Z" },
+      { "name": "Race", "date": "2026-03-15T06:00:00Z" }
+    ]
   },
   {
     "round": 3,
@@ -30,7 +44,14 @@
     "date": "2026-03-29",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-03-27T02:30:00Z" },
+      { "name": "FP2", "date": "2026-03-27T06:00:00Z" },
+      { "name": "FP3", "date": "2026-03-28T02:30:00Z" },
+      { "name": "Qualifying", "date": "2026-03-28T06:00:00Z" },
+      { "name": "Race", "date": "2026-03-29T05:00:00Z" }
+    ]
   },
   {
     "round": 4,
@@ -41,7 +62,14 @@
     "date": "2026-05-03",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-05-01T16:30:00Z" },
+      { "name": "Sprint Qualifying", "date": "2026-05-01T20:30:00Z" },
+      { "name": "Sprint", "date": "2026-05-02T16:00:00Z" },
+      { "name": "Qualifying", "date": "2026-05-02T20:00:00Z" },
+      { "name": "Race", "date": "2026-05-03T19:00:00Z" }
+    ]
   },
   {
     "round": 5,
@@ -52,7 +80,14 @@
     "date": "2026-05-24",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-05-22T17:30:00Z" },
+      { "name": "FP2", "date": "2026-05-22T21:00:00Z" },
+      { "name": "FP3", "date": "2026-05-23T17:30:00Z" },
+      { "name": "Qualifying", "date": "2026-05-23T21:00:00Z" },
+      { "name": "Race", "date": "2026-05-24T18:00:00Z" }
+    ]
   },
   {
     "round": 6,
@@ -63,7 +98,14 @@
     "date": "2026-06-07",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-06-05T09:30:00Z" },
+      { "name": "FP2", "date": "2026-06-05T13:00:00Z" },
+      { "name": "FP3", "date": "2026-06-06T09:30:00Z" },
+      { "name": "Qualifying", "date": "2026-06-06T13:00:00Z" },
+      { "name": "Race", "date": "2026-06-07T13:00:00Z" }
+    ]
   },
   {
     "round": 7,
@@ -74,7 +116,14 @@
     "date": "2026-06-14",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-06-12T11:30:00Z" },
+      { "name": "FP2", "date": "2026-06-12T15:00:00Z" },
+      { "name": "FP3", "date": "2026-06-13T10:30:00Z" },
+      { "name": "Qualifying", "date": "2026-06-13T14:00:00Z" },
+      { "name": "Race", "date": "2026-06-14T13:00:00Z" }
+    ]
   },
   {
     "round": 8,
@@ -85,7 +134,14 @@
     "date": "2026-06-28",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-06-26T10:30:00Z" },
+      { "name": "Sprint Qualifying", "date": "2026-06-26T14:30:00Z" },
+      { "name": "Sprint", "date": "2026-06-27T10:00:00Z" },
+      { "name": "Qualifying", "date": "2026-06-27T14:00:00Z" },
+      { "name": "Race", "date": "2026-06-28T13:00:00Z" }
+    ]
   },
   {
     "round": 9,
@@ -96,7 +152,14 @@
     "date": "2026-07-05",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-07-03T11:30:00Z" },
+      { "name": "FP2", "date": "2026-07-03T15:00:00Z" },
+      { "name": "FP3", "date": "2026-07-04T10:30:00Z" },
+      { "name": "Qualifying", "date": "2026-07-04T14:00:00Z" },
+      { "name": "Race", "date": "2026-07-05T14:00:00Z" }
+    ]
   },
   {
     "round": 10,
@@ -107,7 +170,14 @@
     "date": "2026-07-19",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-07-17T11:30:00Z" },
+      { "name": "Sprint Qualifying", "date": "2026-07-17T15:30:00Z" },
+      { "name": "Sprint", "date": "2026-07-18T11:00:00Z" },
+      { "name": "Qualifying", "date": "2026-07-18T15:00:00Z" },
+      { "name": "Race", "date": "2026-07-19T13:00:00Z" }
+    ]
   },
   {
     "round": 11,
@@ -118,7 +188,14 @@
     "date": "2026-07-26",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-07-24T11:30:00Z" },
+      { "name": "FP2", "date": "2026-07-24T15:00:00Z" },
+      { "name": "FP3", "date": "2026-07-25T10:30:00Z" },
+      { "name": "Qualifying", "date": "2026-07-25T14:00:00Z" },
+      { "name": "Race", "date": "2026-07-26T13:00:00Z" }
+    ]
   },
   {
     "round": 12,
@@ -129,7 +206,14 @@
     "date": "2026-04-12",
     "isCancelled": true,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-04-10T12:30:00Z" },
+      { "name": "FP2", "date": "2026-04-10T16:00:00Z" },
+      { "name": "FP3", "date": "2026-04-11T12:30:00Z" },
+      { "name": "Qualifying", "date": "2026-04-11T16:00:00Z" },
+      { "name": "Race", "date": "2026-04-12T15:00:00Z" }
+    ]
   },
   {
     "round": 13,
@@ -140,7 +224,14 @@
     "date": "2026-04-19",
     "isCancelled": true,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-04-17T14:30:00Z" },
+      { "name": "FP2", "date": "2026-04-17T18:00:00Z" },
+      { "name": "FP3", "date": "2026-04-18T14:30:00Z" },
+      { "name": "Qualifying", "date": "2026-04-18T18:00:00Z" },
+      { "name": "Race", "date": "2026-04-19T17:00:00Z" }
+    ]
   },
   {
     "round": 14,
@@ -151,7 +242,14 @@
     "date": "2026-08-23",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-08-21T10:30:00Z" },
+      { "name": "FP2", "date": "2026-08-21T14:00:00Z" },
+      { "name": "FP3", "date": "2026-08-22T09:30:00Z" },
+      { "name": "Qualifying", "date": "2026-08-22T13:00:00Z" },
+      { "name": "Race", "date": "2026-08-23T13:00:00Z" }
+    ]
   },
   {
     "round": 15,
@@ -162,7 +260,14 @@
     "date": "2026-09-06",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-09-04T11:30:00Z" },
+      { "name": "FP2", "date": "2026-09-04T15:00:00Z" },
+      { "name": "FP3", "date": "2026-09-05T10:30:00Z" },
+      { "name": "Qualifying", "date": "2026-09-05T14:00:00Z" },
+      { "name": "Race", "date": "2026-09-06T13:00:00Z" }
+    ]
   },
   {
     "round": 16,
@@ -173,7 +278,14 @@
     "date": "2026-09-13",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-09-11T11:30:00Z" },
+      { "name": "FP2", "date": "2026-09-11T15:00:00Z" },
+      { "name": "FP3", "date": "2026-09-12T10:30:00Z" },
+      { "name": "Qualifying", "date": "2026-09-12T14:00:00Z" },
+      { "name": "Race", "date": "2026-09-13T13:00:00Z" }
+    ]
   },
   {
     "round": 17,
@@ -184,7 +296,14 @@
     "date": "2026-09-27",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-09-25T08:30:00Z" },
+      { "name": "FP2", "date": "2026-09-25T12:00:00Z" },
+      { "name": "FP3", "date": "2026-09-26T08:30:00Z" },
+      { "name": "Qualifying", "date": "2026-09-26T12:00:00Z" },
+      { "name": "Race", "date": "2026-09-27T11:00:00Z" }
+    ]
   },
   {
     "round": 18,
@@ -195,7 +314,14 @@
     "date": "2026-10-11",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-10-09T09:30:00Z" },
+      { "name": "FP2", "date": "2026-10-09T13:00:00Z" },
+      { "name": "FP3", "date": "2026-10-10T09:30:00Z" },
+      { "name": "Qualifying", "date": "2026-10-10T13:00:00Z" },
+      { "name": "Race", "date": "2026-10-11T12:00:00Z" }
+    ]
   },
   {
     "round": 19,
@@ -206,7 +332,14 @@
     "date": "2026-10-25",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-10-23T17:30:00Z" },
+      { "name": "Sprint Qualifying", "date": "2026-10-23T21:30:00Z" },
+      { "name": "Sprint", "date": "2026-10-24T18:00:00Z" },
+      { "name": "Qualifying", "date": "2026-10-24T22:00:00Z" },
+      { "name": "Race", "date": "2026-10-25T19:00:00Z" }
+    ]
   },
   {
     "round": 20,
@@ -217,7 +350,14 @@
     "date": "2026-11-01",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-10-30T18:30:00Z" },
+      { "name": "FP2", "date": "2026-10-30T22:00:00Z" },
+      { "name": "FP3", "date": "2026-10-31T17:30:00Z" },
+      { "name": "Qualifying", "date": "2026-10-31T21:00:00Z" },
+      { "name": "Race", "date": "2026-11-01T20:00:00Z" }
+    ]
   },
   {
     "round": 21,
@@ -228,7 +368,14 @@
     "date": "2026-11-22",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-11-20T02:30:00Z" },
+      { "name": "FP2", "date": "2026-11-20T06:00:00Z" },
+      { "name": "FP3", "date": "2026-11-21T02:30:00Z" },
+      { "name": "Qualifying", "date": "2026-11-21T06:00:00Z" },
+      { "name": "Race", "date": "2026-11-22T06:00:00Z" }
+    ]
   },
   {
     "round": 22,
@@ -239,6 +386,13 @@
     "date": "2026-12-06",
     "isCancelled": false,
     "maxPosition": null,
-    "maxPoints": null
+    "maxPoints": null,
+    "sessions": [
+      { "name": "FP1", "date": "2026-12-04T09:30:00Z" },
+      { "name": "FP2", "date": "2026-12-04T13:00:00Z" },
+      { "name": "FP3", "date": "2026-12-05T10:30:00Z" },
+      { "name": "Qualifying", "date": "2026-12-05T14:00:00Z" },
+      { "name": "Race", "date": "2026-12-06T13:00:00Z" }
+    ]
   }
 ]

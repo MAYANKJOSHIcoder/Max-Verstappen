@@ -1,4 +1,7 @@
+import { useState, useEffect, useMemo } from 'react';
 import { useOpenF1, fmtLapTime, fmtGap } from '../hooks/useOpenF1';
+import CircuitMap from '../components/CircuitMap';
+import calendarData from '../data/calendar2026.json';
 import './LiveTelemetry.css';
 
 const MAX_DRIVER_NUMBER = 1;
@@ -184,6 +187,55 @@ const PitWindow = ({ tires, laps }) => {
   );
 };
 
+/** Determine the session status for the weekend strip */
+const sessionStatus = (sessionDate, durationMs = 2 * 60 * 60 * 1000) => {
+  const now = Date.now();
+  const start = new Date(sessionDate).getTime();
+  const end = start + durationMs;
+  if (now >= start && now <= end) return 'is-live';
+  if (now > end) return 'is-completed';
+  return 'is-upcoming';
+};
+
+/** Format a UTC date to local time string */
+const fmtLocalTime = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+};
+
+const fmtLocalDate = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
+};
+
+/** Weekend schedule strip component */
+const WeekendSchedule = ({ sessions }) => {
+  const [, setTick] = useState(0);
+
+  // Re-render every 30s to update session statuses
+  useEffect(() => {
+    const id = setInterval(() => setTick((t) => t + 1), 30000);
+    return () => clearInterval(id);
+  }, []);
+
+  if (!sessions || sessions.length === 0) return null;
+
+  return (
+    <div className="lt-weekend">
+      {sessions.map((s) => {
+        const status = sessionStatus(s.date);
+        return (
+          <div key={s.name} className={`lt-weekend-session ${status}`}>
+            <span className="lt-weekend-session-name">{s.name}</span>
+            <span className="lt-weekend-session-time">{fmtLocalTime(s.date)}</span>
+            <span className="lt-weekend-session-date">{fmtLocalDate(s.date)}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 const LiveTelemetry = () => {
   const {
     status,
@@ -204,16 +256,56 @@ const LiveTelemetry = () => {
     refresh,
   } = useOpenF1({ season: 2026, driverNumber: MAX_DRIVER_NUMBER });
 
+  // Find current race weekend from calendar data — always computed (hooks
+  // must be called unconditionally at the top level of the component).
+  const currentRace = useMemo(() => {
+    const now = new Date();
+    const circuitName = session?.circuit_short_name;
+
+    // Try to match by circuit name from session data
+    if (circuitName) {
+      const match = calendarData.find(
+        (r) =>
+          r.circuit.toLowerCase() === circuitName.toLowerCase() ||
+          r.raceName.toLowerCase().includes(circuitName.toLowerCase()),
+      );
+      if (match) return match;
+    }
+
+    // Fallback: find the nearest race by date
+    const sorted = [...calendarData]
+      .filter((r) => !r.isCancelled)
+      .sort((a, b) => {
+        const diffA = Math.abs(new Date(a.date) - now);
+        const diffB = Math.abs(new Date(b.date) - now);
+        return diffA - diffB;
+      });
+
+    return sorted[0] || null;
+  }, [session]);
+
+  // Next upcoming race for the no-session view — always computed
+  const nextUpcomingRace = useMemo(() => {
+    const now = new Date();
+    return (
+      calendarData
+        .filter((r) => !r.isCancelled && new Date(r.date) >= now)
+        .sort((a, b) => new Date(a.date) - new Date(b.date))[0] || null
+    );
+  }, []);
+
   // ---- NO SESSION STATE ----
   if (status === 'no-session' || (status === 'live' && !isLive)) {
     const displaySession = nextSession || session;
+    const noSessionRace = nextUpcomingRace;
+
     return (
       <div className="lt-page container">
         <header className="page-head">
           <span className="eyebrow">Live Timing</span>
           <h1 className="page-title">Live Telemetry</h1>
           <p className="page-subtitle">
-            Real-time data from Max Verstappen's on-track sessions.
+            Real-time data from Max Verstappen&apos;s on-track sessions.
           </p>
         </header>
 
@@ -221,16 +313,32 @@ const LiveTelemetry = () => {
           <div className="lt-no-session-inner">
             <span className="lt-no-session-icon" aria-hidden="true">🏎️</span>
             <h2 className="lt-no-session-title">No live session</h2>
-            {displaySession && (
+            {(displaySession || noSessionRace) && (
               <>
                 <p className="lt-no-session-text">
-                  Next race: <strong>{displaySession.raceName || displaySession.session_name}</strong>
-                  {displaySession.circuit_short_name && ` · ${displaySession.circuit_short_name}`}
+                  Next race:{' '}
+                  <strong>
+                    {displaySession?.raceName ||
+                      displaySession?.session_name ||
+                      noSessionRace?.raceName}
+                  </strong>
+                  {(displaySession?.circuit_short_name || noSessionRace?.circuit) &&
+                    ` · ${displaySession?.circuit_short_name || noSessionRace?.circuit}`}
                 </p>
-                <Countdown date={displaySession.date_start} />
+                {noSessionRace && (
+                  <CircuitMap
+                    circuit={noSessionRace.circuit}
+                    size={100}
+                    className="circuit-map--hero"
+                  />
+                )}
+                <Countdown date={displaySession?.date_start || noSessionRace?.date} />
+                {noSessionRace?.sessions && (
+                  <WeekendSchedule sessions={noSessionRace.sessions} />
+                )}
               </>
             )}
-            {!displaySession && (
+            {!displaySession && !noSessionRace && (
               <p className="lt-no-session-text">
                 Check back during a race weekend to see live data.
               </p>
@@ -300,16 +408,23 @@ const LiveTelemetry = () => {
         <span className="eyebrow">Live Timing</span>
         <h1 className="page-title">Live Telemetry</h1>
         <p className="page-subtitle">
-          Real-time data from Max Verstappen's on-track sessions.
+          Real-time data from Max Verstappen&apos;s on-track sessions.
         </p>
       </header>
+
+      {/* Weekend schedule strip */}
+      {currentRace?.sessions && <WeekendSchedule sessions={currentRace.sessions} />}
 
       {/* Status bar */}
       <div className="lt-statusbar">
         <div className="lt-statusbar-left">
           {isLive && <LiveDot lastUpdate={lastUpdate} />}
-          <span className="lt-statusbar-name">{session?.raceName || session?.session_name || 'Race'}</span>
-          <span className="lt-statusbar-circuit">· {session?.circuit_short_name || 'Circuit'}</span>
+          <span className="lt-statusbar-name">
+            {session?.raceName || session?.session_name || 'Race'}
+          </span>
+          <span className="lt-statusbar-circuit">
+            · {session?.circuit_short_name || currentRace?.circuit || 'Circuit'}
+          </span>
         </div>
         <div className="lt-statusbar-right">
           <span className="lt-statusbar-lap">
@@ -337,14 +452,16 @@ const LiveTelemetry = () => {
               <span className="lt-lap-time-value telemetry is-best">{bestLapTime}</span>
             </div>
           </div>
+          {/* Circuit map watermark */}
+          {currentRace && (
+            <div className="lt-hero-circuit-map">
+              <CircuitMap circuit={currentRace.circuit} size={120} />
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Sectors — times + per-segment mini-bar (purple/personal/gray) -------
-          The segment mini-bars come from the per-segment byte arrays the OpenF1
-          /laps endpoint exposes (`segments_sector_1/2/3`). Byte 19 = purple,
-          byte 9 = personal best, byte 11 = gray; everything else neutral. If
-          the field isn't present we fall back to the plain second-value view. */}
+      {/* Sectors */}
       {sectors && (
         <div className="lt-sectors">
           <span className="lt-sectors-title">Sectors</span>
@@ -389,30 +506,37 @@ const LiveTelemetry = () => {
           </div>
           <div className="lt-gap-card">
             <span className="lt-gap-label">Gap Behind</span>
-            <span className="lt-gap-value telemetry">{gaps.gapBehind != null ? fmtGap(gaps.gapBehind) : '—'}</span>
+            <span className="lt-gap-value telemetry">
+              {gaps.gapBehind != null ? fmtGap(gaps.gapBehind) : '—'}
+            </span>
           </div>
         </div>
       )}
 
-      {/* Car telemetry — driven by the car_data slice (6 refreshes/min) -------
-          The Power Unit readout (speed/gear/RPM/DRS/throttle/brake) updates
-          much faster than lap data, so it lives in its own section keyed on
-          `carTelemetry` rather than `lap`. */}
+      {/* Car telemetry */}
       {carTelemetry && (
         <div className="lt-car">
           <span className="lt-section-title">Car Telemetry</span>
           <div className="lt-car-grid">
             <div className="lt-car-item">
               <span className="lt-car-label">Speed</span>
-              <span className="lt-car-value telemetry">{carTelemetry.speed != null ? `${carTelemetry.speed} km/h` : '—'}</span>
+              <span className="lt-car-value telemetry">
+                {carTelemetry.speed != null ? `${carTelemetry.speed} km/h` : '—'}
+              </span>
             </div>
             <div className="lt-car-item">
               <span className="lt-car-label">Gear</span>
-              <span className="lt-car-value telemetry">{carTelemetry.n_gear != null && carTelemetry.n_gear > 0 ? carTelemetry.n_gear : '—'}</span>
+              <span className="lt-car-value telemetry">
+                {carTelemetry.n_gear != null && carTelemetry.n_gear > 0
+                  ? carTelemetry.n_gear
+                  : '—'}
+              </span>
             </div>
             <div className="lt-car-item">
               <span className="lt-car-label">RPM</span>
-              <span className="lt-car-value telemetry">{carTelemetry.rpm != null && carTelemetry.rpm > 0 ? carTelemetry.rpm : '—'}</span>
+              <span className="lt-car-value telemetry">
+                {carTelemetry.rpm != null && carTelemetry.rpm > 0 ? carTelemetry.rpm : '—'}
+              </span>
             </div>
             <div className="lt-car-item">
               <span className="lt-car-label">DRS</span>
@@ -426,16 +550,30 @@ const LiveTelemetry = () => {
             <div className="lt-car-pedal">
               <span className="lt-car-label">Throttle</span>
               <span className="lt-bar lt-bar--throttle">
-                <span className="lt-bar-fill" style={{ width: `${Math.max(0, Math.min(100, carTelemetry.throttle ?? 0))}%` }} />
+                <span
+                  className="lt-bar-fill"
+                  style={{
+                    width: `${Math.max(0, Math.min(100, carTelemetry.throttle ?? 0))}%`,
+                  }}
+                />
               </span>
-              <span className="lt-car-value">{carTelemetry.throttle != null ? `${carTelemetry.throttle}%` : '—'}</span>
+              <span className="lt-car-value">
+                {carTelemetry.throttle != null ? `${carTelemetry.throttle}%` : '—'}
+              </span>
             </div>
             <div className="lt-car-pedal">
               <span className="lt-car-label">Brake</span>
               <span className="lt-bar lt-bar--brake">
-                <span className="lt-bar-fill" style={{ width: `${Math.max(0, Math.min(100, carTelemetry.brake ?? 0))}%` }} />
+                <span
+                  className="lt-bar-fill"
+                  style={{
+                    width: `${Math.max(0, Math.min(100, carTelemetry.brake ?? 0))}%`,
+                  }}
+                />
               </span>
-              <span className="lt-car-value">{carTelemetry.brake != null ? `${carTelemetry.brake}%` : '—'}</span>
+              <span className="lt-car-value">
+                {carTelemetry.brake != null ? `${carTelemetry.brake}%` : '—'}
+              </span>
             </div>
           </div>
         </div>
@@ -447,10 +585,7 @@ const LiveTelemetry = () => {
           <span className="lt-section-title">Tyre Strategy</span>
           <div className="lt-tyre-inner">
             <div className="lt-tire-visual">
-              <div
-                className="lt-tire-ring"
-                style={{ '--tire-color': tires.color }}
-              >
+              <div className="lt-tire-ring" style={{ '--tire-color': tires.color }}>
                 <span className="lt-tire-compound">{tires.compound?.charAt(0) || '?'}</span>
               </div>
               <div className="lt-tire-info">

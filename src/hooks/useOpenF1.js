@@ -79,8 +79,22 @@ const binarySearchPosition = (positions, targetDate) => {
   return result;
 };
 
-const fetchJSON = async (url, signal) => {
+/**
+ * Rate-limit-aware fetch. On 429, pauses for Retry-After seconds (or 10s
+ * default) and retries once. All other HTTP errors throw immediately.
+ */
+const fetchJSON = async (url, signal, retryOnce = true) => {
   const res = await fetch(url, { signal });
+
+  if (res.status === 429 && retryOnce) {
+    const retryAfter = parseInt(res.headers.get('Retry-After'), 10);
+    const waitMs = (Number.isFinite(retryAfter) ? retryAfter : 10) * 1000;
+    console.warn(`OpenF1 429 — backing off ${waitMs}ms`);
+    await new Promise((r) => setTimeout(r, waitMs));
+    // Retry exactly once
+    return fetchJSON(url, signal, false);
+  }
+
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 };
@@ -99,6 +113,9 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   const RE_RESOLVE_MS = 30 * 60 * 1000; // session re-discovery cadence
   const EMPTY_STOP_THRESHOLD = 3; // consecutive empty polls before we give up
   const SESSION_LIVE_WINDOW_MS = 30 * 60 * 1000; // grace window past date_end
+  // Minimum inter-request gap to prevent burst stacking from visibility
+  // events + manual refresh + slot ticks landing in the same ms window.
+  const MIN_REQUEST_GAP_MS = 200;
 
   // 12 slots per 60s cycle. Each tick fires EXACTLY ONE request — never a
   // Promise.all bundle. car_data × 6 | intervals × 2 | laps/position/weather/pit × 1.
@@ -159,6 +176,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   const bufferRef = useRef([]); // ring buffer backing state.carDataBuffer
   const sortedPositionsRef = useRef([]); // position history for timeline re-derivation
   const sortedLapsRef = useRef([]); // latest laps for timeline re-derivation
+  const lastRequestTimeRef = useRef(0); // timestamp of last dispatched request
   // Cross-tab dedup (Part 2)
   const channelRef = useRef(null); // BroadcastChannel('openf1-telemetry')
   const isLeaderRef = useRef(false);
@@ -221,13 +239,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       const sorted = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
       const latest = sorted[sorted.length - 1];
       if (latest?.gap_to_leader == null) return { gaps: null };
-      // Gap-to-behind is approximated client-side from the leader's relative
-      // position. We do NOT fire a 7th fetch — that broke the one-per-slot rule
-      // and is an approximation anyway. Here: gap_to_behind ≈ max(0, my_gap −
-      // next_slower_gap). We don't have the sorted field for "next slower"
-      // without another fetch, so we keep this simple: if Max is leading,
-      // gapBehind is null; otherwise we keep best-effort = gap_to_car_ahead
-      // difference `interval` already captured. Acceptable for a fan site.
       return {
         gaps: {
           gapToLeader: latest.gap_to_leader,
@@ -304,9 +315,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       if (!data.length) return null;
       const sorted = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
       const latest = sorted[sorted.length - 1];
-      // Position timeline is re-derived from lap start times — a client-side
-      // operation that doesn't need its own fetch. The ticks that fire the
-      // `laps` slot write sortedLapsRef; on a position slot we re-derive now.
       return { driver: latest };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -365,10 +373,10 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   }, []);
 
   // --- Scheduler lifecycle ------------------------------------------------
-  const startScheduler = useCallback((intervalMs) => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(schedulerTick, intervalMs);
-  }, [schedulerTick]);
+  // Declaration order matters: stopScheduler → isSessionOver → schedulerTick
+  // → startScheduler. We use a ref for schedulerTick inside setInterval so
+  // startScheduler always calls the latest version without a stale closure.
+  const schedulerTickRef = useRef(null);
 
   const stopScheduler = useCallback((nextStatus = null) => {
     if (intervalRef.current) {
@@ -391,8 +399,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
 
   // --- The slot tick ------------------------------------------------------
   // Fires EXACTLY ONE request per tick. Never a Promise.all bundle. Reads live
-  // state via `stateRef` so the callback stays referentially stable renders. Stable deps: SLOTS, SLOT_COUNT, FETCHERS, EMPTY_STOP_THRESHOLD,
-  // slotRef, abortRef, stateRef, sortedPositionsRef, sortedLapsRef.
+  // state via `stateRef` so the callback stays referentially stable across renders.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const schedulerTick = useCallback(async () => {
     const live = stateRef.current;
@@ -401,6 +408,13 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       stopScheduler('no-session');
       return;
     }
+
+    // Rate-limit guard: ensure minimum gap between requests
+    const now = Date.now();
+    if (now - lastRequestTimeRef.current < MIN_REQUEST_GAP_MS) {
+      return; // skip this tick — too close to a previous request
+    }
+    lastRequestTimeRef.current = now;
 
     // Cancel any in-flight request before dispatching the next one — this
     // also fixes the old abortRef-overwrite leak.
@@ -427,10 +441,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
     }
     emptyStreakRef.current = 0;
 
-    // Position timeline re-derivation. On a `position` or `laps` slot we have
-    // everything needed to produce the race-long sparkline client-side — no
-    // extra network call. `sortedPositionsRef` accumulates the position
-    // history as the position slot fires; `sortedLapsRef` is set on laps.
+    // Position timeline re-derivation.
     let positionTimeline = null;
     if (endpoint === 'position' || endpoint === 'laps') {
       if (endpoint === 'position' && slice.driver) {
@@ -460,21 +471,18 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       isLive: true,
       lastUpdate: Date.now(),
     }));
-    // SLOTS / SLOT_COUNT / FETCHERS / EMPTY_STOP_THRESHOLD are module-level
-    // constants; slotRef/abortRef/stateRef/sortedPositionsRef/sortedLapsRef
-    // are stable refs — all referentially stable, so listing the behavioral
-    // deps (isSessionOver, stopScheduler) is sufficient.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSessionOver, stopScheduler]);
 
+  // Keep schedulerTickRef in sync so setInterval always calls the latest fn
+  schedulerTickRef.current = schedulerTick;
+
+  const startScheduler = useCallback((intervalMs) => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => schedulerTickRef.current?.(), intervalMs);
+  }, []);
+
   // --- Startup priming burst ----------------------------------------------
-  // Fires ONE request per second (≤1 req/s, safe) for ~3s to get the page out
-  // of the loading state immediately. After the burst, the cyclic scheduler
-  // takes over. The order prioritizes the chunks the eye wants first: car
-  // telemetry (speed/gear), laps (lap counter + (gaps),
-  // position (badge).
-  // SLOTS / SLOT_COUNT / FETCHERS / channelRef / isLeaderRef / tabIdRef are
-  // stable refs or module-level constants by construction.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const runPrimingBurst = useCallback(async () => {
     // Skip priming if not the leader (follower tabs will apply leader's
@@ -493,6 +501,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
     ];
     for (const { endpoint, fetcher } of order) {
       try {
+        lastRequestTimeRef.current = Date.now();
         const slice = await fetcher(ctrl.signal);
         if (slice) {
           setState((s) => ({ ...s, ...slice, status: 'live', isLive: true, lastUpdate: Date.now() }));
@@ -508,30 +517,42 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   }, [fetchCarData, fetchLaps, fetchIntervals, fetchPosition]);
 
   // --- Visibility API throttling ------------------------------------------
-  // When the tab is hidden, swap to a slow 60s cadence. On return, refresh
-  // immediately and restore 5s.
   const applyVisibilityInterval = useCallback(() => {
     const ms = document.visibilityState === 'hidden' ? HIDDEN_INTERVAL_MS : SCHEDULER_INTERVAL_MS;
     if (!intervalRef.current) return;
     clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(schedulerTick, ms);
-  }, [schedulerTick]);
+    intervalRef.current = setInterval(() => schedulerTickRef.current?.(), ms);
+  }, []);
 
   // --- Fetch sessions (mount) ---------------------------------------------
+  // Fetch ALL session types for the current meeting (not just Race) so the
+  // telemetry page can show FP, Qualifying, Sprint, and Race sessions.
   useEffect(() => {
     const ctrl = new AbortController();
     abortRef.current = ctrl;
 
     const loadSessions = async () => {
       try {
+        // Fetch all sessions for this season (all types)
         const sessions = await fetchJSON(
-          `${OPENF1}/sessions?year=${season}&session_name=Race`,
+          `${OPENF1}/sessions?year=${season}`,
           ctrl.signal,
         );
         const { session, isLive } = findCurrentSession(sessions);
 
         if (!session) {
-          setState((s) => ({ ...s, status: 'no-session', session: null }));
+          // No session at all — try to find the next upcoming race for display
+          const raceSessions = sessions.filter((s) => s.session_name === 'Race');
+          const nextRace = raceSessions
+            .filter((s) => new Date(s.date_start) > new Date())
+            .sort((a, b) => new Date(a.date_start) - new Date(b.date_start))[0];
+
+          setState((s) => ({
+            ...s,
+            status: 'no-session',
+            session: null,
+            nextSession: nextRace || null,
+          }));
           return;
         }
 
@@ -551,8 +572,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
 
         if (!isLive) return;
 
-        // Part 2 hook-in: open BroadcastChannel after resolving the session so
-        // leader election runs before the scheduler starts.
         initChannel();
 
         await runPrimingBurst();
@@ -570,7 +589,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
 
     const onVisibility = () => {
       // Returning to the tab: fire an immediate catch-up tick, then restore.
-      if (document.visibilityState !== 'hidden') schedulerTick();
+      if (document.visibilityState !== 'hidden') schedulerTickRef.current?.();
       applyVisibilityInterval();
     };
     document.addEventListener('visibilitychange', onVisibility);
@@ -589,7 +608,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
     const id = setInterval(async () => {
       try {
         const sessions = await fetchJSON(
-          `${OPENF1}/sessions?year=${season}&session_name=Race`,
+          `${OPENF1}/sessions?year=${season}`,
         );
         const { session, isLive } = findCurrentSession(sessions);
         const newKey = session?.session_key;
@@ -633,15 +652,18 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       }
     }, RE_RESOLVE_MS);
     return () => clearInterval(id);
-    // RE_RESOLVE_MS is a module-level constant — stable by construction.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season, stopScheduler, runPrimingBurst, startScheduler]);
 
   // --- Manual refresh -----------------------------------------------------
-  // Refresh only the most recent slot's endpoint — exactly one request, never
-  // a bundle. Honors leader/follower roles.
   const refresh = useCallback(() => {
     if (!state.session || !sessionKeyRef.current) return;
+
+    // Rate-limit guard
+    const now = Date.now();
+    if (now - lastRequestTimeRef.current < MIN_REQUEST_GAP_MS) return;
+    lastRequestTimeRef.current = now;
+
     const lastEndpoint = SLOTS[(slotRef.current - 1 + SLOT_COUNT) % SLOT_COUNT];
     let cancelled = false;
     const ctrl = new AbortController();
@@ -668,8 +690,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
     return () => {
       cancelled = true;
     };
-    // SLOTS / SLOT_COUNT / FETCHERS are module-level constants; slotRef/
-    // abortRef/stateRef/channelRef/isLeaderRef/tabIdRef are stable refs.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.session]);
 

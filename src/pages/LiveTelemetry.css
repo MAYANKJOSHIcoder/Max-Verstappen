@@ -613,6 +613,179 @@
   margin-bottom: var(--spacing-md);
 }
 
+/* ---- Segment mini-bars ---- */
+.lt-segment-bar {
+  display: flex;
+  gap: 1px;
+  margin-top: 6px;
+  justify-content: center;
+}
+
+.lt-segment {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--carbon);
+}
+
+.lt-segment.is-purple {
+  background: oklch(55% 0.2 300);
+}
+
+.lt-segment.is-personal {
+  background: oklch(70% 0.15 130);
+}
+
+.lt-segment.is-gray {
+  background: var(--mist);
+}
+
+/* ---- Pedal bars (throttle / brake) ---- */
+.lt-car-pedals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+}
+
+.lt-car-pedal {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.lt-car-pedal .lt-car-label {
+  min-width: 60px;
+  text-align: right;
+  margin-bottom: 0;
+}
+
+.lt-car-pedal .lt-car-value {
+  min-width: 48px;
+  font-size: 0.9rem;
+  color: var(--smoke);
+}
+
+.lt-bar {
+  flex: 1;
+  height: 12px;
+  background: var(--carbon);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.lt-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.3s var(--ease-out-quint);
+}
+
+.lt-bar--throttle .lt-bar-fill {
+  background: linear-gradient(90deg, oklch(60% 0.15 140), oklch(75% 0.18 135));
+}
+
+.lt-bar--brake .lt-bar-fill {
+  background: linear-gradient(90deg, var(--red), oklch(65% 0.2 30));
+}
+
+/* ---- Rain indicator ---- */
+.lt-weather-value.is-rain {
+  color: oklch(65% 0.15 230);
+  font-weight: 700;
+}
+
+/* ---- Weekend schedule strip ---- */
+.lt-weekend {
+  display: flex;
+  gap: 2px;
+  background: var(--carbon);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: var(--spacing-md);
+  overflow-x: auto;
+}
+
+.lt-weekend-session {
+  flex: 1;
+  min-width: 80px;
+  text-align: center;
+  padding: 8px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--asphalt);
+  transition: background var(--dur-fast) var(--ease-out-quint);
+}
+
+.lt-weekend-session.is-completed {
+  opacity: 0.5;
+}
+
+.lt-weekend-session.is-live {
+  background: oklch(20% 0.05 35);
+  border: 1px solid var(--red);
+  position: relative;
+}
+
+.lt-weekend-session.is-upcoming {
+  opacity: 0.8;
+}
+
+.lt-weekend-session-name {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 2px;
+}
+
+.lt-weekend-session.is-live .lt-weekend-session-name {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.lt-weekend-session-time {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--white);
+  font-weight: 700;
+}
+
+.lt-weekend-session-date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--mist);
+  margin-top: 1px;
+}
+
+/* ---- Circuit map in hero ---- */
+.lt-hero-main {
+  position: relative;
+}
+
+.lt-hero-circuit-map {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .lt-hero-circuit-map {
+    position: static;
+    transform: none;
+    opacity: 0.5;
+    margin-top: var(--spacing-sm);
+  }
+}
+
 /* ---- Responsive ---- */
 
 @media (max-width: 1280px) {

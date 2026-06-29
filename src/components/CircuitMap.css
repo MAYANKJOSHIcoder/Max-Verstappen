@@ -1,0 +1,71 @@
+/* ───────────────────────────────────────────────────────────
+   CircuitMap — small SVG circuit outline
+   ──────────────────────────────────────────────────────────═ */
+
+.circuit-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.circuit-map-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.circuit-map-track {
+  transition: stroke-width var(--dur-fast) var(--ease-out-quint),
+    filter var(--dur-fast) var(--ease-out-quint);
+}
+
+.circuit-map:hover .circuit-map-track {
+  stroke-width: 3.2;
+}
+
+.circuit-map-start {
+  transition: r var(--dur-fast) var(--ease-out-quint);
+}
+
+.circuit-map:hover .circuit-map-start {
+  r: 5;
+}
+
+/* Fallback icon */
+.circuit-map--fallback {
+  color: var(--mist);
+  opacity: 0.5;
+}
+
+/* Size variants for different contexts */
+.circuit-map--sm {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.circuit-map--lg {
+  width: 120px !important;
+  height: 120px !important;
+}
+
+.circuit-map--hero {
+  width: 140px !important;
+  height: 140px !important;
+  opacity: 0.7;
+  transition: opacity var(--dur-fast) var(--ease-out-quint);
+}
+
+.circuit-map--hero:hover {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circuit-map-track,
+  .circuit-map-start,
+  .circuit-map--hero {
+    transition: none;
+  }
+}
