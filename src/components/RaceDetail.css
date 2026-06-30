@@ -1,0 +1,391 @@
+/* ───────────────────────────────────────────────────────────
+   RaceDetail — full race report replacing the hero banner
+   ──────────────────────────────────────────────────────────═ */
+
+.rd-hero {
+  background: linear-gradient(135deg, var(--navy-deep), var(--navy-soft));
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.rd-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--rail);
+  height: 100%;
+  background: linear-gradient(180deg, var(--red), var(--yellow));
+}
+
+/* Back button */
+.rd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mist);
+  background: none;
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out-quint),
+    border-color var(--dur-fast) var(--ease-out-quint);
+  margin-bottom: var(--spacing-md);
+}
+
+.rd-back:hover {
+  color: var(--white);
+  border-color: var(--smoke);
+}
+
+/* Header */
+.rd-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.rd-header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.rd-header-right {
+  flex-shrink: 0;
+}
+
+.rd-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-xs);
+}
+
+.rd-flag {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.rd-gp-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.rd-sprint-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--red);
+  color: var(--white);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.rd-circuit-name {
+  color: var(--mist);
+  font-size: 0.95rem;
+}
+
+/* Result summary row */
+.rd-summary {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.rd-position {
+  display: flex;
+  flex-direction: column;
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-width: 120px;
+}
+
+.rd-position--win {
+  border-color: var(--yellow);
+  box-shadow: var(--glow-yellow);
+}
+
+.rd-position-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 4px;
+}
+
+.rd-position-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.rd-trophy {
+  font-size: 1.6rem;
+}
+
+/* Stat cards */
+.rd-stat-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.rd-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 4px;
+}
+
+.rd-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--white);
+}
+
+.rd-stat--accent {
+  border-color: var(--yellow);
+}
+
+.rd-stat--accent .rd-stat-value {
+  color: var(--yellow);
+}
+
+/* Sections */
+.rd-section {
+  margin-bottom: var(--spacing-md);
+}
+
+.rd-section:last-child {
+  margin-bottom: 0;
+}
+
+.rd-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Stat grids */
+.rd-stat-grid {
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.rd-stat-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Tyre strategy */
+.rd-tyre-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.rd-tyre-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.rd-tyre-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.rd-tyre-stints {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.rd-tyre-stint {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--carbon);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+}
+
+.rd-tyre-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid oklch(30% 0.02 250);
+}
+
+.rd-tyre-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--white);
+}
+
+.rd-tyre-laps {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--mist);
+}
+
+/* Highlights row */
+.rd-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.rd-highlight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--white);
+  background: var(--carbon);
+  border: 1px solid var(--grid-line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  letter-spacing: 0.02em;
+}
+
+.rd-highlight-icon {
+  font-size: 0.9rem;
+}
+
+/* Championship impact */
+.rd-champ {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.rd-champ-item {
+  display: flex;
+  flex-direction: column;
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  flex: 1;
+  min-width: 140px;
+}
+
+.rd-champ-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 4px;
+}
+
+.rd-champ-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--white);
+}
+
+.rd-champ-leader {
+  color: var(--yellow);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 768px) {
+  .rd-hero {
+    padding: var(--spacing-md);
+  }
+
+  .rd-stat-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rd-summary {
+    gap: var(--spacing-xs);
+  }
+
+  .rd-position-value {
+    font-size: 1.6rem;
+  }
+
+  .rd-header {
+    flex-direction: column;
+  }
+
+  .rd-header-right {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .rd-hero {
+    padding: var(--spacing-sm);
+  }
+
+  .rd-stat-grid--4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rd-champ-item {
+    min-width: 100px;
+  }
+
+  .rd-gp-name {
+    font-size: 1.2rem;
+  }
+
+  .rd-title-row {
+    gap: var(--spacing-xs);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rd-hero {
+    animation: none;
+  }
+}

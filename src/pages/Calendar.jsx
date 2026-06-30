@@ -2,6 +2,8 @@ import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import calendarData from '../data/calendar2026.json';
 import CircuitMap from '../components/CircuitMap';
+import RaceDetail from '../components/RaceDetail';
+import raceResults from '../data/raceResults2026.json';
 import './Calendar.css';
 
 const flagEmoji = (code) => {
@@ -52,6 +54,7 @@ const fmtSessionDay = (dateStr) => {
 const Calendar = () => {
   const now = new Date();
   const [expandedCard, setExpandedCard] = useState(null);
+  const [selectedRound, setSelectedRound] = useState(null);
 
   const upcomingRound = useMemo(
     () => calendarData.find((r) => !r.isCancelled && new Date(r.date) >= now) || null,
@@ -63,6 +66,14 @@ const Calendar = () => {
     [],
   );
 
+  const selectedRaceData = useMemo(() => {
+    if (!selectedRound) return null;
+    const race = sortedRaces.find((r) => r.round === selectedRound);
+    const results = raceResults.find((r) => r.round === selectedRound);
+    if (!race || !results?.hasResults) return null;
+    return { race, results };
+  }, [selectedRound, sortedRaces]);
+
   return (
     <div className="calendar-page container">
       <header className="page-head">
@@ -73,7 +84,13 @@ const Calendar = () => {
         </p>
       </header>
 
-      {upcomingRound && (
+      {selectedRaceData ? (
+        <RaceDetail
+          race={selectedRaceData.race}
+          results={selectedRaceData.results}
+          onBack={() => setSelectedRound(null)}
+        />
+      ) : upcomingRound && (
         <motion.div
           className="cal-hero"
           initial={{ opacity: 0, y: 24 }}
@@ -140,21 +157,32 @@ const Calendar = () => {
         {sortedRaces.map((race, i) => {
           const status = statusOf(race, now);
           const isExpanded = expandedCard === race.round;
+          const raceResult = raceResults.find((r) => r.round === race.round);
+          const isSelected = selectedRound === race.round;
           return (
             <motion.div
               key={race.round}
-              className={`cal-card cal-card--${status}`}
+              className={`cal-card cal-card--${status} ${isSelected ? 'cal-card--selected' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: (i % 6) * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              onClick={() => setExpandedCard(isExpanded ? null : race.round)}
+              onClick={() => {
+                if (raceResult?.hasResults) {
+                  setSelectedRound((prev) => (prev === race.round ? null : race.round));
+                  setExpandedCard(null);
+                } else {
+                  setExpandedCard((prev) => (prev === race.round ? null : race.round));
+                }
+              }}
             >
               <div className="cal-card-top">
                 <span className="cal-round">R{race.round}</span>
                 <span className={`cal-status-badge cal-status-badge--${status}`}>
                   {status === 'cancelled' && 'Cancelled'}
-                  {status === 'completed' && (race.maxPosition ? `P${race.maxPosition}` : 'TBD')}
+                  {status === 'completed' && (raceResult?.hasResults
+                    ? `P${raceResult.result.position}`
+                    : 'TBD')}
                   {status === 'soon' && 'Soon'}
                   {status === 'upcoming' && 'Upcoming'}
                 </span>
