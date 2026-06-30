@@ -1,5 +1,5 @@
 /* ───────────────────────────────────────────────────────────
-   CircuitMap — small SVG circuit outline
+   CircuitMap — circuit outline loaded from SVG image files
    ──────────────────────────────────────────────────────────═ */
 
 .circuit-map {
@@ -9,29 +9,21 @@
   flex-shrink: 0;
   position: relative;
   overflow: visible;
+  color: var(--red);
 }
 
-.circuit-map-svg {
+.circuit-map-img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
   display: block;
+  filter: drop-shadow(0 0 6px oklch(0.6 0.3 25 / 0.25));
+  transition: filter var(--dur-fast) var(--ease-out-quint),
+    opacity var(--dur-fast) var(--ease-out-quint);
 }
 
-.circuit-map-track {
-  transition: stroke-width var(--dur-fast) var(--ease-out-quint),
-    filter var(--dur-fast) var(--ease-out-quint);
-}
-
-.circuit-map:hover .circuit-map-track {
-  stroke-width: 3.2;
-}
-
-.circuit-map-start {
-  transition: r var(--dur-fast) var(--ease-out-quint);
-}
-
-.circuit-map:hover .circuit-map-start {
-  r: 5;
+.circuit-map:hover .circuit-map-img {
+  filter: drop-shadow(0 0 10px oklch(0.6 0.3 25 / 0.5));
 }
 
 /* Fallback icon */
@@ -63,8 +55,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .circuit-map-track,
-  .circuit-map-start,
+  .circuit-map-img,
   .circuit-map--hero {
     transition: none;
   }

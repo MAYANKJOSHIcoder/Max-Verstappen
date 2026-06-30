@@ -182,7 +182,7 @@
   {
     "round": 11,
     "raceName": "Hungarian Grand Prix",
-    "circuit": "Budapest",
+    "circuit": "Hungaroring",
     "country": "Hungary",
     "countryCode": "HU",
     "date": "2026-07-26",
@@ -200,7 +200,7 @@
   {
     "round": 12,
     "raceName": "Bahrain Grand Prix",
-    "circuit": "Sakhir",
+    "circuit": "Bahrain",
     "country": "Bahrain",
     "countryCode": "BH",
     "date": "2026-04-12",
@@ -272,7 +272,7 @@
   {
     "round": 16,
     "raceName": "Spanish Grand Prix",
-    "circuit": "Madrid",
+    "circuit": "Madring",
     "country": "Spain",
     "countryCode": "ES",
     "date": "2026-09-13",
