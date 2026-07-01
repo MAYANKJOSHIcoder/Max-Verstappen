@@ -298,5 +298,5 @@ a:hover { color: var(--signal); }
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--track-black); }
-::-webkit-scrollbar-thumb { background: var(--navy-deep); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--red); }

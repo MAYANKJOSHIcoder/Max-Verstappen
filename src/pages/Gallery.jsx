@@ -1,42 +1,28 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import galleryData from '../data/gallery.json';
 import DomeGallery from '../components/DomeGallery';
 import './Gallery.css';
 
 const Gallery = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  const categories = useMemo(
-    () => ['all', ...new Set(galleryData.map((img) => img.category))],
-    []
-  );
-
-  const images = useMemo(() => {
-    const pool =
-      selectedCategory === 'all'
-        ? galleryData
-        : galleryData.filter((img) => img.category === selectedCategory);
-
-    return pool.map((img) => ({
+  const images = useMemo(
+    () => galleryData.map((img) => ({
       src: img.imageUrl,
       alt: img.caption,
       credit: img.credit,
-    }));
-  }, [selectedCategory]);
+    })),
+    []
+  );
 
-  // Scroll-lock mirror — DomeGallery toggles `.dg-scroll-lock` on
-  // open/close via its own `lock`/`unlock` helpers, which flip
-  // document.body.classList. Nothing else to do here, but we clean
-  // up on unmount in case the user navigates away mid-enlarge.
-  useEffect(() => {
-    return () => {
-      document.body.classList.remove('dg-scroll-lock');
-    };
-  }, []);
+  const segments = useMemo(() => {
+    const count = images.length;
+    if (count <= 4) return 8;
+    if (count <= 8) return 12;
+    return 24;
+  }, [images.length]);
 
   return (
-    <div className="home-section-gallery">
+    <div className="home-section-gallery container">
       <div className="gallery-head">
         <motion.div
           className="section-head"
@@ -48,33 +34,14 @@ const Gallery = () => {
           <span className="eyebrow">Gallery</span>
           <h2 className="section-title">In the frame</h2>
           <p className="section-lead">
-            Races, podiums, championships, and behind the scenes. Click a tile
-            to enlarge, or drag to spin the wall.
+            Spin and click to see
           </p>
-        </motion.div>
-
-        <motion.div
-          className="gallery-filters"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`filter-button ${selectedCategory === cat ? 'is-active' : ''}`}
-              onClick={() => setSelectedCategory(cat)}
-            >
-              {cat === 'all' ? 'All' : cat}
-            </button>
-          ))}
         </motion.div>
       </div>
 
       <DomeGallery
         images={images}
-        segments={images.length < 10 ? 17 : 24}
+        segments={segments}
         fit={0.6}
         minRadius={420}
         overlayBlurColor="#0a0a18"

@@ -92,25 +92,45 @@ function buildItems(pool, seg) {
     (_, i) => normalizedImages[i % normalizedImages.length]
   );
 
-  // De-dup adjacent identical tiles — makes a wall where the same
-  // image wouldn't sit next to itself look varied.
-  for (let i = 1; i < usedImages.length; i++) {
-    if (usedImages[i].src === usedImages[i - 1].src) {
-      for (let j = i + 1; j < usedImages.length; j++) {
-        if (usedImages[j].src !== usedImages[i].src) {
-          const tmp = usedImages[i];
-          usedImages[i] = usedImages[j];
-          usedImages[j] = tmp;
+  // Scatter identical tiles so they're spread evenly across the sphere.
+  // Group positions by image src, then interleave them.
+  const srcPositions = {};
+  for (let i = 0; i < usedImages.length; i++) {
+    const src = usedImages[i].src;
+    if (!srcPositions[src]) srcPositions[src] = [];
+    srcPositions[src].push(i);
+  }
+
+  const scattered = new Array(usedImages.length);
+  const srcKeys = Object.keys(srcPositions);
+  for (const src of srcKeys) {
+    const positions = srcPositions[src];
+    const count = positions.length;
+    const stride = Math.floor(usedImages.length / count);
+    for (let k = 0; k < count; k++) {
+      const targetIdx = (k * stride) % usedImages.length;
+      // Find nearest unoccupied slot to targetIdx
+      let slot = targetIdx;
+      for (let attempt = 0; attempt < usedImages.length; attempt++) {
+        const tryIdx = (targetIdx + attempt) % usedImages.length;
+        if (!scattered[tryIdx]) {
+          slot = tryIdx;
           break;
         }
       }
+      scattered[slot] = usedImages[positions[k]];
     }
+  }
+
+  // Fill any remaining gaps (shouldn't happen, but safety net)
+  for (let i = 0; i < scattered.length; i++) {
+    if (!scattered[i]) scattered[i] = usedImages[i % usedImages.length];
   }
 
   return coords.map((c, i) => ({
     ...c,
-    src: usedImages[i].src,
-    alt: usedImages[i].alt,
+    src: scattered[i].src,
+    alt: scattered[i].alt,
   }));
 }
 

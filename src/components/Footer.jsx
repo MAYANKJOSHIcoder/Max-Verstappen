@@ -31,10 +31,9 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-top">
           <div className="footer-brand">
-            <span className="brand-number" aria-hidden="true">33</span>
             <div>
               <p className="footer-title">Max Verstappen</p>
-              <p className="footer-sub">Unofficial fan site</p>
+              <p className="footer-sub">4× World Champion</p>
             </div>
           </div>
 
@@ -53,14 +52,6 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Sources</h4>
-              <p>
-                All images sourced from the official Formula 1 and Red Bull
-                Racing media libraries, used under fair use for non-commercial
-                fan purposes.
-              </p>
             </div>
           </div>
         </div>

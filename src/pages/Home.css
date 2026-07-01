@@ -60,7 +60,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 21 / 9;
   object-fit: contain;
   background: var(--navy-deep);
   border-bottom: 1px solid var(--grid-line);
@@ -69,7 +69,7 @@
 /* Cards without an image keep the navy band */
 .highlight-img--fallback {
   background: linear-gradient(135deg, var(--navy-deep), var(--navy-soft));
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 21 / 9;
 }
 
 .highlight-year {
@@ -89,10 +89,10 @@
 }
 
 .highlight-caption {
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   color: var(--smoke);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.45;
 }
 
 /* Last card spans full width so it doesn't sit alone in a column of one */

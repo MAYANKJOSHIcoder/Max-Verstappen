@@ -35,24 +35,10 @@
   gap: var(--spacing-sm);
 }
 
-.footer-brand .brand-number {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--yellow);
-  background: var(--red);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .footer-title {
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--white);
+  color: var(--red);
   font-size: 1.1rem;
 }
 
@@ -65,9 +51,8 @@
 }
 
 .footer-cols {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-md);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .footer-col h4 {
@@ -124,8 +109,4 @@
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
-}
-
-@media (max-width: 360px) {
-  .footer-cols { grid-template-columns: 1fr; }
 }
