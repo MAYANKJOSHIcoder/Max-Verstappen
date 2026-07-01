@@ -6,15 +6,6 @@ import RaceDetail from '../components/RaceDetail';
 import raceResults from '../data/raceResults2026.json';
 import './Calendar.css';
 
-const flagEmoji = (code) => {
-  if (!code) return '';
-  const codePoints = code
-    .toUpperCase()
-    .split('')
-    .map((c) => 127397 + c.charCodeAt(0));
-  return String.fromCodePoint(...codePoints);
-};
-
 const statusOf = (race, now) => {
   if (race.isCancelled) return 'cancelled';
   const raceDate = new Date(race.date);
@@ -103,7 +94,7 @@ const Calendar = () => {
               <span className="cal-hero-eyebrow">Next Race</span>
               <h2 className="cal-hero-name">{upcomingRound.raceName}</h2>
               <p className="cal-hero-circuit">
-                {flagEmoji(upcomingRound.countryCode)} {upcomingRound.circuit}
+                {upcomingRound.country} · {upcomingRound.circuit}
               </p>
               <p className="cal-hero-date">{formatDate(upcomingRound.date)}</p>
               {/* Weekend sessions */}
@@ -191,7 +182,7 @@ const Calendar = () => {
                 <div className="cal-card-info">
                   <h3 className="cal-race-name">{race.raceName}</h3>
                   <p className="cal-circuit-name">
-                    {flagEmoji(race.countryCode)} {race.circuit}
+                    {race.country} · {race.circuit}
                   </p>
                   <p className="cal-date">{formatDate(race.date)}</p>
                 </div>

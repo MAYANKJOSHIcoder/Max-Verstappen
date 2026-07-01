@@ -6,7 +6,7 @@
   background: linear-gradient(135deg, var(--navy-deep), var(--navy-soft));
   border: 1px solid var(--grid-line);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
+  padding: 32px;
   margin-bottom: var(--spacing-lg);
   position: relative;
   overflow: hidden;
@@ -53,7 +53,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 32px;
 }
 
 .rd-header-left {
@@ -71,11 +71,6 @@
   gap: var(--spacing-sm);
   flex-wrap: wrap;
   margin-bottom: var(--spacing-xs);
-}
-
-.rd-flag {
-  font-size: 1.8rem;
-  line-height: 1;
 }
 
 .rd-gp-name {
@@ -107,7 +102,7 @@
 .rd-summary {
   display: flex;
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: 32px;
   flex-wrap: wrap;
 }
 
@@ -143,10 +138,6 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-}
-
-.rd-trophy {
-  font-size: 1.6rem;
 }
 
 /* Stat cards */
@@ -292,10 +283,6 @@
   letter-spacing: 0.02em;
 }
 
-.rd-highlight-icon {
-  font-size: 0.9rem;
-}
-
 /* Championship impact */
 .rd-champ {
   display: flex;
@@ -334,11 +321,19 @@
   color: var(--yellow);
 }
 
+/* Not available text */
+.rd-na {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--mist);
+  font-style: italic;
+}
+
 /* ---- Responsive ---- */
 
 @media (max-width: 768px) {
   .rd-hero {
-    padding: var(--spacing-md);
+    padding: 32px;
   }
 
   .rd-stat-grid--4 {
@@ -364,7 +359,7 @@
 
 @media (max-width: 360px) {
   .rd-hero {
-    padding: var(--spacing-sm);
+    padding: 32px;
   }
 
   .rd-stat-grid--4 {

@@ -2,15 +2,6 @@ import { motion } from 'framer-motion';
 import CircuitMap from './CircuitMap';
 import './RaceDetail.css';
 
-const flagEmoji = (code) => {
-  if (!code) return '';
-  const codePoints = code
-    .toUpperCase()
-    .split('')
-    .map((c) => 127397 + c.charCodeAt(0));
-  return String.fromCodePoint(...codePoints);
-};
-
 const compoundColor = (compound) => {
   const map = {
     SOFT: '#FF3333',
@@ -22,30 +13,12 @@ const compoundColor = (compound) => {
   return map[compound] || '#888888';
 };
 
-const HIGHLIGHT_ICONS = {
-  'Win': '🏁',
-  'Podium': '🥉',
-  'Pole Position': '🏆',
-  'Fastest Lap': '⚡',
-  'Driver of the Day': '🗳️',
-  'Sprint Win': '🏁',
-  'Sprint Podium': '🥉',
-  'Overtakes': '🚗',
-  'Safety Car': '🚨',
-  'Rain Race': '🌧️',
-  'Penalty': '🟡',
-  'Retirement': '🔴',
-};
-
 const PositionDisplay = ({ position }) => {
   const isWin = position === 1;
   return (
     <div className={`rd-position ${isWin ? 'rd-position--win' : ''}`}>
       <span className="rd-position-label">Finished</span>
-      <span className="rd-position-value">
-        P{position}
-        {isWin && <span className="rd-trophy">🏆</span>}
-      </span>
+      <span className="rd-position-value">P{position}</span>
     </div>
   );
 };
@@ -53,12 +26,12 @@ const PositionDisplay = ({ position }) => {
 const StatCard = ({ label, value, className = '' }) => (
   <div className={`rd-stat-card ${className}`}>
     <span className="rd-stat-label">{label}</span>
-    <span className="rd-stat-value">{value}</span>
+    <span className="rd-stat-value">{value == null ? '—' : value}</span>
   </div>
 );
 
 const TyreTimeline = ({ strategy, sprintStrategy }) => {
-  if (!strategy || strategy.length === 0) return null;
+  if (!strategy && !sprintStrategy) return <p className="rd-na">Data not available</p>;
   return (
     <div className="rd-tyre-section">
       {sprintStrategy && sprintStrategy.length > 0 && (
@@ -78,21 +51,23 @@ const TyreTimeline = ({ strategy, sprintStrategy }) => {
           </div>
         </div>
       )}
-      <div className="rd-tyre-group">
-        <span className="rd-tyre-group-label">Race</span>
-        <div className="rd-tyre-stints">
-          {strategy.map((stint, i) => (
-            <div key={`race-${i}`} className="rd-tyre-stint">
-              <span
-                className="rd-tyre-dot"
-                style={{ backgroundColor: compoundColor(stint.compound) }}
-              />
-              <span className="rd-tyre-name">{stint.compound}</span>
-              <span className="rd-tyre-laps">{stint.laps} laps</span>
-            </div>
-          ))}
+      {strategy && strategy.length > 0 && (
+        <div className="rd-tyre-group">
+          <span className="rd-tyre-group-label">Race</span>
+          <div className="rd-tyre-stints">
+            {strategy.map((stint, i) => (
+              <div key={`race-${i}`} className="rd-tyre-stint">
+                <span
+                  className="rd-tyre-dot"
+                  style={{ backgroundColor: compoundColor(stint.compound) }}
+                />
+                <span className="rd-tyre-name">{stint.compound}</span>
+                <span className="rd-tyre-laps">{stint.laps} laps</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -102,17 +77,14 @@ const HighlightsRow = ({ highlights }) => {
   return (
     <div className="rd-highlights">
       {highlights.map((h) => (
-        <span key={h} className="rd-highlight-badge">
-          {HIGHLIGHT_ICONS[h] && <span className="rd-highlight-icon">{HIGHLIGHT_ICONS[h]}</span>}
-          {h}
-        </span>
+        <span key={h} className="rd-highlight-badge">{h}</span>
       ))}
     </div>
   );
 };
 
 const ChampImpact = ({ championship }) => {
-  if (!championship) return null;
+  if (!championship) return <p className="rd-na">Not available — no championship data</p>;
   const gapText =
     championship.gapToLeader === 0
       ? 'Leader'
@@ -166,7 +138,6 @@ const RaceDetail = ({ race, results, onBack }) => {
       <div className="rd-header">
         <div className="rd-header-left">
           <div className="rd-title-row">
-            <span className="rd-flag">{flagEmoji(race.countryCode)}</span>
             <h2 className="rd-gp-name">{race.raceName}</h2>
             {results.isSprint && <span className="rd-sprint-badge">Sprint Weekend</span>}
           </div>
@@ -179,24 +150,28 @@ const RaceDetail = ({ race, results, onBack }) => {
         </div>
       </div>
 
-      <div className="rd-summary">
-        <PositionDisplay position={r.position} />
-        <StatCard label="Points" value={r.points} />
-        {r.fastestLap && <StatCard label="Fastest Lap" value="Yes" className="rd-stat--accent" />}
-        {r.driverOfTheDay && <StatCard label="Driver of the Day" value="Won" className="rd-stat--accent" />}
-      </div>
+      {r.position != null && (
+        <div className="rd-summary">
+          <PositionDisplay position={r.position} />
+          {r.points != null && <StatCard label="Points" value={r.points} />}
+          {r.fastestLap && <StatCard label="Fastest Lap" value="Yes" className="rd-stat--accent" />}
+          {r.driverOfTheDay && <StatCard label="Driver of the Day" value="Won" className="rd-stat--accent" />}
+        </div>
+      )}
 
       <div className="rd-section">
         <span className="rd-section-label">Weekend Performance</span>
         <div className="rd-stat-grid rd-stat-grid--4">
-          <StatCard label="Qualifying" value={`P${r.qualifyingPosition}`} />
-          <StatCard label="Started" value={`P${r.gridPosition}`} />
+          <StatCard label="Qualifying" value={r.qualifyingPosition != null ? `P${r.qualifyingPosition}` : null} />
+          <StatCard label="Started" value={r.gridPosition != null ? `P${r.gridPosition}` : null} />
           {r.sprintPosition != null && (
             <StatCard label="Sprint" value={`P${r.sprintPosition}`} />
           )}
           <StatCard
             label="Positions Gained"
-            value={r.positionsGained > 0 ? `+${r.positionsGained}` : r.positionsGained === 0 ? '—' : `${r.positionsGained}`}
+            value={r.positionsGained != null
+              ? (r.positionsGained > 0 ? `+${r.positionsGained}` : r.positionsGained === 0 ? '—' : `${r.positionsGained}`)
+              : null}
           />
         </div>
       </div>
@@ -204,9 +179,9 @@ const RaceDetail = ({ race, results, onBack }) => {
       <div className="rd-section">
         <span className="rd-section-label">Race Statistics</span>
         <div className="rd-stat-grid rd-stat-grid--4">
-          <StatCard label="Pit Stops" value={r.pitStops} />
+          <StatCard label="Pit Stops" value={r.pitStops != null ? r.pitStops : null} />
           <StatCard label="Best Lap" value={r.bestLapTime} />
-          <StatCard label="Top Speed" value={`${r.topSpeed} km/h`} />
+          <StatCard label="Top Speed" value={r.topSpeed != null ? `${r.topSpeed} km/h` : null} />
           <StatCard label="Race Time" value={r.totalRaceTime} />
         </div>
       </div>
@@ -219,6 +194,7 @@ const RaceDetail = ({ race, results, onBack }) => {
       <div className="rd-section">
         <span className="rd-section-label">Race Highlights</span>
         <HighlightsRow highlights={r.highlights} />
+        {(!r.highlights || r.highlights.length === 0) && <p className="rd-na">No highlights recorded</p>}
       </div>
 
       <div className="rd-section">

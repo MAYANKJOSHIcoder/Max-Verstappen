@@ -4,51 +4,49 @@
     "hasResults": true,
     "isSprint": false,
     "result": {
-      "position": 1,
-      "points": 26,
-      "gridPosition": 1,
-      "qualifyingPosition": 1,
+      "position": 6,
+      "points": null,
+      "gridPosition": 20,
+      "qualifyingPosition": 20,
       "sprintPosition": null,
-      "fastestLap": true,
-      "driverOfTheDay": false,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 2,
-      "bestLapTime": "1:20.452",
-      "totalRaceTime": "1:32:18.247",
-      "topSpeed": 336,
-      "positionsGained": 0,
-      "tyreStrategy": [
-        { "compound": "MEDIUM", "laps": 16 },
-        { "compound": "HARD", "laps": 24 },
-        { "compound": "SOFT", "laps": 18 }
+      "bestLapTime": "1:22.091",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 324,
+      "positionsGained": 14,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [
+        "14 Overtakes"
       ],
-      "highlights": ["Win", "Fastest Lap", "Pole Position"],
-      "championship": { "position": 1, "points": 26, "gapToLeader": 0 }
+      "championship": null
     }
   },
   {
     "round": 2,
     "hasResults": true,
-    "isSprint": false,
+    "isSprint": true,
     "result": {
-      "position": 1,
-      "points": 25,
-      "gridPosition": 1,
-      "qualifyingPosition": 1,
-      "sprintPosition": null,
-      "fastestLap": false,
-      "driverOfTheDay": false,
-      "pitStops": 2,
-      "bestLapTime": "1:34.128",
-      "totalRaceTime": "1:34:56.781",
-      "topSpeed": 328,
-      "positionsGained": 0,
-      "tyreStrategy": [
-        { "compound": "MEDIUM", "laps": 14 },
-        { "compound": "HARD", "laps": 20 },
-        { "compound": "MEDIUM", "laps": 16 }
-      ],
-      "highlights": ["Win", "Pole Position"],
-      "championship": { "position": 1, "points": 51, "gapToLeader": 8 }
+      "position": 16,
+      "points": null,
+      "gridPosition": 8,
+      "qualifyingPosition": 8,
+      "sprintPosition": 9,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 1,
+      "bestLapTime": "1:37.046",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 341,
+      "positionsGained": -8,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [],
+      "championship": null
     }
   },
   {
@@ -56,25 +54,25 @@
     "hasResults": true,
     "isSprint": false,
     "result": {
-      "position": 2,
-      "points": 19,
-      "gridPosition": 2,
-      "qualifyingPosition": 2,
+      "position": 8,
+      "points": null,
+      "gridPosition": 11,
+      "qualifyingPosition": 11,
       "sprintPosition": null,
-      "fastestLap": true,
-      "driverOfTheDay": true,
-      "pitStops": 2,
-      "bestLapTime": "1:31.875",
-      "totalRaceTime": "1:29:47.332",
-      "topSpeed": 319,
-      "positionsGained": 0,
-      "tyreStrategy": [
-        { "compound": "MEDIUM", "laps": 12 },
-        { "compound": "HARD", "laps": 20 },
-        { "compound": "SOFT", "laps": 14 }
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 1,
+      "bestLapTime": "1:33.552",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 346,
+      "positionsGained": 3,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [
+        "3 Overtakes"
       ],
-      "highlights": ["Podium", "Fastest Lap", "Driver of the Day"],
-      "championship": { "position": 2, "points": 70, "gapToLeader": -3 }
+      "championship": null
     }
   },
   {
@@ -82,55 +80,50 @@
     "hasResults": true,
     "isSprint": true,
     "result": {
-      "position": 1,
-      "points": 26,
+      "position": 5,
+      "points": null,
       "gridPosition": 2,
       "qualifyingPosition": 2,
-      "sprintPosition": 1,
-      "sprintPoints": 8,
-      "fastestLap": true,
-      "driverOfTheDay": false,
-      "pitStops": 2,
-      "bestLapTime": "1:29.741",
-      "totalRaceTime": "1:31:22.415",
-      "topSpeed": 341,
-      "positionsGained": 1,
-      "tyreStrategy": [
-        { "compound": "SOFT", "laps": 14 },
-        { "compound": "MEDIUM", "laps": 22 },
-        { "compound": "HARD", "laps": 18 }
-      ],
-      "sprintStrategy": [
-        { "compound": "MEDIUM", "laps": 19 }
-      ],
-      "highlights": ["Win", "Fastest Lap", "Sprint Win", "Pole Position"],
-      "championship": { "position": 1, "points": 104, "gapToLeader": 12 }
+      "sprintPosition": 5,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 1,
+      "bestLapTime": "1:33.110",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 332,
+      "positionsGained": -3,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [],
+      "championship": null
     }
   },
   {
     "round": 5,
     "hasResults": true,
-    "isSprint": false,
+    "isSprint": true,
     "result": {
-      "position": 1,
-      "points": 25,
-      "gridPosition": 1,
-      "qualifyingPosition": 1,
-      "sprintPosition": null,
-      "fastestLap": false,
-      "driverOfTheDay": false,
-      "pitStops": 2,
-      "bestLapTime": "1:14.256",
-      "totalRaceTime": "1:35:12.908",
-      "topSpeed": 334,
-      "positionsGained": 0,
-      "tyreStrategy": [
-        { "compound": "MEDIUM", "laps": 18 },
-        { "compound": "HARD", "laps": 26 },
-        { "compound": "SOFT", "laps": 14 }
+      "position": 3,
+      "points": null,
+      "gridPosition": 6,
+      "qualifyingPosition": 6,
+      "sprintPosition": 7,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 1,
+      "bestLapTime": "1:14.398",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 329,
+      "positionsGained": 3,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [
+        "Podium",
+        "3 Overtakes"
       ],
-      "highlights": ["Win", "Pole Position"],
-      "championship": { "position": 1, "points": 129, "gapToLeader": 15 }
+      "championship": null
     }
   },
   {
@@ -138,24 +131,23 @@
     "hasResults": true,
     "isSprint": false,
     "result": {
-      "position": 3,
-      "points": 15,
-      "gridPosition": 3,
-      "qualifyingPosition": 3,
+      "position": 22,
+      "points": null,
+      "gridPosition": 2,
+      "qualifyingPosition": 2,
       "sprintPosition": null,
-      "fastestLap": false,
-      "driverOfTheDay": false,
-      "pitStops": 1,
-      "bestLapTime": "1:12.847",
-      "totalRaceTime": "1:44:28.553",
-      "topSpeed": 289,
-      "positionsGained": 0,
-      "tyreStrategy": [
-        { "compound": "SOFT", "laps": 34 },
-        { "compound": "HARD", "laps": 42 }
-      ],
-      "highlights": ["Podium"],
-      "championship": { "position": 1, "points": 144, "gapToLeader": 10 }
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 0,
+      "bestLapTime": null,
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 151,
+      "positionsGained": -20,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [],
+      "championship": null
     }
   },
   {
@@ -163,56 +155,52 @@
     "hasResults": true,
     "isSprint": false,
     "result": {
-      "position": 1,
-      "points": 26,
-      "gridPosition": 1,
-      "qualifyingPosition": 1,
+      "position": 4,
+      "points": null,
+      "gridPosition": 5,
+      "qualifyingPosition": 5,
       "sprintPosition": null,
-      "fastestLap": true,
-      "driverOfTheDay": false,
-      "pitStops": 2,
-      "bestLapTime": "1:16.534",
-      "totalRaceTime": "1:28:15.220",
-      "topSpeed": 331,
-      "positionsGained": 0,
-      "tyreStrategy": [
-        { "compound": "MEDIUM", "laps": 14 },
-        { "compound": "HARD", "laps": 24 },
-        { "compound": "MEDIUM", "laps": 16 }
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 3,
+      "bestLapTime": "1:20.230",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 342,
+      "positionsGained": 1,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [
+        "1 Overtakes"
       ],
-      "highlights": ["Win", "Fastest Lap", "Pole Position"],
-      "championship": { "position": 1, "points": 170, "gapToLeader": 18 }
+      "championship": null
     }
   },
   {
     "round": 8,
     "hasResults": true,
-    "isSprint": true,
+    "isSprint": false,
     "result": {
       "position": 2,
-      "points": 18,
-      "gridPosition": 2,
-      "qualifyingPosition": 2,
-      "sprintPosition": 1,
-      "sprintPoints": 8,
-      "fastestLap": false,
-      "driverOfTheDay": false,
-      "pitStops": 3,
-      "bestLapTime": "1:07.112",
-      "totalRaceTime": "1:17:45.331",
-      "topSpeed": 342,
-      "positionsGained": 0,
-      "tyreStrategy": [
-        { "compound": "MEDIUM", "laps": 10 },
-        { "compound": "SOFT", "laps": 16 },
-        { "compound": "MEDIUM", "laps": 12 },
-        { "compound": "HARD", "laps": 18 }
+      "points": null,
+      "gridPosition": 5,
+      "qualifyingPosition": 5,
+      "sprintPosition": null,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 2,
+      "bestLapTime": "1:10.483",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 340,
+      "positionsGained": 3,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [
+        "Podium",
+        "3 Overtakes"
       ],
-      "sprintStrategy": [
-        { "compound": "SOFT", "laps": 24 }
-      ],
-      "highlights": ["Podium", "Sprint Win"],
-      "championship": { "position": 1, "points": 196, "gapToLeader": 19 }
+      "championship": null
     }
   },
   {
@@ -224,7 +212,7 @@
   {
     "round": 10,
     "hasResults": false,
-    "isSprint": true,
+    "isSprint": false,
     "result": null
   },
   {
@@ -278,7 +266,7 @@
   {
     "round": 19,
     "hasResults": false,
-    "isSprint": true,
+    "isSprint": false,
     "result": null
   },
   {

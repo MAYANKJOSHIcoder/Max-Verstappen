@@ -16,8 +16,8 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 | 🚀 **Career Journey** | Scroll-animated vertical timeline from go-kart prodigy (2005) through Toro Rosso to 4-time world champion |
 | 🏆 **Records** | Categorized record cards — Age Records, Season Records, Win Records, Lap Records, Grand Prix Records, Championship Records |
 | 🌐 **Sphere Gallery** | Interactive sphere photo wall (drag/swipe to orbit) with filterable categories and lightbox |
-| 📡 **Live Telemetry** (`/telemetry`) | F1 broadcast-style live race dashboard powered by the OpenF1 API — speed, gear, RPM, throttle, brake, DRS, gaps (leader/ahead/behind), last + best lap, sector times with PB coloring, tyre compound/age, pit windows, weather (air/track temp, humidity, wind, rain), and a race-long position timeline. All data is for Max Verstappen (driver #1). |
-| 📅 **2026 Calendar** (`/calendar`) | Full 22-round 2026 F1 season calendar with dates, circuits, and results |
+| 📡 **Live Telemetry** (`/telemetry`) | F1 broadcast-style live race dashboard powered by the OpenF1 API — speed, gear, RPM, throttle, brake, DRS, gaps (leader/ahead/behind), last + best lap, sector times with PB coloring, tyre compound/age, pit windows, weather (air/track temp, humidity, wind, rain), and a race-long position timeline. All data is for Max Verstappen (driver #3). |
+| 📅 **2026 Calendar** (`/calendar`) | Full 22-round 2026 F1 season calendar with dates, circuits, session timings, and completed race results (R1–R8) via an interactive detail panel |
 
 ### Design
 
@@ -72,6 +72,9 @@ npm run build
 
 # Preview the production build
 npm run preview
+
+# Refresh race results from OpenF1 API (re-run as season progresses)
+node scripts/fetch-race-results.mjs
 ```
 
 ---
@@ -85,7 +88,9 @@ max-verstappen-site/
 │   │   ├── Navbar.jsx / .css       # Sticky top nav with smooth-scroll links
 │   │   ├── Footer.jsx / .css       # Site disclaimer, quick links, credits
 │   │   ├── Hero.jsx / .css         # Poster-style hero with masked text + stats
-│   │   └── DomeGallery.jsx / .css  # Sphere photo wall with drag interaction
+│   │   ├── DomeGallery.jsx / .css  # Sphere photo wall with drag interaction
+│   │   ├── RaceDetail.jsx / .css   # Expandable race result detail panel (Calendar)
+│   │   └── CircuitMap.jsx / .css   # SVG circuit map for race hero/details
 │   ├── pages/               # Route pages
 │   │   ├── Home.jsx / .css         # Orchestrator — renders all scroll sections
 │   │   ├── LiveTelemetry.jsx/.css  # F1 broadcast-style live dashboard (/telemetry)
@@ -103,13 +108,16 @@ max-verstappen-site/
 │   │   ├── journey.json     # Career timeline events (2005–2025)
 │   │   ├── records.json     # Record entries by category
 │   │   ├── gallery.json     # Image URLs, captions, categories, credits
-│   │   └── calendar2026.json # 2026 F1 calendar (22 rounds)
+│   │   ├── calendar2026.json     # 2026 F1 calendar (22 rounds)
+│   │   └── raceResults2026.json  # Race results from OpenF1 API (R1–R8)
 │   ├── styles/
 │   │   └── theme.css        # Global tokens: palette, type, spacing, motion, reset
 │   ├── assets/              # Static images bundled by Vite
 │   │   └── Hero.png         # Hero background image
 │   ├── main.jsx             # React DOM entry point (BrowserRouter)
 │   └── App.jsx / .css       # Root component (Navbar → Routes → Footer)
+├── scripts/                 # Utility scripts (development)
+│   └── fetch-race-results.mjs  # One-time OpenF1 API data fetcher for race results
 ├── public/                  # Static assets served as-is
 │   ├── _redirects           # Vercel SPA redirect rule
 │   ├── favicon.svg
