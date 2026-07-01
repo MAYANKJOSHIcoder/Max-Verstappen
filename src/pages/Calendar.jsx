@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
 import calendarData from '../data/calendar2026.json';
 import CircuitMap from '../components/CircuitMap';
@@ -46,6 +46,8 @@ const Calendar = () => {
   const now = new Date();
   const [expandedCard, setExpandedCard] = useState(null);
   const [selectedRound, setSelectedRound] = useState(null);
+  const [previewRound, setPreviewRound] = useState(null);
+  const calendarRef = useRef(null);
 
   const upcomingRound = useMemo(
     () => calendarData.find((r) => !r.isCancelled && new Date(r.date) >= now) || null,
@@ -65,8 +67,13 @@ const Calendar = () => {
     return { race, results };
   }, [selectedRound, sortedRaces]);
 
+  const previewRace = useMemo(
+    () => (previewRound ? sortedRaces.find((r) => r.round === previewRound) : null),
+    [previewRound, sortedRaces],
+  );
+
   return (
-    <div className="calendar-page container">
+    <div className="calendar-page container" ref={calendarRef}>
       <header className="page-head">
         <span className="eyebrow">2026 Season</span>
         <h1 className="page-title">Calendar</h1>
@@ -81,6 +88,73 @@ const Calendar = () => {
           results={selectedRaceData.results}
           onBack={() => setSelectedRound(null)}
         />
+      ) : previewRace ? (
+        <motion.div
+          className="cal-hero cal-hero--preview"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <button className="rd-back" onClick={() => setPreviewRound(null)}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            All Races
+          </button>
+
+          <div className="cal-hero-inner">
+            <div className="cal-hero-left">
+              <span className="cal-hero-eyebrow">Round {previewRace.round}</span>
+              <h2 className="cal-hero-name">{previewRace.raceName}</h2>
+              <p className="cal-hero-circuit">
+                {previewRace.country} · {previewRace.circuit}
+              </p>
+              <p className="cal-hero-date">{formatDate(previewRace.date)}</p>
+
+              {previewRace.sessions && (
+                <div className="cal-hero-sessions">
+                  {previewRace.sessions.map((s) => (
+                    <span key={s.name} className="cal-hero-session-chip">
+                      <span className="cal-hero-session-name">{s.name}</span>
+                      <span className="cal-hero-session-time">
+                        {fmtSessionDay(s.date)} {fmtSessionTime(s.date)}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="cal-hero-right">
+              <CircuitMap
+                circuit={previewRace.circuit}
+                size={220}
+                className="circuit-map--hero"
+              />
+              <div className="cal-hero-countdown">
+                {(() => {
+                  const cd = countdown(previewRace.date);
+                  if (!cd) return <span className="cal-countdown-live">RACE WEEK</span>;
+                  return (
+                    <div className="cal-countdown-grid">
+                      <div className="cal-countdown-cell">
+                        <span className="cal-countdown-value telemetry">{cd.days}</span>
+                        <span className="cal-countdown-label">Days</span>
+                      </div>
+                      <div className="cal-countdown-cell">
+                        <span className="cal-countdown-value telemetry">{cd.hours}</span>
+                        <span className="cal-countdown-label">Hrs</span>
+                      </div>
+                      <div className="cal-countdown-cell">
+                        <span className="cal-countdown-value telemetry">{cd.mins}</span>
+                        <span className="cal-countdown-label">Min</span>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            </div>
+          </div>
+        </motion.div>
       ) : upcomingRound && (
         <motion.div
           className="cal-hero"
@@ -114,7 +188,7 @@ const Calendar = () => {
             <div className="cal-hero-right">
               <CircuitMap
                 circuit={upcomingRound.circuit}
-                size={140}
+                size={220}
                 className="circuit-map--hero"
               />
               <div className="cal-hero-countdown">
@@ -162,9 +236,13 @@ const Calendar = () => {
                 if (raceResult?.hasResults) {
                   setSelectedRound((prev) => (prev === race.round ? null : race.round));
                   setExpandedCard(null);
+                  setPreviewRound(null);
                 } else {
-                  setExpandedCard((prev) => (prev === race.round ? null : race.round));
+                  setPreviewRound((prev) => (prev === race.round ? null : race.round));
+                  setExpandedCard(null);
+                  setSelectedRound(null);
                 }
+                calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
               }}
             >
               <div className="cal-card-top">
@@ -187,7 +265,7 @@ const Calendar = () => {
                   <p className="cal-date">{formatDate(race.date)}</p>
                 </div>
                 <div className="cal-card-map">
-                  <CircuitMap circuit={race.circuit} size={56} />
+                  <CircuitMap circuit={race.circuit} size={90} />
                 </div>
               </div>
 

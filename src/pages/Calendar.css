@@ -22,6 +22,10 @@
   background: linear-gradient(180deg, var(--red), var(--yellow));
 }
 
+.cal-hero--preview .cal-hero-inner {
+  margin-top: var(--spacing-sm);
+}
+
 .cal-hero-inner {
   display: flex;
   justify-content: space-between;
@@ -251,12 +255,12 @@
 
 .cal-card-map {
   flex-shrink: 0;
-  opacity: 0.5;
+  opacity: 0.7;
   transition: opacity var(--dur-fast) var(--ease-out-quint);
 }
 
 .cal-card:hover .cal-card-map {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .cal-race-name {
@@ -334,11 +338,27 @@
     align-items: flex-start;
   }
 
+  .cal-hero {
+    overflow: visible;
+  }
+
   .cal-hero-right {
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 100%;
-    justify-content: space-between;
+    margin-top: var(--spacing-sm);
+  }
+
+  .cal-hero-right .circuit-map--hero {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1;
+    max-width: 280px;
+    opacity: 0.85;
+  }
+
+  .cal-hero--preview .cal-hero-inner {
+    margin-top: var(--spacing-md);
   }
 
   .cal-countdown-grid {
