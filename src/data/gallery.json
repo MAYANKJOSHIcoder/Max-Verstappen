@@ -24,103 +24,103 @@
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2021/2021-Verstappen-Dutch-GP",
+    "imageUrl": "/images/races/2021-verstappen-dutch-gp.webp",
     "caption": "Max Verstappen celebrates winning his home Dutch Grand Prix in 2021",
     "category": "Races",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2022/2022-Verstappen-Dutch-GP",
+    "imageUrl": "/images/races/2022-verstappen-dutch-gp.webp",
     "caption": "Max Verstappen on the podium at the 2022 Dutch Grand Prix",
     "category": "Races",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2023/2023-Verstappen-Dutch-GP",
+    "imageUrl": "/images/races/2023-verstappen-dutch-gp.webp",
     "caption": "Max Verstappen waves to fans after winning the 2023 Dutch Grand Prix",
     "category": "Races",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2024/2024-Verstappen-Dutch-GP",
+    "imageUrl": "/images/races/2024-verstappen-dutch-gp.webp",
     "caption": "Max Verstappen celebrates his fourth consecutive Dutch Grand Prix win in 2024",
     "category": "Races",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2021/2021-Verstappen-Pitlane",
+    "imageUrl": "/images/behind-the-scenes/2021-verstappen-pitlane.webp",
     "caption": "Max Verstappen in the pitlane during the 2021 season",
     "category": "Behind the Scenes",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2022/2022-Verstappen-Team",
+    "imageUrl": "/images/behind-the-scenes/2022-verstappen-team.webp",
     "caption": "Max Verstappen with his Red Bull Racing team after a race win in 2022",
     "category": "Behind the Scenes",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2023/2023-Verstappen-Testing",
+    "imageUrl": "/images/behind-the-scenes/2023-verstappen-testing.webp",
     "caption": "Max Verstappen during pre-season testing for the 2023 season",
     "category": "Behind the Scenes",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2024/2024-Verstappen-Fans",
+    "imageUrl": "/images/behind-the-scenes/2024-verstappen-fans.webp",
     "caption": "Max Verstappen interacts with fans at the 2024 British Grand Prix",
     "category": "Behind the Scenes",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2021/2021-Verstappen-Podium",
+    "imageUrl": "/images/podiums/2021-verstappen-podium.webp",
     "caption": "Max Verstappen on the podium at the 2021 Monaco Grand Prix",
     "category": "Podiums",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2022/2022-Verstappen-Podium",
+    "imageUrl": "/images/podiums/2022-verstappen-podium.webp",
     "caption": "Max Verstappen celebrates on the podium at the 2022 Monaco Grand Prix",
     "category": "Podiums",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2023/2023-Verstappen-Podium",
+    "imageUrl": "/images/podiums/2023-verstappen-podium.webp",
     "caption": "Max Verstappen on the podium at the 2023 Monaco Grand Prix",
     "category": "Podiums",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2024/2024-Verstappen-Podium",
+    "imageUrl": "/images/podiums/2024-verstappen-podium.webp",
     "caption": "Max Verstappen celebrates another podium finish at the 2024 Monaco Grand Prix",
     "category": "Podiums",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2025/2025-Verstappen-Japan",
+    "imageUrl": "/images/races/2025-verstappen-japan.webp",
     "caption": "Max Verstappen on the podium after winning the 2025 Japanese Grand Prix",
     "category": "Races",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2025/2025-Verstappen-Abu-Dhabi",
+    "imageUrl": "/images/races/2025-verstappen-abu-dhabi.webp",
     "caption": "Max Verstappen wins the 2025 Abu Dhabi Grand Prix at Yas Marina",
     "category": "Races",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2025/2025-Verstappen-RB21",
+    "imageUrl": "/images/behind-the-scenes/2025-verstappen-rb21.webp",
     "caption": "Max Verstappen with the Red Bull Racing RB21 during the 2025 season",
     "category": "Behind the Scenes",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2025/2025-Verstappen-Dutch-GP",
+    "imageUrl": "/images/podiums/2025-verstappen-dutch-gp.webp",
     "caption": "Max Verstappen at the 2025 Dutch Grand Prix in Zandvoort",
     "category": "Podiums",
     "credit": "Formula 1 Media"
   },
   {
-    "imageUrl": "https://media.formula1.com/image/upload/f_auto,c_auto,q_auto,w_1200/content/dam/fom-website/manual/Misc/2025/2025-Verstappen-Podium",
+    "imageUrl": "/images/podiums/2025-verstappen-podium.webp",
     "caption": "Max Verstappen celebrates a podium finish during the 2025 season",
     "category": "Podiums",
     "credit": "Formula 1 Media"

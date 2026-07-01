@@ -85,6 +85,7 @@ const Gallery = () => {
         openedImageHeight="460px"
         imageBorderRadius="14px"
         openedImageBorderRadius="16px"
+        grayscale={false}
       />
     </div>
   );
