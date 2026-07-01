@@ -91,7 +91,13 @@ const Navbar = () => {
         <button
           className="navbar-brand"
           aria-label="Max Verstappen — back to top"
-          onClick={() => navigate('/')}
+          onClick={() => {
+            if (location.pathname === '/') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              navigate('/');
+            }
+          }}
         >
           <span className="brand-name">Max Verstappen</span>
           <span className="brand-tag">4× World Champion</span>

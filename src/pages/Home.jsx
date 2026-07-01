@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Cars from './Cars';
@@ -22,39 +21,20 @@ const highlights = [
   { year: '2025', caption: 'Runner-up in one of the closest modern battles, pushing to the final rounds.' },
 ];
 
-const Home = () => {
-  const navigate = useNavigate();
+const Home = () => (
+  <div className="home">
+    <Hero />
 
-  return (
-    <div className="home">
-      <Hero />
+    <div className="home-lead container">
+      <p>
+        From go-kart prodigy at four years old to the most dominant force
+        in modern Formula 1. Four consecutive world championships and a
+        record books rewritten.
+      </p>
+    </div>
 
-      <div className="home-lead container">
-        <p>
-          From go-kart prodigy at four years old to the most dominant force
-          in modern Formula 1. Four consecutive world championships and a
-          record books rewritten.
-        </p>
-        <div className="home-lead-actions">
-          <button
-            type="button"
-            className="btn btn--primary"
-            onClick={() => navigate('/telemetry')}
-          >
-            Live Telemetry
-          </button>
-          <button
-            type="button"
-            className="btn btn--ghost"
-            onClick={() => navigate('/calendar')}
-          >
-            Calendar
-          </button>
-        </div>
-      </div>
-
-      {/* Championship Highlights */}
-      <section id="highlights" className="home-section" aria-label="Championship highlights">
+    {/* Championship Highlights */}
+    <section id="highlights" className="home-section" aria-label="Championship highlights">
         <div className="container">
           <motion.div className="section-head" {...fadeUp}>
             <span className="eyebrow">Championships</span>
@@ -105,6 +85,5 @@ const Home = () => {
       </section>
     </div>
   );
-};
 
 export default Home;

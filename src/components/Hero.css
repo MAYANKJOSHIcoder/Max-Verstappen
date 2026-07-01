@@ -213,3 +213,267 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   Hero Bottom Panels — Telemetry & Calendar preview cards
+   sit below the stats strip in a 2-column grid.
+   ============================================================ */
+
+.hero-panels {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-sm);
+  border-top: 1px solid var(--grid-line);
+  padding-top: 32px;
+  margin-top: 0;
+}
+
+.hp-card {
+  background: var(--asphalt);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out-quint),
+    border-color var(--dur-fast) var(--ease-out-quint);
+  overflow: hidden;
+}
+
+.hp-card:hover {
+  transform: translateY(-2px);
+}
+
+.hp-card--telem:hover {
+  border-color: var(--red);
+}
+
+.hp-card--cal:hover {
+  border-color: var(--yellow);
+}
+
+.hp-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding: 20px 24px;
+  min-width: 0;
+}
+
+.hp-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.hp-card-left .eyebrow {
+  font-size: 0.65rem;
+}
+
+.hp-card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.4vw, 1.3rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.hp-card-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* ---- Live telemetry indicator ---- */
+
+.hp-telem-live {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.hp-telem-pos {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  color: var(--yellow);
+  line-height: 1;
+}
+
+.hp-telem-laptime {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  color: var(--smoke);
+  line-height: 1;
+}
+
+/* ---- Next race preview (telemetry card) ---- */
+
+.hp-telem-next {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 0;
+}
+
+.hp-telem-next-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mist);
+  line-height: 1;
+}
+
+.hp-telem-next-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  color: var(--white);
+  line-height: 1.2;
+  text-align: right;
+  white-space: normal;
+}
+
+.hp-telem-next-circuit {
+  font-size: 0.7rem;
+  color: var(--smoke);
+  line-height: 1.2;
+  text-align: right;
+}
+
+/* ---- Calendar card ---- */
+
+.hp-cal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 0;
+}
+
+.hp-cal-next-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mist);
+  line-height: 1;
+}
+
+.hp-cal-next-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  color: var(--yellow);
+  line-height: 1.2;
+  text-align: right;
+  white-space: normal;
+}
+
+/* ---- Countdown (shared) ---- */
+
+.hp-countdown-grid {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.hp-countdown-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  min-width: 32px;
+}
+
+.hp-countdown-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+  color: var(--white);
+  line-height: 1;
+}
+
+.hp-countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mist);
+  line-height: 1;
+}
+
+.hp-countdown-live {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--red);
+  animation: hp-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes hp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ---- Live dot ---- */
+
+.hp-live-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+}
+
+.hp-live-dot-core {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  position: absolute;
+}
+
+.hp-live-dot-ring {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--red);
+  position: absolute;
+  animation: hp-dot-ring 1.5s ease-out infinite;
+}
+
+@keyframes hp-dot-ring {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 768px) {
+  .hero-panels {
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+  }
+
+  .hp-card-body {
+    padding: 16px 16px;
+  }
+
+  .hp-card-title {
+    font-size: 0.9rem;
+  }
+}

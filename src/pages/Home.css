@@ -16,13 +16,6 @@
   margin-bottom: var(--spacing-md);
 }
 
-.home-lead-actions {
-  display: flex;
-  gap: var(--spacing-sm);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .home-section {
   padding: var(--spacing-xl) 0;
   position: relative;
