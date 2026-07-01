@@ -55,7 +55,7 @@ const YearSelector = ({ years, selectedYear, onYearChange }) => (
 );
 
 const Cars = () => {
-  const [selectedYear, setSelectedYear] = useState('all');
+  const [selectedYear, setSelectedYear] = useState(2026);
 
   const years = useMemo(
     () => [...new Set(carsData.map((c) => c.year))].sort((a, b) => b - a),

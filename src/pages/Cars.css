@@ -135,7 +135,7 @@
   background: var(--carbon);
   color: var(--smoke);
   border: 1px solid var(--grid-line);
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--dur-fast) var(--ease-out-quint);
 }

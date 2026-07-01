@@ -19,7 +19,6 @@ const highlights = [
   { year: '2022', caption: 'Second title, clinched in Japan with a record 15 wins in a season.', img: '/images/championships/2022-verstappen-championship.webp' },
   { year: '2023', caption: 'Third consecutive crown, breaking his own record with 19 wins.', img: '/images/championships/2023-verstappen-championship.webp' },
   { year: '2024', caption: 'Fourth straight championship, sealed under the Las Vegas lights.', img: '/images/championships/2024-verstappen-championship.webp' },
-  { year: '2025', caption: 'Runner-up in one of the closest modern battles, pushing to the final rounds.' },
 ];
 
 const Home = () => (

@@ -3,10 +3,10 @@ import journeyData from '../data/journey.json';
 import './Journey.css';
 
 const catColor = {
-  'Go-Kart': 'var(--yellow)',
+  'Go-Kart': 'var(--red)',
   F3: 'var(--red)',
-  F4: 'var(--navy-soft)',
-  F1: 'var(--navy)',
+  F4: 'var(--red)',
+  F1: 'var(--red)',
 };
 
 const Journey = () => {
