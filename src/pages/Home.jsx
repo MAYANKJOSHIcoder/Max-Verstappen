@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
+import HeroPanels from '../components/HeroPanels';
 import Cars from './Cars';
 import Journey from './Journey';
 import Records from './Records';
@@ -24,6 +25,7 @@ const highlights = [
 const Home = () => (
   <div className="home">
     <Hero />
+    <HeroPanels />
 
     <div className="home-lead container">
       <p>
