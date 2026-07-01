@@ -185,11 +185,24 @@ const PitWindow = ({ tires, laps }) => {
   );
 };
 
+/** Duration estimate (ms) per session type */
+const SESSION_DURATION_MS = {
+  'FP1': 60 * 60 * 1000,
+  'FP2': 60 * 60 * 1000,
+  'FP3': 60 * 60 * 1000,
+  'Qualifying': 60 * 60 * 1000,
+  'Sprint Qualifying': 30 * 60 * 1000,
+  'Sprint': 30 * 60 * 1000,
+  'Race': 2 * 60 * 60 * 1000,
+};
+const DEFAULT_SESSION_DURATION = 2 * 60 * 60 * 1000;
+
 /** Determine the session status for the weekend strip */
-const sessionStatus = (sessionDate, durationMs = 2 * 60 * 60 * 1000) => {
+const sessionStatus = (sessionDate, sessionName) => {
   const now = Date.now();
   const start = new Date(sessionDate).getTime();
-  const end = start + durationMs;
+  const duration = SESSION_DURATION_MS[sessionName] ?? DEFAULT_SESSION_DURATION;
+  const end = start + duration;
   if (now >= start && now <= end) return 'is-live';
   if (now > end) return 'is-completed';
   return 'is-upcoming';
@@ -221,7 +234,7 @@ const WeekendSchedule = ({ sessions }) => {
   return (
     <div className="lt-weekend">
       {sessions.map((s) => {
-        const status = sessionStatus(s.date);
+        const status = sessionStatus(s.date, s.name);
         return (
           <div key={s.name} className={`lt-weekend-session ${status}`}>
             <span className="lt-weekend-session-name">{s.name}</span>
@@ -233,6 +246,49 @@ const WeekendSchedule = ({ sessions }) => {
     </div>
   );
 };
+
+/**
+ * Ghost dashboard — faded outlines of the live dashboard layout used as a
+ * background backdrop when no live data is available (no-session, error,
+ * loading). Shows the user what will appear once a session goes live.
+ */
+const GhostDashboard = () => (
+  <div className="lt-ghost" aria-hidden="true">
+    <div className="lt-ghost-bar" />
+    <div className="lt-ghost-hero">
+      <div className="lt-ghost-position" />
+      <div className="lt-ghost-lap-cards">
+        <div className="lt-ghost-lap-card" />
+        <div className="lt-ghost-lap-card" />
+      </div>
+    </div>
+    <div className="lt-ghost-sectors">
+      <div className="lt-ghost-sector" />
+      <div className="lt-ghost-sector" />
+      <div className="lt-ghost-sector" />
+    </div>
+    <div className="lt-ghost-gaps">
+      <div className="lt-ghost-gap" />
+      <div className="lt-ghost-gap" />
+      <div className="lt-ghost-gap" />
+    </div>
+    <div className="lt-ghost-car">
+      <div className="lt-ghost-car-item" />
+      <div className="lt-ghost-car-item" />
+      <div className="lt-ghost-car-item" />
+      <div className="lt-ghost-car-item" />
+      <div className="lt-ghost-pedal" />
+      <div className="lt-ghost-pedal" />
+    </div>
+    <div className="lt-ghost-weather">
+      <div className="lt-ghost-weather-item" />
+      <div className="lt-ghost-weather-item" />
+      <div className="lt-ghost-weather-item" />
+      <div className="lt-ghost-weather-item" />
+      <div className="lt-ghost-weather-item" />
+    </div>
+  </div>
+);
 
 const LiveTelemetry = () => {
   const {
@@ -308,8 +364,8 @@ const LiveTelemetry = () => {
         </header>
 
         <div className="lt-no-session">
+          <GhostDashboard />
           <div className="lt-no-session-inner">
-            <span className="lt-no-session-icon" aria-hidden="true">🏎️</span>
             <h2 className="lt-no-session-title">No live session</h2>
             {(displaySession || noSessionRace) && (
               <>
@@ -323,17 +379,21 @@ const LiveTelemetry = () => {
                   {(displaySession?.circuit_short_name || noSessionRace?.circuit) &&
                     ` · ${displaySession?.circuit_short_name || noSessionRace?.circuit}`}
                 </p>
-                {noSessionRace && (
-                  <CircuitMap
-                    circuit={noSessionRace.circuit}
-                    size={100}
-                    className="circuit-map--hero"
-                  />
-                )}
-                <Countdown date={displaySession?.date_start || noSessionRace?.date} />
-                {noSessionRace?.sessions && (
-                  <WeekendSchedule sessions={noSessionRace.sessions} />
-                )}
+                <div className="lt-no-session-stack">
+                  {noSessionRace && (
+                    <div className="lt-no-session-map">
+                      <CircuitMap
+                        circuit={noSessionRace.circuit}
+                        size={220}
+                        className="circuit-map--hero"
+                      />
+                    </div>
+                  )}
+                  <Countdown date={displaySession?.date_start || noSessionRace?.date} />
+                  {noSessionRace?.sessions && (
+                    <WeekendSchedule sessions={noSessionRace.sessions} />
+                  )}
+                </div>
               </>
             )}
             {!displaySession && !noSessionRace && (
@@ -356,9 +416,21 @@ const LiveTelemetry = () => {
           <h1 className="page-title">Live Telemetry</h1>
         </header>
         <div className="lt-skeleton">
-          <div className="lt-skeleton-bar lt-skeleton-bar--sm" />
-          <div className="lt-skeleton-bar lt-skeleton-bar--lg" />
-          <div className="lt-skeleton-bar lt-skeleton-bar--md" />
+          <GhostDashboard />
+          <div className="lt-skeleton-statusbar">
+            <div className="lt-skeleton-bar lt-skeleton-bar--dot" />
+            <div className="lt-skeleton-bar lt-skeleton-bar--label" />
+          </div>
+          <div className="lt-skeleton-hero-row">
+            <div className="lt-skeleton-bar lt-skeleton-bar--pos" />
+            <div className="lt-skeleton-bar lt-skeleton-bar--time" />
+            <div className="lt-skeleton-bar lt-skeleton-bar--time" />
+          </div>
+          <div className="lt-skeleton-grid">
+            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
+            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
+            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
+          </div>
           <div className="lt-skeleton-grid">
             <div className="lt-skeleton-bar lt-skeleton-bar--box" />
             <div className="lt-skeleton-bar lt-skeleton-bar--box" />
@@ -378,11 +450,21 @@ const LiveTelemetry = () => {
           <h1 className="page-title">Live Telemetry</h1>
         </header>
         <div className="lt-error">
-          <p>Could not connect to live timing data.</p>
-          {error && <p className="lt-error-detail">{error}</p>}
-          <button className="btn btn--ghost" onClick={refresh}>
-            Retry
-          </button>
+          <GhostDashboard />
+          <div className="lt-error-inner">
+            <h2 className="lt-error-title">Connection lost</h2>
+            <p className="lt-error-text">
+              Could not reach the live timing data source. This usually
+              means the session hasn&apos;t started yet, or the API
+              is temporarily unavailable.
+            </p>
+            {error && <p className="lt-error-detail">{error}</p>}
+            <div className="lt-error-actions">
+              <button className="btn btn--ghost" onClick={refresh}>
+                Retry
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     );

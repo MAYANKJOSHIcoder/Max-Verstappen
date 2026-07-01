@@ -10,6 +10,13 @@
   position: relative;
   overflow: visible;
   color: var(--red);
+  width: var(--cm-size, 80px);
+  height: var(--cm-size, 80px);
+}
+
+.circuit-map-fallback-icon {
+  width: 50%;
+  height: 50%;
 }
 
 .circuit-map-img {
@@ -52,6 +59,13 @@
 
 .circuit-map--hero:hover {
   opacity: 1;
+}
+
+@media (max-width: 470px) {
+  .circuit-map--hero {
+    width: 160px !important;
+    height: 160px !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -15,13 +15,12 @@ const CircuitMap = ({ circuit, size = 80, className = '' }) => {
     return (
       <div
         className={`circuit-map circuit-map--fallback ${className}`}
-        style={{ width: size, height: size }}
+        style={{ '--cm-size': `${size}px` }}
         aria-label={`${circuit || 'Unknown'} circuit`}
       >
         <svg
           viewBox="0 0 24 24"
-          width={size * 0.5}
-          height={size * 0.5}
+          className="circuit-map-fallback-icon"
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
@@ -39,7 +38,7 @@ const CircuitMap = ({ circuit, size = 80, className = '' }) => {
   return (
     <div
       className={`circuit-map ${className}`}
-      style={{ width: size, height: size }}
+      style={{ '--cm-size': `${size}px` }}
       aria-label={`${circuit} circuit layout`}
     >
       <img
