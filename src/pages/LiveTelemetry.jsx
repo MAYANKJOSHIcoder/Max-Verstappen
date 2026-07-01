@@ -9,9 +9,7 @@ const MAX_DRIVER_NUMBER = 1;
 // LiveDot pulses based on the telemetry hook's lastUpdate timestamp rather than
 // a 1s parent re-render loop — we snapshot `lastUpdate` locally and react to
 // it via React state only when the parent actually has new data.
-const LiveDot = ({ lastUpdate }) => {
-  // Re-render the pulse animation on every lastUpdate change only.
-  void lastUpdate;
+const LiveDot = () => {
   return (
     <span className="lt-live-dot" aria-hidden="true">
       <span className="lt-live-dot-core" />
@@ -68,7 +66,7 @@ const PositionTimeline = ({ timeline }) => {
   const plotH = height - padding.top - padding.bottom;
 
   const minPos = 1;
-  const maxPos = Math.max(...timeline.map((t) => t.position), 4);
+  const maxPos = timeline.reduce((m, t) => Math.max(m, t.position), 4);
   const posRange = maxPos - minPos || 1;
 
   const xScale = (lap) => {
@@ -420,7 +418,7 @@ const LiveTelemetry = () => {
         <div className="lt-statusbar-left">
           {isLive && <LiveDot lastUpdate={lastUpdate} />}
           <span className="lt-statusbar-name">
-            {session?.raceName || session?.session_name || 'Race'}
+            {session?.session_name || 'Race'}
           </span>
           <span className="lt-statusbar-circuit">
             · {session?.circuit_short_name || currentRace?.circuit || 'Circuit'}

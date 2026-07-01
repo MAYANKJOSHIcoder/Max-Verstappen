@@ -7,8 +7,6 @@
     "countryCode": "AU",
     "date": "2026-03-08",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-03-06T01:30:00Z" },
       { "name": "FP2", "date": "2026-03-06T05:00:00Z" },
@@ -25,8 +23,6 @@
     "countryCode": "CN",
     "date": "2026-03-15",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-03-13T03:30:00Z" },
       { "name": "FP2", "date": "2026-03-13T07:00:00Z" },
@@ -43,8 +39,6 @@
     "countryCode": "JP",
     "date": "2026-03-29",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-03-27T02:30:00Z" },
       { "name": "FP2", "date": "2026-03-27T06:00:00Z" },
@@ -61,8 +55,6 @@
     "countryCode": "US",
     "date": "2026-05-03",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-05-01T16:30:00Z" },
       { "name": "Sprint Qualifying", "date": "2026-05-01T20:30:00Z" },
@@ -79,8 +71,6 @@
     "countryCode": "CA",
     "date": "2026-05-24",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-05-22T17:30:00Z" },
       { "name": "FP2", "date": "2026-05-22T21:00:00Z" },
@@ -97,8 +87,6 @@
     "countryCode": "MC",
     "date": "2026-06-07",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-06-05T09:30:00Z" },
       { "name": "FP2", "date": "2026-06-05T13:00:00Z" },
@@ -115,8 +103,6 @@
     "countryCode": "ES",
     "date": "2026-06-14",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-06-12T11:30:00Z" },
       { "name": "FP2", "date": "2026-06-12T15:00:00Z" },
@@ -133,8 +119,6 @@
     "countryCode": "AT",
     "date": "2026-06-28",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-06-26T10:30:00Z" },
       { "name": "Sprint Qualifying", "date": "2026-06-26T14:30:00Z" },
@@ -151,8 +135,6 @@
     "countryCode": "GB",
     "date": "2026-07-05",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-07-03T11:30:00Z" },
       { "name": "FP2", "date": "2026-07-03T15:00:00Z" },
@@ -169,8 +151,6 @@
     "countryCode": "BE",
     "date": "2026-07-19",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-07-17T11:30:00Z" },
       { "name": "Sprint Qualifying", "date": "2026-07-17T15:30:00Z" },
@@ -187,8 +167,6 @@
     "countryCode": "HU",
     "date": "2026-07-26",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-07-24T11:30:00Z" },
       { "name": "FP2", "date": "2026-07-24T15:00:00Z" },
@@ -205,8 +183,6 @@
     "countryCode": "BH",
     "date": "2026-04-12",
     "isCancelled": true,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-04-10T12:30:00Z" },
       { "name": "FP2", "date": "2026-04-10T16:00:00Z" },
@@ -223,8 +199,6 @@
     "countryCode": "SA",
     "date": "2026-04-19",
     "isCancelled": true,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-04-17T14:30:00Z" },
       { "name": "FP2", "date": "2026-04-17T18:00:00Z" },
@@ -241,8 +215,6 @@
     "countryCode": "NL",
     "date": "2026-08-23",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-08-21T10:30:00Z" },
       { "name": "FP2", "date": "2026-08-21T14:00:00Z" },
@@ -259,8 +231,6 @@
     "countryCode": "IT",
     "date": "2026-09-06",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-09-04T11:30:00Z" },
       { "name": "FP2", "date": "2026-09-04T15:00:00Z" },
@@ -272,13 +242,11 @@
   {
     "round": 16,
     "raceName": "Spanish Grand Prix",
-    "circuit": "Madring",
+    "circuit": "Madrid",
     "country": "Spain",
     "countryCode": "ES",
     "date": "2026-09-13",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-09-11T11:30:00Z" },
       { "name": "FP2", "date": "2026-09-11T15:00:00Z" },
@@ -295,8 +263,6 @@
     "countryCode": "AZ",
     "date": "2026-09-27",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-09-25T08:30:00Z" },
       { "name": "FP2", "date": "2026-09-25T12:00:00Z" },
@@ -313,8 +279,6 @@
     "countryCode": "SG",
     "date": "2026-10-11",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-10-09T09:30:00Z" },
       { "name": "FP2", "date": "2026-10-09T13:00:00Z" },
@@ -331,8 +295,6 @@
     "countryCode": "US",
     "date": "2026-10-25",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-10-23T17:30:00Z" },
       { "name": "Sprint Qualifying", "date": "2026-10-23T21:30:00Z" },
@@ -349,8 +311,6 @@
     "countryCode": "MX",
     "date": "2026-11-01",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-10-30T18:30:00Z" },
       { "name": "FP2", "date": "2026-10-30T22:00:00Z" },
@@ -367,8 +327,6 @@
     "countryCode": "US",
     "date": "2026-11-22",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-11-20T02:30:00Z" },
       { "name": "FP2", "date": "2026-11-20T06:00:00Z" },
@@ -385,8 +343,6 @@
     "countryCode": "AE",
     "date": "2026-12-06",
     "isCancelled": false,
-    "maxPosition": null,
-    "maxPoints": null,
     "sessions": [
       { "name": "FP1", "date": "2026-12-04T09:30:00Z" },
       { "name": "FP2", "date": "2026-12-04T13:00:00Z" },

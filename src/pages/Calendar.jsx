@@ -44,7 +44,6 @@ const fmtSessionDay = (dateStr) => {
 
 const Calendar = () => {
   const now = new Date();
-  const [expandedCard, setExpandedCard] = useState(null);
   const [selectedRound, setSelectedRound] = useState(null);
   const [previewRound, setPreviewRound] = useState(null);
   const calendarRef = useRef(null);
@@ -221,7 +220,6 @@ const Calendar = () => {
       <div className="cal-grid">
         {sortedRaces.map((race, i) => {
           const status = statusOf(race, now);
-          const isExpanded = expandedCard === race.round;
           const raceResult = raceResults.find((r) => r.round === race.round);
           const isSelected = selectedRound === race.round;
           return (
@@ -235,11 +233,9 @@ const Calendar = () => {
               onClick={() => {
                 if (raceResult?.hasResults) {
                   setSelectedRound((prev) => (prev === race.round ? null : race.round));
-                  setExpandedCard(null);
                   setPreviewRound(null);
                 } else {
                   setPreviewRound((prev) => (prev === race.round ? null : race.round));
-                  setExpandedCard(null);
                   setSelectedRound(null);
                 }
                 calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -268,20 +264,6 @@ const Calendar = () => {
                   <CircuitMap circuit={race.circuit} size={90} />
                 </div>
               </div>
-
-              {/* Expanded session schedule */}
-              {isExpanded && race.sessions && (
-                <div className="cal-card-sessions">
-                  {race.sessions.map((s) => (
-                    <div key={s.name} className="cal-card-session-row">
-                      <span className="cal-card-session-name">{s.name}</span>
-                      <span className="cal-card-session-time">
-                        {fmtSessionDay(s.date)} {fmtSessionTime(s.date)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
             </motion.div>
           );
         })}

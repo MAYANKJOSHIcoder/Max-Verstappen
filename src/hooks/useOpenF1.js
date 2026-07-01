@@ -153,13 +153,9 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
     lap: null,
     laps: [],
     sectors: null, // { s1, s2, s3, bestS1, bestS2, bestS3, segments? }
-    speeds: null, // { i1, i2, st } speed traps (from latest lap)
     tires: null, // { compound, color, age, stint }
     // Owned by `car_data` slot
     carTelemetry: null, // { speed, rpm, n_gear, drs, throttle, brake, date }
-    carDataBuffer: [], // ring buffer (max 500) of recent samples for graphs
-    // Owned by `pit` slot
-    pits: [],
     // Owned by `weather` slot
     weather: null,
     nextSession: null,
@@ -177,11 +173,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   const sortedPositionsRef = useRef([]); // position history for timeline re-derivation
   const sortedLapsRef = useRef([]); // latest laps for timeline re-derivation
   const lastRequestTimeRef = useRef(0); // timestamp of last dispatched request
-  // Cross-tab dedup (Part 2)
-  const channelRef = useRef(null); // BroadcastChannel('openf1-telemetry')
-  const isLeaderRef = useRef(false);
-  const tabIdRef = useRef(Math.random().toString(36).slice(2));
-  const _heartbeatRef = useRef(null); // follower: heartbeat miss counter (Part 2)
   const stateRef = useRef(state); // mirror of `state` for callbacks that run
   // outside the React render cycle (schedulerTick reads latest without
   // forcing useCallback to re-create on every state change).
@@ -225,7 +216,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
           brake: latest.brake,
           date: latest.date,
         },
-        carDataBuffer: bufferRef.current,
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -298,9 +288,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
               segmentsS3: latestLap.segments_sector_3,
             }
           : null,
-        speeds: latestLap
-          ? { i1: latestLap.i1_speed, i2: latestLap.i2_speed, st: latestLap.st_speed }
-          : null,
         // Best-lap times are exposed for render convenience
         bestLap,
       };
@@ -335,6 +322,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   const fetchPit = useCallback(
     async (signal) => {
       const data = await fetchJSON(sessionBase('pit'), signal);
+      if (!Array.isArray(data) || !data.length) return null;
       const driverPits = data
         .filter((p) => p.driver_number === driverNumber)
         .sort((a, b) => a.lap_number - b.lap_number);
@@ -352,25 +340,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
     weather: fetchWeather,
     pit: fetchPit,
   };
-
-  // --- BroadcastChannel cross-tab dedup -----------------------------------
-  // Defined here and wired for real in Part 2. Part 1 leaves them as safe
-  // no-ops so the hook compiles and runs without any multi-tab behavior.
-  const initChannel = useCallback(() => {
-    // Part 2 will implement leader election, heartbeat, slice-broadcast, and
-    // follower apply logic on BroadcastChannel('openf1-telemetry').
-  }, []);
-
-  const teardownChannel = useCallback(() => {
-    if (!channelRef.current) return;
-    try {
-      channelRef.current.close();
-    } catch {
-      /* channel may already be closed by the browser */
-    }
-    channelRef.current = null;
-    isLeaderRef.current = false;
-  }, []);
 
   // --- Scheduler lifecycle ------------------------------------------------
   // Declaration order matters: stopScheduler → isSessionOver → schedulerTick
@@ -485,10 +454,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   // --- Startup priming burst ----------------------------------------------
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const runPrimingBurst = useCallback(async () => {
-    // Skip priming if not the leader (follower tabs will apply leader's
-    // priming slices as they are broadcast).
-    if (channelRef.current && !isLeaderRef.current) return;
-
     abortRef.current?.abort();
     const ctrl = new AbortController();
     abortRef.current = ctrl;
@@ -499,15 +464,12 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       { endpoint: 'intervals', fetcher: fetchIntervals },
       { endpoint: 'position', fetcher: fetchPosition },
     ];
-    for (const { endpoint, fetcher } of order) {
+    for (const { fetcher } of order) {
       try {
         lastRequestTimeRef.current = Date.now();
         const slice = await fetcher(ctrl.signal);
         if (slice) {
           setState((s) => ({ ...s, ...slice, status: 'live', isLive: true, lastUpdate: Date.now() }));
-          if (channelRef.current && isLeaderRef.current) {
-            channelRef.current.postMessage({ type: 'slice', tabId: tabIdRef.current, endpoint, slice });
-          }
         }
       } catch (err) {
         if (err.name !== 'AbortError') console.warn('priming failed:', err.message);
@@ -572,8 +534,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
 
         if (!isLive) return;
 
-        initChannel();
-
         await runPrimingBurst();
         const startMs =
           document.visibilityState === 'hidden' ? HIDDEN_INTERVAL_MS : SCHEDULER_INTERVAL_MS;
@@ -598,7 +558,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       ctrl.abort();
       stopScheduler();
       document.removeEventListener('visibilitychange', onVisibility);
-      teardownChannel();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [season, driverNumber]);
@@ -625,15 +584,12 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
             isLive,
             status: isLive ? 'loading' : 'no-session',
             carTelemetry: isLive ? null : s.carTelemetry,
-            carDataBuffer: isLive ? [] : s.carDataBuffer,
             laps: isLive ? [] : s.laps,
             lap: isLive ? null : s.lap,
             gaps: isLive ? null : s.gaps,
             tires: isLive ? null : s.tires,
             sectors: isLive ? null : s.sectors,
-            speeds: isLive ? null : s.speeds,
             weather: isLive ? null : s.weather,
-            pits: isLive ? [] : s.pits,
             driver: isLive ? null : s.driver,
             positionTimeline: isLive ? [] : s.positionTimeline,
           }));
@@ -674,14 +630,6 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
         if (cancelled) return;
         if (slice) {
           setState((s) => ({ ...s, ...slice, lastUpdate: Date.now() }));
-          if (channelRef.current && isLeaderRef.current) {
-            channelRef.current.postMessage({
-              type: 'slice',
-              tabId: tabIdRef.current,
-              endpoint: lastEndpoint,
-              slice,
-            });
-          }
         }
       })
       .catch((err) => {
@@ -699,4 +647,4 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   };
 };
 
-export { fmtLapTime, fmtGap, compoundColor };
+export { fmtLapTime, fmtGap };

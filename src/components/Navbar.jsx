@@ -23,7 +23,8 @@ const Navbar = () => {
   // when the user returns to the top (hero has no matching link).
   useEffect(() => {
     const onScroll = () => {
-      setHasScrolled(window.scrollY > 12);
+      const next = window.scrollY > 12;
+      setHasScrolled((prev) => (prev === next ? prev : next));
       if (window.scrollY < 200) setActiveId('');
     };
     onScroll();
@@ -66,21 +67,24 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, [location.pathname]);
 
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const NAV_HEIGHT = 72;
+    const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
   const handleNavigate = (link) => {
     setIsMenuOpen(false);
     if (link.route) {
       navigate(link.route);
     } else {
-      // If not on home page, navigate home first then scroll
       if (location.pathname !== '/') {
         navigate('/');
-        setTimeout(() => {
-          const el = document.getElementById(link.id);
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+        setTimeout(() => scrollToSection(link.id), 100);
       } else {
-        const el = document.getElementById(link.id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToSection(link.id);
       }
     }
   };

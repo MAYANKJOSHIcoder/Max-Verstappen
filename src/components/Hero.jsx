@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import heroImage from '../assets/hero.png';
+import heroImage from '../assets/Hero.png';
 import './Hero.css';
 
 const heroStats = [

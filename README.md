@@ -119,7 +119,6 @@ max-verstappen-site/
 ├── scripts/                 # Utility scripts (development)
 │   └── fetch-race-results.mjs  # One-time OpenF1 API data fetcher for race results
 ├── public/                  # Static assets served as-is
-│   ├── _redirects           # Vercel SPA redirect rule
 │   ├── favicon.svg
 │   └── images/              # Gallery images by category
 │       ├── championships/
@@ -212,8 +211,6 @@ vercel
 ```
 
 Build command: `npm run build` · Output directory: `dist`
-
-The `public/_redirects` file ensures Vercel serves `index.html` for all routes (required for SPA client-side routing).
 
 ---
 

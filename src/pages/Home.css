@@ -1,21 +1,5 @@
 /* Home — sections below the hero */
 
-/* Hero-lede — sits below the fold, carries the paragraph + CTAs
-   that were previously in the hero itself. Keeps the hero itself a
-   pure sports-poster composition. */
-.home-lead {
-  padding: var(--spacing-md) 0 var(--spacing-lg);
-  text-align: center;
-  max-width: 60ch;
-}
-
-.home-lead p {
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  color: var(--smoke);
-  line-height: 1.6;
-  margin-bottom: var(--spacing-md);
-}
-
 .home-section {
   padding: var(--spacing-xl) 0;
   position: relative;

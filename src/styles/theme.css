@@ -81,7 +81,7 @@
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 4rem;
-  --spacing-xl: 8rem;
+  --spacing-xl: 2rem;
 
   /* ---- Radius ---- */
   --radius-sm: 4px;
@@ -167,7 +167,7 @@ a:hover { color: var(--signal); }
   :root {
     --maxw: 720px;
     --spacing-lg: 3rem;
-    --spacing-xl: 5rem;
+    --spacing-xl: 1.25rem;
   }
 }
 
@@ -176,7 +176,7 @@ a:hover { color: var(--signal); }
     --maxw: 320px;
     --spacing-md: 1rem;
     --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
+    --spacing-xl: 0.75rem;
   }
 }
 

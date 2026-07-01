@@ -27,13 +27,7 @@ const Home = () => (
     <Hero />
     <HeroPanels />
 
-    <div className="home-lead container">
-      <p>
-        From go-kart prodigy at four years old to the most dominant force
-        in modern Formula 1. Four consecutive world championships and a
-        record books rewritten.
-      </p>
-    </div>
+
 
     {/* Championship Highlights */}
     <section id="highlights" className="home-section" aria-label="Championship highlights">
