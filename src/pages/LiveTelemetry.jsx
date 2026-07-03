@@ -1,10 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useOpenF1, fmtLapTime, fmtGap } from '../hooks/useOpenF1';
+import { useF1LiveTiming, fmtLapTime, fmtGap } from '../hooks/useF1LiveTiming';
 import CircuitMap from '../components/CircuitMap';
 import calendarData from '../data/calendar2026.json';
 import './LiveTelemetry.css';
-
-const MAX_DRIVER_NUMBER = 1;
 
 // LiveDot pulses based on the telemetry hook's lastUpdate timestamp rather than
 // a 1s parent re-render loop — we snapshot `lastUpdate` locally and react to
@@ -308,7 +306,7 @@ const LiveTelemetry = () => {
     nextSession,
     error,
     refresh,
-  } = useOpenF1({ season: 2026, driverNumber: MAX_DRIVER_NUMBER });
+  } = useF1LiveTiming({ season: 2026 });
 
   // Find current race weekend from calendar data — always computed (hooks
   // must be called unconditionally at the top level of the component).
@@ -359,26 +357,28 @@ const LiveTelemetry = () => {
           <span className="eyebrow">Live Timing</span>
           <h1 className="page-title">Live Telemetry</h1>
           <p className="page-subtitle">
-            Real-time data from Max Verstappen&apos;s on-track sessions.
+            Free unofficial F1 live timing for Max Verstappen&apos;s on-track sessions.
           </p>
         </header>
 
         <div className="lt-no-session">
           <GhostDashboard />
           <div className="lt-no-session-inner">
-            <h2 className="lt-no-session-title">No live session</h2>
+            <h2 className="lt-no-session-title">
+              {displaySession ? 'Waiting for live timing' : 'No live session'}
+            </h2>
             {(displaySession || noSessionRace) && (
               <>
                 <p className="lt-no-session-text">
-                  Next race:{' '}
+                  {displaySession ? 'Current session' : 'Next race'}:{' '}
                   <strong>
-                    {displaySession?.raceName ||
-                      displaySession?.session_name ||
-                      noSessionRace?.raceName}
+                    {displaySession?.session_name || noSessionRace?.raceName}
                   </strong>
+                  {displaySession?.raceName && ` · ${displaySession.raceName}`}
                   {(displaySession?.circuit_short_name || noSessionRace?.circuit) &&
                     ` · ${displaySession?.circuit_short_name || noSessionRace?.circuit}`}
                 </p>
+                {error && <p className="lt-no-session-text">{error}</p>}
                 <div className="lt-no-session-stack">
                   {noSessionRace && (
                     <div className="lt-no-session-map">
@@ -488,7 +488,7 @@ const LiveTelemetry = () => {
         <span className="eyebrow">Live Timing</span>
         <h1 className="page-title">Live Telemetry</h1>
         <p className="page-subtitle">
-          Real-time data from Max Verstappen&apos;s on-track sessions.
+          Free unofficial F1 live timing for Max Verstappen&apos;s on-track sessions.
         </p>
       </header>
 

@@ -4,32 +4,8 @@
    ============================================================ */
 
 /* ---- Typefaces ----
-   Formula1 Display is the official F1 typeface, served from the
-   F1 CDN. Bold for numbers/headings, Regular for sub-headings.
-   Inter for body copy. ui-monospace for telemetry-style figures. */
-@font-face {
-  font-family: 'Formula1 Display';
-  src: url('https://media.formula1.com/fonts/Formula1-Display-BoldItalic.woff2') format('woff2');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Formula1 Display';
-  src: url('https://media.formula1.com/fonts/Formula1-Display-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Formula1 Display';
-  src: url('https://media.formula1.com/fonts/Formula1-Display-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+   Use system display fonts for headings. The old remote F1 font URLs 404.
+   Inter is used for body copy. ui-monospace is used for telemetry figures. */
 
 @font-face {
   font-family: 'Inter';

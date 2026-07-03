@@ -137,9 +137,9 @@
     "isCancelled": false,
     "sessions": [
       { "name": "FP1", "date": "2026-07-03T11:30:00Z" },
-      { "name": "FP2", "date": "2026-07-03T15:00:00Z" },
-      { "name": "FP3", "date": "2026-07-04T10:30:00Z" },
-      { "name": "Qualifying", "date": "2026-07-04T14:00:00Z" },
+      { "name": "Sprint Qualifying", "date": "2026-07-03T15:30:00Z" },
+      { "name": "Sprint", "date": "2026-07-04T11:00:00Z" },
+      { "name": "Qualifying", "date": "2026-07-04T15:00:00Z" },
       { "name": "Race", "date": "2026-07-05T14:00:00Z" }
     ]
   },
