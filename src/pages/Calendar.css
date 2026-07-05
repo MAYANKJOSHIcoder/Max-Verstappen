@@ -26,6 +26,12 @@
   margin-top: var(--spacing-sm);
 }
 
+.cal-hero--current {
+  border-color: oklch(58% 0.19 35 / 0.3);
+  box-shadow: 0 0 40px oklch(58% 0.19 35 / 0.12),
+              0 0 80px oklch(58% 0.19 35 / 0.06);
+}
+
 .cal-hero-inner {
   display: flex;
   justify-content: space-between;
@@ -301,6 +307,50 @@
   font-family: var(--font-mono);
 }
 
+/* ---- Race navigation ---- */
+
+.cal-nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.cal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--grid-line);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out-quint);
+}
+
+.cal-nav-btn:hover:not(:disabled) {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  transform: translateY(-1px);
+}
+
+.cal-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cal-nav-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 /* ---- Responsive ---- */
 
 @media (max-width: 1280px) {
@@ -365,6 +415,11 @@
   .cal-hero-session-chip {
     min-width: 60px;
     padding: 4px 6px;
+  }
+
+  .cal-nav-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem 0.9rem;
   }
 }
 

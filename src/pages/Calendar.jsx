@@ -66,6 +66,32 @@ const Calendar = () => {
     [],
   );
 
+  const viewingRound = selectedRound || previewRound || heroRace?.round;
+
+  const prevRace = useMemo(() => {
+    if (!viewingRound) return null;
+    const idx = sortedRaces.findIndex((r) => r.round === viewingRound);
+    return idx > 0 ? sortedRaces[idx - 1] : null;
+  }, [viewingRound, sortedRaces]);
+
+  const nextRaceNav = useMemo(() => {
+    if (!viewingRound) return null;
+    const idx = sortedRaces.findIndex((r) => r.round === viewingRound);
+    return idx < sortedRaces.length - 1 ? sortedRaces[idx + 1] : null;
+  }, [viewingRound, sortedRaces]);
+
+  const goToRace = (race) => {
+    const raceResult = raceResults.find((r) => r.round === race.round);
+    if (raceResult?.hasResults) {
+      setSelectedRound(race.round);
+      setPreviewRound(null);
+    } else {
+      setPreviewRound(race.round);
+      setSelectedRound(null);
+    }
+    calendarRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const selectedRaceData = useMemo(() => {
     if (!selectedRound) return null;
     const race = sortedRaces.find((r) => r.round === selectedRound);
@@ -164,7 +190,7 @@ const Calendar = () => {
         </motion.div>
       ) : heroRace && (
         <motion.div
-          className="cal-hero"
+          className={`cal-hero ${currentRace ? 'cal-hero--current' : ''}`}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
@@ -223,6 +249,29 @@ const Calendar = () => {
           </div>
         </motion.div>
       )}
+
+      <div className="cal-nav">
+        <button
+          className="cal-nav-btn"
+          disabled={!prevRace}
+          onClick={() => prevRace && goToRace(prevRace)}
+        >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Previous
+        </button>
+        <button
+          className="cal-nav-btn"
+          disabled={!nextRaceNav}
+          onClick={() => nextRaceNav && goToRace(nextRaceNav)}
+        >
+          Next
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+      </div>
 
       <div className="cal-grid">
         {sortedRaces.map((race, i) => {
