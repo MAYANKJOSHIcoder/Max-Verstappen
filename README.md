@@ -47,7 +47,7 @@ An unofficial fan website dedicated to 4-time Formula 1 World Champion Max Verst
 
 ### Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 22+ and npm
 
 ### Install & Run
 
@@ -88,6 +88,7 @@ max-verstappen-site/
 │   │   ├── Navbar.jsx / .css       # Sticky top nav with smooth-scroll links
 │   │   ├── Footer.jsx / .css       # Site disclaimer, quick links, credits
 │   │   ├── Hero.jsx / .css         # Poster-style hero with masked text + stats
+│   │   ├── HeroPanels.jsx / .css   # Race weekend panels (countdown, next race)
 │   │   ├── DomeGallery.jsx / .css  # Sphere photo wall with drag interaction
 │   │   ├── RaceDetail.jsx / .css   # Expandable race result detail panel (Calendar)
 │   │   └── CircuitMap.jsx / .css   # SVG circuit map for race hero/details
@@ -100,9 +101,10 @@ max-verstappen-site/
 │   │   ├── Records.jsx / .css      # Categorized record rows with search + filter
 │   │   └── Gallery.jsx / .css      # Filterable gallery with sphere viewer
 │   ├── hooks/               # Custom React hooks
-│   │   └── useOpenF1.js     # OpenF1 API telemetry hook (5s slot scheduler, cursor
-│   │                          #  fetching, rate-limit-safe per-endpoint cadence, 
-│   │                          #  visibility throttling, 30-min session rollover)
+│   │   ├── useOpenF1.js     # OpenF1 API telemetry hook (5s slot scheduler, cursor
+│   │   │                      # fetching, rate-limit-safe per-endpoint cadence,
+│   │   │                      # visibility throttling, 30-min session rollover)
+│   │   └── useRaceWeekend.js # Race weekend logic (current/next race, session timers)
 │   ├── data/                # Static JSON data
 │   │   ├── cars.json        # Cars & season stats (2016–2026)
 │   │   ├── journey.json     # Career timeline events (2005–2025)
@@ -116,6 +118,9 @@ max-verstappen-site/
 │   │   └── Hero.png         # Hero background image
 │   ├── main.jsx             # React DOM entry point (BrowserRouter)
 │   └── App.jsx / .css       # Root component (Navbar → Routes → Footer)
+├── api/                     # Vercel serverless functions
+│   └── f1-static/
+│       └── [...path].js     # CORS proxy for F1 live timing static assets
 ├── scripts/                 # Utility scripts (development)
 │   └── fetch-race-results.mjs  # One-time OpenF1 API data fetcher for race results
 ├── public/                  # Static assets served as-is
@@ -127,6 +132,8 @@ max-verstappen-site/
 │       ├── cars/
 │       └── behind-the-scenes/
 ├── .oxlintrc.json           # OxLint config (React + oxc plugins)
+├── .nvmrc                   # Node.js 22
+├── vercel.json              # Vercel SPA rewrite rules
 ├── vite.config.js           # Vite + React plugin
 └── package.json
 ```
@@ -157,6 +164,10 @@ Full token set (including type, spacing, motion, and shadows) lives in `src/styl
 The `/telemetry` dashboard is built on the public [OpenF1 API](https://openf1.org), called
 **directly from the visitor's browser** — there is no server, proxy, or auth token. Vercel
 serves only the static bundle; every client hits `api.openf1.org` on its own IP.
+
+> **Want your own proxy?** A Render backend (`render` repo) is available as an alternative
+> — it polls F1's live timing servers directly and exposes an OpenF1-compatible API.
+> Deploy it on Render (free tier), then swap the base URL in `src/hooks/useOpenF1.js`.
 
 OpenF1's free tier allows **3 requests/second and 30 requests/minute per IP**. A naïve
 implementation (polling every 4 seconds a bundle of 6–7 endpoints at once) trips 429s
@@ -222,9 +233,13 @@ If you are the owner of any image and would like it removed, please contact the 
 
 ---
 
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome — data corrections, new features, or design improvements. Please open an issue or submit a pull request.
+
+---
 
 ## ⚠️ Disclaimer
 
