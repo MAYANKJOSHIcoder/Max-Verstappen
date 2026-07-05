@@ -116,7 +116,7 @@ const formatDate = (dateStr) => {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
-const RaceDetail = ({ race, results, onBack }) => {
+const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) => {
   if (!results) return null;
   const r = results.result;
   if (!r) return null;
@@ -128,12 +128,36 @@ const RaceDetail = ({ race, results, onBack }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
-      <button className="rd-back" onClick={onBack}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        All Races
-      </button>
+      <div className="cal-hero-top">
+        <button className="rd-back" onClick={onBack}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          All Races
+        </button>
+        <div className="cal-nav-arrows">
+          <button
+            className="cal-nav-btn"
+            disabled={!prevRace}
+            onClick={() => prevRace && goToRace(prevRace)}
+            aria-label="Previous race"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <button
+            className="cal-nav-btn"
+            disabled={!nextRaceNav}
+            onClick={() => nextRaceNav && goToRace(nextRaceNav)}
+            aria-label="Next race"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
 
       <div className="rd-header">
         <div className="rd-header-left">

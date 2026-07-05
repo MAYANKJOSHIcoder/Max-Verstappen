@@ -120,6 +120,9 @@ const Calendar = () => {
           race={selectedRaceData.race}
           results={selectedRaceData.results}
           onBack={() => setSelectedRound(null)}
+          prevRace={prevRace}
+          nextRaceNav={nextRaceNav}
+          goToRace={goToRace}
         />
       ) : previewRace ? (
         <motion.div
@@ -128,12 +131,36 @@ const Calendar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          <button className="rd-back" onClick={() => setPreviewRound(null)}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            All Races
-          </button>
+          <div className="cal-hero-top">
+            <button className="rd-back" onClick={() => setPreviewRound(null)}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              All Races
+            </button>
+            <div className="cal-nav-arrows">
+              <button
+                className="cal-nav-btn"
+                disabled={!prevRace}
+                onClick={() => prevRace && goToRace(prevRace)}
+                aria-label="Previous race"
+              >
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <button
+                className="cal-nav-btn"
+                disabled={!nextRaceNav}
+                onClick={() => nextRaceNav && goToRace(nextRaceNav)}
+                aria-label="Next race"
+              >
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <div className="cal-hero-inner">
             <div className="cal-hero-left">
@@ -196,6 +223,32 @@ const Calendar = () => {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
+          <div className="cal-hero-top">
+            <span />
+            <div className="cal-nav-arrows">
+              <button
+                className="cal-nav-btn"
+                disabled={!prevRace}
+                onClick={() => prevRace && goToRace(prevRace)}
+                aria-label="Previous race"
+              >
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <button
+                className="cal-nav-btn"
+                disabled={!nextRaceNav}
+                onClick={() => nextRaceNav && goToRace(nextRaceNav)}
+                aria-label="Next race"
+              >
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
           <div className="cal-hero-inner">
             <div className="cal-hero-left">
               <span className="cal-hero-eyebrow">{currentRace ? 'This Week' : 'Next Race'}</span>
@@ -249,29 +302,6 @@ const Calendar = () => {
           </div>
         </motion.div>
       )}
-
-      <div className="cal-nav">
-        <button
-          className="cal-nav-btn"
-          disabled={!prevRace}
-          onClick={() => prevRace && goToRace(prevRace)}
-        >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Previous
-        </button>
-        <button
-          className="cal-nav-btn"
-          disabled={!nextRaceNav}
-          onClick={() => nextRaceNav && goToRace(nextRaceNav)}
-        >
-          Next
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-      </div>
 
       <div className="cal-grid">
         {sortedRaces.map((race, i) => {

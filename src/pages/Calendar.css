@@ -309,26 +309,28 @@
 
 /* ---- Race navigation ---- */
 
-.cal-nav {
+.cal-hero-top {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.cal-nav-arrows {
+  display: flex;
+  gap: 4px;
 }
 
 .cal-nav-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.6rem 1.2rem;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  padding: 0;
   border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--white);
+  background: none;
+  color: var(--mist);
   border: 1px solid var(--grid-line);
   cursor: pointer;
   transition: all var(--dur-fast) var(--ease-out-quint);
@@ -337,11 +339,10 @@
 .cal-nav-btn:hover:not(:disabled) {
   border-color: var(--yellow);
   color: var(--yellow);
-  transform: translateY(-1px);
 }
 
 .cal-nav-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
 }
 
@@ -415,11 +416,6 @@
   .cal-hero-session-chip {
     min-width: 60px;
     padding: 4px 6px;
-  }
-
-  .cal-nav-btn {
-    font-size: 0.7rem;
-    padding: 0.5rem 0.9rem;
   }
 }
 

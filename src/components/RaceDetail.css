@@ -22,6 +22,51 @@
   background: linear-gradient(180deg, var(--red), var(--yellow));
 }
 
+/* Hero top bar + nav arrows (shared with Calendar) */
+.cal-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.cal-nav-arrows {
+  display: flex;
+  gap: 4px;
+}
+
+.cal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--mist);
+  border: 1px solid var(--grid-line);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out-quint);
+}
+
+.cal-nav-btn:hover:not(:disabled) {
+  border-color: var(--yellow);
+  color: var(--yellow);
+  background: oklch(0% 0 0 / 0.5);
+}
+
+.cal-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.cal-nav-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 /* Back button */
 .rd-back {
   display: inline-flex;
@@ -39,7 +84,6 @@
   cursor: pointer;
   transition: color var(--dur-fast) var(--ease-out-quint),
     border-color var(--dur-fast) var(--ease-out-quint);
-  margin-bottom: var(--spacing-md);
 }
 
 .rd-back:hover {
