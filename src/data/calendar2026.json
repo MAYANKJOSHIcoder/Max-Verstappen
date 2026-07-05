@@ -166,36 +166,6 @@
   },
   {
     "round": 12,
-    "raceName": "Bahrain Grand Prix",
-    "circuit": "Bahrain",
-    "country": "Bahrain",
-    "date": "2026-04-12",
-    "isCancelled": true,
-    "sessions": [
-      { "name": "FP1", "date": "2026-04-10T12:30:00Z" },
-      { "name": "FP2", "date": "2026-04-10T16:00:00Z" },
-      { "name": "FP3", "date": "2026-04-11T12:30:00Z" },
-      { "name": "Qualifying", "date": "2026-04-11T16:00:00Z" },
-      { "name": "Race", "date": "2026-04-12T15:00:00Z" }
-    ]
-  },
-  {
-    "round": 13,
-    "raceName": "Saudi Arabian Grand Prix",
-    "circuit": "Jeddah",
-    "country": "Saudi Arabia",
-    "date": "2026-04-19",
-    "isCancelled": true,
-    "sessions": [
-      { "name": "FP1", "date": "2026-04-17T14:30:00Z" },
-      { "name": "FP2", "date": "2026-04-17T18:00:00Z" },
-      { "name": "FP3", "date": "2026-04-18T14:30:00Z" },
-      { "name": "Qualifying", "date": "2026-04-18T18:00:00Z" },
-      { "name": "Race", "date": "2026-04-19T17:00:00Z" }
-    ]
-  },
-  {
-    "round": 14,
     "raceName": "Dutch Grand Prix",
     "circuit": "Zandvoort",
     "country": "Netherlands",
@@ -210,7 +180,7 @@
     ]
   },
   {
-    "round": 15,
+    "round": 13,
     "raceName": "Italian Grand Prix",
     "circuit": "Monza",
     "country": "Italy",
@@ -225,7 +195,7 @@
     ]
   },
   {
-    "round": 16,
+    "round": 14,
     "raceName": "Spanish Grand Prix",
     "circuit": "Madrid",
     "country": "Spain",
@@ -240,7 +210,7 @@
     ]
   },
   {
-    "round": 17,
+    "round": 15,
     "raceName": "Azerbaijan Grand Prix",
     "circuit": "Baku",
     "country": "Azerbaijan",
@@ -255,7 +225,7 @@
     ]
   },
   {
-    "round": 18,
+    "round": 16,
     "raceName": "Singapore Grand Prix",
     "circuit": "Singapore",
     "country": "Singapore",
@@ -270,7 +240,7 @@
     ]
   },
   {
-    "round": 19,
+    "round": 17,
     "raceName": "United States Grand Prix",
     "circuit": "Austin",
     "country": "United States",
@@ -285,7 +255,7 @@
     ]
   },
   {
-    "round": 20,
+    "round": 18,
     "raceName": "Mexico City Grand Prix",
     "circuit": "Mexico City",
     "country": "Mexico",
@@ -300,7 +270,22 @@
     ]
   },
   {
-    "round": 21,
+    "round": 19,
+    "raceName": "São Paulo Grand Prix",
+    "circuit": "Interlagos",
+    "country": "Brazil",
+    "date": "2026-11-08",
+    "isCancelled": false,
+    "sessions": [
+      { "name": "FP1", "date": "2026-11-06T15:30:00Z" },
+      { "name": "FP2", "date": "2026-11-06T19:00:00Z" },
+      { "name": "FP3", "date": "2026-11-07T14:30:00Z" },
+      { "name": "Qualifying", "date": "2026-11-07T18:00:00Z" },
+      { "name": "Race", "date": "2026-11-08T17:00:00Z" }
+    ]
+  },
+  {
+    "round": 20,
     "raceName": "Las Vegas Grand Prix",
     "circuit": "Las Vegas",
     "country": "United States",
@@ -312,6 +297,21 @@
       { "name": "FP3", "date": "2026-11-21T02:30:00Z" },
       { "name": "Qualifying", "date": "2026-11-21T06:00:00Z" },
       { "name": "Race", "date": "2026-11-22T06:00:00Z" }
+    ]
+  },
+  {
+    "round": 21,
+    "raceName": "Qatar Grand Prix",
+    "circuit": "Lusail",
+    "country": "Qatar",
+    "date": "2026-11-29",
+    "isCancelled": false,
+    "sessions": [
+      { "name": "FP1", "date": "2026-11-27T13:30:00Z" },
+      { "name": "FP2", "date": "2026-11-27T17:00:00Z" },
+      { "name": "FP3", "date": "2026-11-28T14:30:00Z" },
+      { "name": "Qualifying", "date": "2026-11-28T18:00:00Z" },
+      { "name": "Race", "date": "2026-11-29T16:00:00Z" }
     ]
   },
   {

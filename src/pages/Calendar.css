@@ -192,6 +192,18 @@
   transform: translateY(-2px);
 }
 
+.cal-card--current {
+  border-color: var(--red);
+  background: oklch(18% 0.03 35);
+  box-shadow: var(--glow-red);
+  animation: pulse-current-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-current-glow {
+  0%, 100% { box-shadow: var(--glow-red); }
+  50% { box-shadow: 0 0 30px oklch(58% 0.19 35 / 0.18); }
+}
+
 .cal-card--soon {
   border-color: var(--yellow);
   background: oklch(20% 0.03 70);
@@ -223,6 +235,11 @@
 .cal-status-badge--cancelled {
   background: var(--carbon);
   color: var(--mist);
+}
+
+.cal-status-badge--current {
+  background: var(--red);
+  color: var(--white);
 }
 
 .cal-status-badge--completed {

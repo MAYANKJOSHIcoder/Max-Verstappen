@@ -74,12 +74,12 @@
   {
     "round": 5,
     "hasResults": true,
-    "isSprint": true,
+    "isSprint": false,
     "result": {
       "position": 3,
       "gridPosition": 6,
       "qualifyingPosition": 6,
-      "sprintPosition": 7,
+      "sprintPosition": null,
       "pitStops": 1,
       "bestLapTime": "1:14.398",
       "totalRaceTime": "2:00:00.000",
@@ -130,7 +130,7 @@
   {
     "round": 8,
     "hasResults": true,
-    "isSprint": false,
+    "isSprint": true,
     "result": {
       "position": 2,
       "gridPosition": 5,
@@ -150,13 +150,13 @@
   {
     "round": 9,
     "hasResults": false,
-    "isSprint": false,
+    "isSprint": true,
     "result": null
   },
   {
     "round": 10,
     "hasResults": false,
-    "isSprint": false,
+    "isSprint": true,
     "result": null
   },
   {
@@ -198,7 +198,7 @@
   {
     "round": 17,
     "hasResults": false,
-    "isSprint": false,
+    "isSprint": true,
     "result": null
   },
   {
