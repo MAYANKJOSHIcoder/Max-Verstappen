@@ -99,7 +99,7 @@ const main = async () => {
     }
     const round = match.round;
     processedRounds.add(round);
-    const isCompleted = raceDate < new Date('2026-07-01');
+    const isCompleted = raceDate < new Date('2026-07-06');
 
     if (!isCompleted) {
       console.log(`R${round}: ${match.raceName} — upcoming`);

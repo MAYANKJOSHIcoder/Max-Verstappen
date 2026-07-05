@@ -5,17 +5,24 @@
     "isSprint": false,
     "result": {
       "position": 6,
+      "points": null,
       "gridPosition": 20,
       "qualifyingPosition": 20,
       "sprintPosition": null,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 2,
       "bestLapTime": "1:22.091",
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 324,
       "positionsGained": 14,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
       "highlights": [
         "14 Overtakes"
-      ]
+      ],
+      "championship": null
     }
   },
   {
@@ -24,15 +31,22 @@
     "isSprint": true,
     "result": {
       "position": 16,
+      "points": null,
       "gridPosition": 8,
       "qualifyingPosition": 8,
       "sprintPosition": 9,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 1,
       "bestLapTime": "1:37.046",
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 341,
       "positionsGained": -8,
-      "highlights": []
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [],
+      "championship": null
     }
   },
   {
@@ -41,17 +55,24 @@
     "isSprint": false,
     "result": {
       "position": 8,
+      "points": null,
       "gridPosition": 11,
       "qualifyingPosition": 11,
       "sprintPosition": null,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 1,
       "bestLapTime": "1:33.552",
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 346,
       "positionsGained": 3,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
       "highlights": [
         "3 Overtakes"
-      ]
+      ],
+      "championship": null
     }
   },
   {
@@ -60,35 +81,49 @@
     "isSprint": true,
     "result": {
       "position": 5,
+      "points": null,
       "gridPosition": 2,
       "qualifyingPosition": 2,
       "sprintPosition": 5,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 1,
       "bestLapTime": "1:33.110",
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 332,
       "positionsGained": -3,
-      "highlights": []
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [],
+      "championship": null
     }
   },
   {
     "round": 5,
     "hasResults": true,
-    "isSprint": false,
+    "isSprint": true,
     "result": {
       "position": 3,
+      "points": null,
       "gridPosition": 6,
       "qualifyingPosition": 6,
-      "sprintPosition": null,
+      "sprintPosition": 7,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 1,
       "bestLapTime": "1:14.398",
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 329,
       "positionsGained": 3,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
       "highlights": [
         "Podium",
         "3 Overtakes"
-      ]
+      ],
+      "championship": null
     }
   },
   {
@@ -97,15 +132,22 @@
     "isSprint": false,
     "result": {
       "position": 22,
+      "points": null,
       "gridPosition": 2,
       "qualifyingPosition": 2,
       "sprintPosition": null,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 0,
       "bestLapTime": null,
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 151,
       "positionsGained": -20,
-      "highlights": []
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [],
+      "championship": null
     }
   },
   {
@@ -114,49 +156,81 @@
     "isSprint": false,
     "result": {
       "position": 4,
+      "points": null,
       "gridPosition": 5,
       "qualifyingPosition": 5,
       "sprintPosition": null,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 3,
       "bestLapTime": "1:20.230",
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 342,
       "positionsGained": 1,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
       "highlights": [
         "1 Overtakes"
-      ]
+      ],
+      "championship": null
     }
   },
   {
     "round": 8,
     "hasResults": true,
-    "isSprint": true,
+    "isSprint": false,
     "result": {
       "position": 2,
+      "points": null,
       "gridPosition": 5,
       "qualifyingPosition": 5,
       "sprintPosition": null,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
       "pitStops": 2,
       "bestLapTime": "1:10.483",
       "totalRaceTime": "2:00:00.000",
       "topSpeed": 340,
       "positionsGained": 3,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
       "highlights": [
         "Podium",
         "3 Overtakes"
-      ]
+      ],
+      "championship": null
     }
   },
   {
     "round": 9,
-    "hasResults": false,
+    "hasResults": true,
     "isSprint": true,
-    "result": null
+    "result": {
+      "position": 20,
+      "points": null,
+      "gridPosition": 7,
+      "qualifyingPosition": 7,
+      "sprintPosition": 6,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 2,
+      "bestLapTime": "1:32.101",
+      "totalRaceTime": "2:00:00.000",
+      "topSpeed": 330,
+      "positionsGained": -13,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [],
+      "championship": null
+    }
   },
   {
     "round": 10,
     "hasResults": false,
-    "isSprint": true,
+    "isSprint": false,
     "result": null
   },
   {
@@ -198,7 +272,7 @@
   {
     "round": 17,
     "hasResults": false,
-    "isSprint": true,
+    "isSprint": false,
     "result": null
   },
   {
