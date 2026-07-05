@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo } from 'react';
-import { useF1LiveTiming, fmtLapTime, fmtGap } from '../hooks/useF1LiveTiming';
+import { useState, useEffect } from 'react';
+import { useOpenF1 as useF1LiveTiming, fmtLapTime, fmtGap } from '../hooks/useOpenF1';
 import CircuitMap from '../components/CircuitMap';
-import calendarData from '../data/calendar2026.json';
+import useRaceWeekend from '../hooks/useRaceWeekend';
 import './LiveTelemetry.css';
 
 // LiveDot pulses based on the telemetry hook's lastUpdate timestamp rather than
@@ -308,48 +308,12 @@ const LiveTelemetry = () => {
     refresh,
   } = useF1LiveTiming({ season: 2026 });
 
-  // Find current race weekend from calendar data — always computed (hooks
-  // must be called unconditionally at the top level of the component).
-  const currentRace = useMemo(() => {
-    const now = new Date();
-    const circuitName = session?.circuit_short_name;
-
-    // Try to match by circuit name from session data
-    if (circuitName) {
-      const match = calendarData.find(
-        (r) =>
-          r.circuit.toLowerCase() === circuitName.toLowerCase() ||
-          r.raceName.toLowerCase().includes(circuitName.toLowerCase()),
-      );
-      if (match) return match;
-    }
-
-    // Fallback: find the nearest race by date
-    const sorted = [...calendarData]
-      .filter((r) => !r.isCancelled)
-      .sort((a, b) => {
-        const diffA = Math.abs(new Date(a.date) - now);
-        const diffB = Math.abs(new Date(b.date) - now);
-        return diffA - diffB;
-      });
-
-    return sorted[0] || null;
-  }, [session]);
-
-  // Next upcoming race for the no-session view — always computed
-  const nextUpcomingRace = useMemo(() => {
-    const now = new Date();
-    return (
-      calendarData
-        .filter((r) => !r.isCancelled && new Date(r.date) >= now)
-        .sort((a, b) => new Date(a.date) - new Date(b.date))[0] || null
-    );
-  }, []);
+  const { currentRace, nextRace } = useRaceWeekend();
 
   // ---- NO SESSION STATE ----
   if (status === 'no-session' || (status === 'live' && !isLive)) {
     const displaySession = nextSession || session;
-    const noSessionRace = nextUpcomingRace;
+    const noSessionRace = currentRace || nextRace;
 
     return (
       <div className="lt-page container">

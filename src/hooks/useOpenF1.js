@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-const OPENF1 = 'https://api.openf1.org/v1';
+const OPENF1 = 'https://max-verstappen-backend.onrender.com/v1';
 
 const fmtLapTime = (seconds) => {
   if (seconds == null) return '—';
@@ -112,6 +112,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   const RING_BUFFER_MAX = 500; // car_data memory bound (samples, not lap history)
   const RE_RESOLVE_MS = 30 * 60 * 1000; // session re-discovery cadence
   const EMPTY_STOP_THRESHOLD = 3; // consecutive empty polls before we give up
+  const ERROR_STOP_THRESHOLD = 5; // consecutive HTTP errors before we show error UI (~25s)
   const SESSION_LIVE_WINDOW_MS = 30 * 60 * 1000; // grace window past date_end
   // Minimum inter-request gap to prevent burst stacking from visibility
   // events + manual refresh + slot ticks landing in the same ms window.
@@ -167,6 +168,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
   const abortRef = useRef(null); // active request AbortController (one per slot tick)
   const slotRef = useRef(0); // current slot index advancing 0..SLOT_COUNT-1
   const emptyStreakRef = useRef(0); // consecutive empty responses since last good one
+  const errorStreakRef = useRef(0); // consecutive HTTP errors since last good one
   const sessionKeyRef = useRef(null); // current session_key (detects rollover)
   const lastCarDataCursorRef = useRef(null); // ISO date cursor for incremental car_data
   const bufferRef = useRef([]); // ring buffer backing state.carDataBuffer
@@ -398,9 +400,17 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
     try {
       slice = await FETCHERS[endpoint]?.(ctrl.signal);
     } catch (err) {
-      if (err.name !== 'AbortError') console.warn('OpenF1 slot failed:', err.message);
+      if (err.name !== 'AbortError') {
+        console.warn('OpenF1 slot failed:', err.message);
+        errorStreakRef.current += 1;
+        if (errorStreakRef.current >= ERROR_STOP_THRESHOLD) {
+          setState((s) => ({ ...s, status: 'error', error: 'Failed to fetch live data' }));
+        }
+      }
       return; // leave state as-is; next tick retries
     }
+
+    errorStreakRef.current = 0;
 
     // Empty-response streak → stop condition
     if (!slice || Object.keys(slice).length === 0) {
@@ -476,6 +486,14 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       }
       await new Promise((r) => setTimeout(r, PRIMING_INTERVAL_MS));
     }
+
+    // If none of the priming fetches returned data, surface the error
+    setState((s) => {
+      if (s.status === 'loading') {
+        return { ...s, status: 'error', error: 'No live data available yet' };
+      }
+      return s;
+    });
   }, [fetchCarData, fetchLaps, fetchIntervals, fetchPosition]);
 
   // --- Visibility API throttling ------------------------------------------
@@ -629,7 +647,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       .then((slice) => {
         if (cancelled) return;
         if (slice) {
-          setState((s) => ({ ...s, ...slice, lastUpdate: Date.now() }));
+          setState((s) => ({ ...s, ...slice, status: 'live', lastUpdate: Date.now() }));
         }
       })
       .catch((err) => {

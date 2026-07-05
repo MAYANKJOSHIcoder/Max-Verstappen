@@ -1,8 +1,8 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useOpenF1, fmtLapTime } from '../hooks/useOpenF1';
-import calendarData from '../data/calendar2026.json';
+import useRaceWeekend from '../hooks/useRaceWeekend';
 import './HeroPanels.css';
 
 const Countdown = ({ date }) => {
@@ -51,15 +51,7 @@ const HeroPanels = () => {
   const noAnim = reduced ? { initial: false } : {};
 
   const { status, isLive, driver, lap } = useOpenF1({ season: 2026, driverNumber: 1 });
-
-  const nextRace = useMemo(() => {
-    const now = new Date();
-    return (
-      calendarData
-        .filter((r) => !r.isCancelled && new Date(r.date) >= now)
-        .sort((a, b) => new Date(a.date) - new Date(b.date))[0] || null
-    );
-  }, []);
+  const { currentRace, nextRace } = useRaceWeekend();
 
   return (
     <motion.div
@@ -91,6 +83,13 @@ const HeroPanels = () => {
                   <span className="hp-telem-laptime">{fmtLapTime(lap.lap_duration)}</span>
                 )}
               </div>
+            ) : currentRace ? (
+              <div className="hp-telem-next">
+                <span className="hp-telem-next-label">This Week:</span>
+                <span className="hp-telem-next-name">{currentRace.raceName}</span>
+                <span className="hp-telem-next-circuit">{currentRace.circuit}</span>
+                <Countdown date={currentRace.date} />
+              </div>
             ) : nextRace ? (
               <div className="hp-telem-next">
                 <span className="hp-telem-next-label">Next:</span>
@@ -119,8 +118,8 @@ const HeroPanels = () => {
           <div className="hp-card-right">
             <div className="hp-cal-info">
               <span className="hp-cal-next-label">Next Race</span>
-              <span className="hp-cal-next-name">{nextRace?.raceName || '—'}</span>
-              {nextRace && <Countdown date={nextRace.date} />}
+              <span className="hp-cal-next-name">{(nextRace || currentRace)?.raceName || '—'}</span>
+              {(nextRace || currentRace) && <Countdown date={(nextRace || currentRace).date} />}
             </div>
           </div>
         </div>

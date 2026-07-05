@@ -33,3 +33,6 @@ AGENTS.md
 
 # OpenCode config
 opencode.json
+
+# Render F1 proxy backend
+/render

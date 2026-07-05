@@ -3,14 +3,24 @@ import { motion } from 'framer-motion';
 import calendarData from '../data/calendar2026.json';
 import CircuitMap from '../components/CircuitMap';
 import RaceDetail from '../components/RaceDetail';
+import useRaceWeekend from '../hooks/useRaceWeekend';
 import raceResults from '../data/raceResults2026.json';
 import './Calendar.css';
 
 const statusOf = (race, now) => {
   if (race.isCancelled) return 'cancelled';
-  const raceDate = new Date(race.date);
-  const diff = raceDate - now;
-  if (diff < 0) return 'completed';
+  const firstSession = race.sessions[0];
+  if (!firstSession) return 'upcoming';
+  const sessionStart = new Date(firstSession.date);
+  const diff = sessionStart - now;
+  if (diff < 0) {
+    const raceDate = new Date(race.date);
+    const weekendEnd = new Date(raceDate);
+    weekendEnd.setDate(weekendEnd.getDate() + 1);
+    weekendEnd.setUTCHours(0, 0, 0, 0);
+    if (now >= weekendEnd) return 'completed';
+    return 'current';
+  }
   if (diff < 7 * 24 * 60 * 60 * 1000) return 'soon';
   return 'upcoming';
 };
@@ -48,10 +58,8 @@ const Calendar = () => {
   const [previewRound, setPreviewRound] = useState(null);
   const calendarRef = useRef(null);
 
-  const upcomingRound = useMemo(
-    () => calendarData.find((r) => !r.isCancelled && new Date(r.date) >= now) || null,
-    [now],
-  );
+  const { currentRace, nextRace } = useRaceWeekend();
+  const heroRace = currentRace || nextRace;
 
   const sortedRaces = useMemo(
     () => [...calendarData].sort((a, b) => a.round - b.round),
@@ -154,7 +162,7 @@ const Calendar = () => {
             </div>
           </div>
         </motion.div>
-      ) : upcomingRound && (
+      ) : heroRace && (
         <motion.div
           className="cal-hero"
           initial={{ opacity: 0, y: 24 }}
@@ -164,16 +172,15 @@ const Calendar = () => {
         >
           <div className="cal-hero-inner">
             <div className="cal-hero-left">
-              <span className="cal-hero-eyebrow">Next Race</span>
-              <h2 className="cal-hero-name">{upcomingRound.raceName}</h2>
+              <span className="cal-hero-eyebrow">{currentRace ? 'This Week' : 'Next Race'}</span>
+              <h2 className="cal-hero-name">{heroRace.raceName}</h2>
               <p className="cal-hero-circuit">
-                {upcomingRound.country} · {upcomingRound.circuit}
+                {heroRace.country} · {heroRace.circuit}
               </p>
-              <p className="cal-hero-date">{formatDate(upcomingRound.date)}</p>
-              {/* Weekend sessions */}
-              {upcomingRound.sessions && (
+              <p className="cal-hero-date">{formatDate(heroRace.date)}</p>
+              {heroRace.sessions && (
                 <div className="cal-hero-sessions">
-                  {upcomingRound.sessions.map((s) => (
+                  {heroRace.sessions.map((s) => (
                     <span key={s.name} className="cal-hero-session-chip">
                       <span className="cal-hero-session-name">{s.name}</span>
                       <span className="cal-hero-session-time">
@@ -186,13 +193,13 @@ const Calendar = () => {
             </div>
             <div className="cal-hero-right">
               <CircuitMap
-                circuit={upcomingRound.circuit}
+                circuit={heroRace.circuit}
                 size={220}
                 className="circuit-map--hero"
               />
               <div className="cal-hero-countdown">
                 {(() => {
-                  const cd = countdown(upcomingRound.date);
+                  const cd = countdown(heroRace.date);
                   if (!cd) return <span className="cal-countdown-live">RACE WEEK</span>;
                   return (
                     <div className="cal-countdown-grid">
@@ -245,6 +252,7 @@ const Calendar = () => {
                 <span className="cal-round">R{race.round}</span>
                 <span className={`cal-status-badge cal-status-badge--${status}`}>
                   {status === 'cancelled' && 'Cancelled'}
+                  {status === 'current' && 'This Week'}
                   {status === 'completed' && (raceResult?.hasResults
                     ? `P${raceResult.result.position}`
                     : 'TBD')}
