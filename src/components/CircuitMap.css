@@ -40,16 +40,6 @@
 }
 
 /* Size variants for different contexts */
-.circuit-map--sm {
-  width: 48px !important;
-  height: 48px !important;
-}
-
-.circuit-map--lg {
-  width: 120px !important;
-  height: 120px !important;
-}
-
 .circuit-map--hero {
   width: 220px !important;
   height: 220px !important;

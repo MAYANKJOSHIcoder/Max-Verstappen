@@ -4,7 +4,6 @@
     "raceName": "Australian Grand Prix",
     "circuit": "Melbourne",
     "country": "Australia",
-    "countryCode": "AU",
     "date": "2026-03-08",
     "isCancelled": false,
     "sessions": [
@@ -20,7 +19,6 @@
     "raceName": "Chinese Grand Prix",
     "circuit": "Shanghai",
     "country": "China",
-    "countryCode": "CN",
     "date": "2026-03-15",
     "isCancelled": false,
     "sessions": [
@@ -36,7 +34,6 @@
     "raceName": "Japanese Grand Prix",
     "circuit": "Suzuka",
     "country": "Japan",
-    "countryCode": "JP",
     "date": "2026-03-29",
     "isCancelled": false,
     "sessions": [
@@ -52,7 +49,6 @@
     "raceName": "Miami Grand Prix",
     "circuit": "Miami",
     "country": "United States",
-    "countryCode": "US",
     "date": "2026-05-03",
     "isCancelled": false,
     "sessions": [
@@ -68,7 +64,6 @@
     "raceName": "Canadian Grand Prix",
     "circuit": "Montreal",
     "country": "Canada",
-    "countryCode": "CA",
     "date": "2026-05-24",
     "isCancelled": false,
     "sessions": [
@@ -84,7 +79,6 @@
     "raceName": "Monaco Grand Prix",
     "circuit": "Monaco",
     "country": "Monaco",
-    "countryCode": "MC",
     "date": "2026-06-07",
     "isCancelled": false,
     "sessions": [
@@ -100,7 +94,6 @@
     "raceName": "Spanish Grand Prix",
     "circuit": "Barcelona-Catalunya",
     "country": "Spain",
-    "countryCode": "ES",
     "date": "2026-06-14",
     "isCancelled": false,
     "sessions": [
@@ -116,7 +109,6 @@
     "raceName": "Austrian Grand Prix",
     "circuit": "Spielberg",
     "country": "Austria",
-    "countryCode": "AT",
     "date": "2026-06-28",
     "isCancelled": false,
     "sessions": [
@@ -132,7 +124,6 @@
     "raceName": "British Grand Prix",
     "circuit": "Silverstone",
     "country": "United Kingdom",
-    "countryCode": "GB",
     "date": "2026-07-05",
     "isCancelled": false,
     "sessions": [
@@ -148,7 +139,6 @@
     "raceName": "Belgian Grand Prix",
     "circuit": "Spa-Francorchamps",
     "country": "Belgium",
-    "countryCode": "BE",
     "date": "2026-07-19",
     "isCancelled": false,
     "sessions": [
@@ -164,7 +154,6 @@
     "raceName": "Hungarian Grand Prix",
     "circuit": "Hungaroring",
     "country": "Hungary",
-    "countryCode": "HU",
     "date": "2026-07-26",
     "isCancelled": false,
     "sessions": [
@@ -180,7 +169,6 @@
     "raceName": "Bahrain Grand Prix",
     "circuit": "Bahrain",
     "country": "Bahrain",
-    "countryCode": "BH",
     "date": "2026-04-12",
     "isCancelled": true,
     "sessions": [
@@ -196,7 +184,6 @@
     "raceName": "Saudi Arabian Grand Prix",
     "circuit": "Jeddah",
     "country": "Saudi Arabia",
-    "countryCode": "SA",
     "date": "2026-04-19",
     "isCancelled": true,
     "sessions": [
@@ -212,7 +199,6 @@
     "raceName": "Dutch Grand Prix",
     "circuit": "Zandvoort",
     "country": "Netherlands",
-    "countryCode": "NL",
     "date": "2026-08-23",
     "isCancelled": false,
     "sessions": [
@@ -228,7 +214,6 @@
     "raceName": "Italian Grand Prix",
     "circuit": "Monza",
     "country": "Italy",
-    "countryCode": "IT",
     "date": "2026-09-06",
     "isCancelled": false,
     "sessions": [
@@ -244,7 +229,6 @@
     "raceName": "Spanish Grand Prix",
     "circuit": "Madrid",
     "country": "Spain",
-    "countryCode": "ES",
     "date": "2026-09-13",
     "isCancelled": false,
     "sessions": [
@@ -260,7 +244,6 @@
     "raceName": "Azerbaijan Grand Prix",
     "circuit": "Baku",
     "country": "Azerbaijan",
-    "countryCode": "AZ",
     "date": "2026-09-27",
     "isCancelled": false,
     "sessions": [
@@ -276,7 +259,6 @@
     "raceName": "Singapore Grand Prix",
     "circuit": "Singapore",
     "country": "Singapore",
-    "countryCode": "SG",
     "date": "2026-10-11",
     "isCancelled": false,
     "sessions": [
@@ -292,7 +274,6 @@
     "raceName": "United States Grand Prix",
     "circuit": "Austin",
     "country": "United States",
-    "countryCode": "US",
     "date": "2026-10-25",
     "isCancelled": false,
     "sessions": [
@@ -308,7 +289,6 @@
     "raceName": "Mexico City Grand Prix",
     "circuit": "Mexico City",
     "country": "Mexico",
-    "countryCode": "MX",
     "date": "2026-11-01",
     "isCancelled": false,
     "sessions": [
@@ -324,7 +304,6 @@
     "raceName": "Las Vegas Grand Prix",
     "circuit": "Las Vegas",
     "country": "United States",
-    "countryCode": "US",
     "date": "2026-11-22",
     "isCancelled": false,
     "sessions": [
@@ -340,7 +319,6 @@
     "raceName": "Abu Dhabi Grand Prix",
     "circuit": "Yas Marina",
     "country": "UAE",
-    "countryCode": "AE",
     "date": "2026-12-06",
     "isCancelled": false,
     "sessions": [

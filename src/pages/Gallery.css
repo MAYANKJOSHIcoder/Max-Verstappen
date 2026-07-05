@@ -14,13 +14,6 @@
   gap: var(--spacing-md);
 }
 
-.gallery-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: var(--spacing-xs) 0;
-}
-
 .gallery-head .section-lead {
   max-width: 60ch;
 }

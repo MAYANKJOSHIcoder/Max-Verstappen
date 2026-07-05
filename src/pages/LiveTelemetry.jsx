@@ -4,9 +4,6 @@ import CircuitMap from '../components/CircuitMap';
 import useRaceWeekend from '../hooks/useRaceWeekend';
 import './LiveTelemetry.css';
 
-// LiveDot pulses based on the telemetry hook's lastUpdate timestamp rather than
-// a 1s parent re-render loop — we snapshot `lastUpdate` locally and react to
-// it via React state only when the parent actually has new data.
 const LiveDot = () => {
   return (
     <span className="lt-live-dot" aria-hidden="true">
@@ -250,7 +247,6 @@ const LiveTelemetry = () => {
     status,
     session,
     isLive,
-    lastUpdate,
     driver,
     lap,
     laps,
@@ -383,7 +379,7 @@ const LiveTelemetry = () => {
       {/* Status bar */}
       <div className="lt-statusbar">
         <div className="lt-statusbar-left">
-          {isLive && <LiveDot lastUpdate={lastUpdate} />}
+          {isLive && <LiveDot />}
           <span className="lt-statusbar-name">
             {session?.session_name || 'Race'}
           </span>
