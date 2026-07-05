@@ -245,49 +245,6 @@ const WeekendSchedule = ({ sessions }) => {
   );
 };
 
-/**
- * Ghost dashboard — faded outlines of the live dashboard layout used as a
- * background backdrop when no live data is available (no-session, error,
- * loading). Shows the user what will appear once a session goes live.
- */
-const GhostDashboard = () => (
-  <div className="lt-ghost" aria-hidden="true">
-    <div className="lt-ghost-bar" />
-    <div className="lt-ghost-hero">
-      <div className="lt-ghost-position" />
-      <div className="lt-ghost-lap-cards">
-        <div className="lt-ghost-lap-card" />
-        <div className="lt-ghost-lap-card" />
-      </div>
-    </div>
-    <div className="lt-ghost-sectors">
-      <div className="lt-ghost-sector" />
-      <div className="lt-ghost-sector" />
-      <div className="lt-ghost-sector" />
-    </div>
-    <div className="lt-ghost-gaps">
-      <div className="lt-ghost-gap" />
-      <div className="lt-ghost-gap" />
-      <div className="lt-ghost-gap" />
-    </div>
-    <div className="lt-ghost-car">
-      <div className="lt-ghost-car-item" />
-      <div className="lt-ghost-car-item" />
-      <div className="lt-ghost-car-item" />
-      <div className="lt-ghost-car-item" />
-      <div className="lt-ghost-pedal" />
-      <div className="lt-ghost-pedal" />
-    </div>
-    <div className="lt-ghost-weather">
-      <div className="lt-ghost-weather-item" />
-      <div className="lt-ghost-weather-item" />
-      <div className="lt-ghost-weather-item" />
-      <div className="lt-ghost-weather-item" />
-      <div className="lt-ghost-weather-item" />
-    </div>
-  </div>
-);
-
 const LiveTelemetry = () => {
   const {
     status,
@@ -326,7 +283,6 @@ const LiveTelemetry = () => {
         </header>
 
         <div className="lt-no-session">
-          <GhostDashboard />
           <div className="lt-no-session-inner">
             <h2 className="lt-no-session-title">
               {displaySession ? 'Waiting for live timing' : 'No live session'}
@@ -371,40 +327,6 @@ const LiveTelemetry = () => {
     );
   }
 
-  // ---- LOADING STATE ----
-  if (status === 'loading') {
-    return (
-      <div className="lt-page container">
-        <header className="page-head">
-          <span className="eyebrow">Live Timing</span>
-          <h1 className="page-title">Live Telemetry</h1>
-        </header>
-        <div className="lt-skeleton">
-          <GhostDashboard />
-          <div className="lt-skeleton-statusbar">
-            <div className="lt-skeleton-bar lt-skeleton-bar--dot" />
-            <div className="lt-skeleton-bar lt-skeleton-bar--label" />
-          </div>
-          <div className="lt-skeleton-hero-row">
-            <div className="lt-skeleton-bar lt-skeleton-bar--pos" />
-            <div className="lt-skeleton-bar lt-skeleton-bar--time" />
-            <div className="lt-skeleton-bar lt-skeleton-bar--time" />
-          </div>
-          <div className="lt-skeleton-grid">
-            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
-            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
-            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
-          </div>
-          <div className="lt-skeleton-grid">
-            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
-            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
-            <div className="lt-skeleton-bar lt-skeleton-bar--box" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   // ---- ERROR STATE ----
   if (status === 'error') {
     return (
@@ -414,7 +336,6 @@ const LiveTelemetry = () => {
           <h1 className="page-title">Live Telemetry</h1>
         </header>
         <div className="lt-error">
-          <GhostDashboard />
           <div className="lt-error-inner">
             <h2 className="lt-error-title">Connection lost</h2>
             <p className="lt-error-text">

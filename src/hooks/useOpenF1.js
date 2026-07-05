@@ -474,6 +474,7 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
       { endpoint: 'intervals', fetcher: fetchIntervals },
       { endpoint: 'position', fetcher: fetchPosition },
     ];
+    let hasErrors = false;
     for (const { fetcher } of order) {
       try {
         lastRequestTimeRef.current = Date.now();
@@ -482,18 +483,23 @@ export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
           setState((s) => ({ ...s, ...slice, status: 'live', isLive: true, lastUpdate: Date.now() }));
         }
       } catch (err) {
-        if (err.name !== 'AbortError') console.warn('priming failed:', err.message);
+        if (err.name !== 'AbortError') {
+          console.warn('priming failed:', err.message);
+          hasErrors = true;
+        }
       }
       await new Promise((r) => setTimeout(r, PRIMING_INTERVAL_MS));
     }
 
-    // If none of the priming fetches returned data, surface the error
-    setState((s) => {
-      if (s.status === 'loading') {
-        return { ...s, status: 'error', error: 'No live data available yet' };
-      }
-      return s;
-    });
+    // Surface an error only if actual HTTP errors occurred (empty data is valid)
+    if (hasErrors) {
+      setState((s) => {
+        if (s.status === 'loading') {
+          return { ...s, status: 'error', error: 'Failed to load live data' };
+        }
+        return s;
+      });
+    }
   }, [fetchCarData, fetchLaps, fetchIntervals, fetchPosition]);
 
   // --- Visibility API throttling ------------------------------------------
