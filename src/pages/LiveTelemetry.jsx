@@ -1,55 +1,9 @@
-import { useState, useEffect } from 'react';
 import { useOpenF1 as useF1LiveTiming, fmtLapTime, fmtGap } from '../hooks/useOpenF1';
 import CircuitMap from '../components/CircuitMap';
+import Countdown from '../components/Countdown';
+import LiveDot from '../components/LiveDot';
 import useRaceWeekend from '../hooks/useRaceWeekend';
 import './LiveTelemetry.css';
-
-const LiveDot = () => {
-  return (
-    <span className="lt-live-dot" aria-hidden="true">
-      <span className="lt-live-dot-core" />
-      <span className="lt-live-dot-ring" />
-    </span>
-  );
-};
-
-const Countdown = ({ date }) => {
-  const [now, setNow] = useState(Date.now());
-
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const diff = new Date(date) - now;
-  if (diff <= 0) return <span className="lt-countdown-live">RACE WEEK</span>;
-
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-
-  return (
-    <div className="lt-countdown-grid">
-      <div className="lt-countdown-cell">
-        <span className="lt-countdown-value telemetry">{String(days).padStart(2, '0')}</span>
-        <span className="lt-countdown-label">Days</span>
-      </div>
-      <div className="lt-countdown-cell">
-        <span className="lt-countdown-value telemetry">{String(hours).padStart(2, '0')}</span>
-        <span className="lt-countdown-label">Hrs</span>
-      </div>
-      <div className="lt-countdown-cell">
-        <span className="lt-countdown-value telemetry">{String(mins).padStart(2, '0')}</span>
-        <span className="lt-countdown-label">Min</span>
-      </div>
-      <div className="lt-countdown-cell">
-        <span className="lt-countdown-value telemetry">{String(secs).padStart(2, '0')}</span>
-        <span className="lt-countdown-label">Sec</span>
-      </div>
-    </div>
-  );
-};
 
 const PositionTimeline = ({ timeline }) => {
   if (!timeline || timeline.length === 0) return null;
@@ -305,7 +259,7 @@ const LiveTelemetry = () => {
                       />
                     </div>
                   )}
-                  <Countdown date={displaySession?.date_start || noSessionRace?.date} />
+                  <Countdown date={displaySession?.date_start || noSessionRace?.date} precision="seconds" />
                   {noSessionRace?.sessions && (
                     <WeekendSchedule sessions={noSessionRace.sessions} />
                   )}

@@ -2,7 +2,9 @@ import { useState, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
 import calendarData from '../data/calendar2026.json';
 import CircuitMap from '../components/CircuitMap';
+import Countdown from '../components/Countdown';
 import RaceDetail from '../components/RaceDetail';
+import { formatDate } from '../utils/format';
 import useRaceWeekend from '../hooks/useRaceWeekend';
 import raceResults from '../data/raceResults2026.json';
 import './Calendar.css';
@@ -23,22 +25,6 @@ const statusOf = (race, now) => {
   }
   if (diff < 7 * 24 * 60 * 60 * 1000) return 'soon';
   return 'upcoming';
-};
-
-const countdown = (dateStr) => {
-  const target = new Date(dateStr);
-  const now = new Date();
-  const diff = target - now;
-  if (diff <= 0) return null;
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  return { days, hours, mins };
-};
-
-const formatDate = (dateStr) => {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
 /** Format a session time to local */
@@ -191,26 +177,7 @@ const Calendar = () => {
                 className="circuit-map--hero"
               />
               <div className="cal-hero-countdown">
-                {(() => {
-                  const cd = countdown(previewRace.date);
-                  if (!cd) return <span className="cal-countdown-live">RACE WEEK</span>;
-                  return (
-                    <div className="cal-countdown-grid">
-                      <div className="cal-countdown-cell">
-                        <span className="cal-countdown-value telemetry">{cd.days}</span>
-                        <span className="cal-countdown-label">Days</span>
-                      </div>
-                      <div className="cal-countdown-cell">
-                        <span className="cal-countdown-value telemetry">{cd.hours}</span>
-                        <span className="cal-countdown-label">Hrs</span>
-                      </div>
-                      <div className="cal-countdown-cell">
-                        <span className="cal-countdown-value telemetry">{cd.mins}</span>
-                        <span className="cal-countdown-label">Min</span>
-                      </div>
-                    </div>
-                  );
-                })()}
+                <Countdown date={previewRace.date} />
               </div>
             </div>
           </div>
@@ -277,26 +244,7 @@ const Calendar = () => {
                 className="circuit-map--hero"
               />
               <div className="cal-hero-countdown">
-                {(() => {
-                  const cd = countdown(heroRace.date);
-                  if (!cd) return <span className="cal-countdown-live">RACE WEEK</span>;
-                  return (
-                    <div className="cal-countdown-grid">
-                      <div className="cal-countdown-cell">
-                        <span className="cal-countdown-value telemetry">{cd.days}</span>
-                        <span className="cal-countdown-label">Days</span>
-                      </div>
-                      <div className="cal-countdown-cell">
-                        <span className="cal-countdown-value telemetry">{cd.hours}</span>
-                        <span className="cal-countdown-label">Hrs</span>
-                      </div>
-                      <div className="cal-countdown-cell">
-                        <span className="cal-countdown-value telemetry">{cd.mins}</span>
-                        <span className="cal-countdown-label">Min</span>
-                      </div>
-                    </div>
-                  );
-                })()}
+                <Countdown date={heroRace.date} />
               </div>
             </div>
           </div>

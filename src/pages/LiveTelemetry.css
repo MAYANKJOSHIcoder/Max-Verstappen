@@ -529,43 +529,7 @@
   opacity: 1;
 }
 
-.lt-countdown-grid {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-sm);
-}
-
-.lt-countdown-cell {
-  text-align: center;
-  min-width: 56px;
-}
-
-.lt-countdown-value {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: var(--white);
-  line-height: 1;
-}
-
-.lt-countdown-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--mist);
-  margin-top: 4px;
-  display: block;
-}
-
-.lt-countdown-live {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--red);
-  letter-spacing: 0.08em;
-}
+/* Countdown styles use shared .cal-countdown-* classes from Calendar.css */
 
 /* ---- Error ---- */
 .lt-error {

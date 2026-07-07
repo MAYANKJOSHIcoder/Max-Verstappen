@@ -1,17 +1,7 @@
 import { motion } from 'framer-motion';
 import CircuitMap from './CircuitMap';
+import { compoundColor, formatDate } from '../utils/format';
 import './RaceDetail.css';
-
-const compoundColor = (compound) => {
-  const map = {
-    SOFT: '#FF3333',
-    MEDIUM: '#FFD700',
-    HARD: '#F0F0F0',
-    INTER: '#3EB83E',
-    WET: '#3399FF',
-  };
-  return map[compound] || '#888888';
-};
 
 const PositionDisplay = ({ position }) => {
   const isWin = position === 1;
@@ -109,11 +99,6 @@ const ChampImpact = ({ championship }) => {
       </div>
     </div>
   );
-};
-
-const formatDate = (dateStr) => {
-  const d = new Date(dateStr);
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
 const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) => {

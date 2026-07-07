@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { compoundColor } from '../utils/format';
 
 const OPENF1 = 'https://max-verstappen-backend.onrender.com/v1';
 
@@ -13,17 +14,6 @@ const fmtGap = (seconds) => {
   if (seconds == null) return '—';
   if (seconds <= 0) return 'LEADER';
   return `+${seconds.toFixed(3)}s`;
-};
-
-const compoundColor = (compound) => {
-  const map = {
-    SOFT: '#FF3333',
-    MEDIUM: '#FFD700',
-    HARD: '#F0F0F0',
-    INTER: '#3EB83E',
-    WET: '#3399FF',
-  };
-  return map[compound] || '#888888';
 };
 
 const findCurrentSession = (sessions) => {
