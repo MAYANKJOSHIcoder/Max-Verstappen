@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useOpenF1 as useF1LiveTiming, fmtLapTime, fmtGap } from '../hooks/useOpenF1';
 import CircuitMap from '../components/CircuitMap';
 import Countdown from '../components/Countdown';
