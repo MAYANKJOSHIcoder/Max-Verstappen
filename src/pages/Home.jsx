@@ -1,18 +1,11 @@
-import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import HeroPanels from '../components/HeroPanels';
+import FadeIn from '../components/FadeIn';
 import Cars from './Cars';
 import Journey from './Journey';
 import Records from './Records';
 import Gallery from './Gallery';
 import './Home.css';
-
-const fadeUp = {
-  initial: { opacity: 0, y: 28 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-80px' },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-};
 
 const highlights = [
   { year: '2021', caption: 'First World Championship — a dramatic final-race duel with Lewis Hamilton.', img: '/images/championships/2021-verstappen-championship.webp' },
@@ -26,28 +19,27 @@ const Home = () => (
     <Hero />
     <HeroPanels />
 
-
-
     {/* Championship Highlights */}
     <section id="highlights" className="home-section" aria-label="Championship highlights">
         <div className="container">
-          <motion.div className="section-head" {...fadeUp}>
+          <FadeIn y={28} duration={0.6} rootMargin="-80px" className="section-head">
             <span className="eyebrow">Championships</span>
             <h2 className="section-title">Title runs</h2>
             <p className="section-lead">
               Four consecutive world championships — the seasons that made Max a legend.
             </p>
-          </motion.div>
+          </FadeIn>
 
           <div className="highlights-grid">
             {highlights.map((h, i) => (
-              <motion.article
+              <FadeIn
                 key={h.year}
+                y={30}
+                duration={0.5}
+                delay={i * 0.08}
+                rootMargin="-60px"
+                as="article"
                 className="highlight-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
                 {h.img ? (
                   <img className="highlight-img" src={h.img} alt={h.caption} loading="lazy" />
@@ -56,7 +48,7 @@ const Home = () => (
                 )}
                 <span className="highlight-year">{h.year}</span>
                 <span className="highlight-caption">{h.caption}</span>
-              </motion.article>
+              </FadeIn>
             ))}
           </div>
         </div>

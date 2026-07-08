@@ -1,16 +1,16 @@
-import { motion } from 'framer-motion';
+import FadeIn from './FadeIn';
+import { ChevronLeft, ChevronRight } from './Chevron';
 import CircuitMap from './CircuitMap';
-import { compoundColor, formatDate } from '../utils/format';
 import './RaceDetail.css';
 
-const PositionDisplay = ({ position }) => {
-  const isWin = position === 1;
-  return (
-    <div className={`rd-position ${isWin ? 'rd-position--win' : ''}`}>
-      <span className="rd-position-label">Finished</span>
-      <span className="rd-position-value">P{position}</span>
-    </div>
-  );
+const compoundColor = (compound) => {
+  const map = { SOFT: '#FF3333', MEDIUM: '#FFD700', HARD: '#F0F0F0', INTER: '#3EB83E', WET: '#3399FF' };
+  return map[compound] || '#888888';
+};
+
+const formatDate = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
 const StatCard = ({ label, value, className = '' }) => (
@@ -20,104 +20,20 @@ const StatCard = ({ label, value, className = '' }) => (
   </div>
 );
 
-const TyreTimeline = ({ strategy, sprintStrategy }) => {
-  if (!strategy && !sprintStrategy) return <p className="rd-na">Data not available</p>;
-  return (
-    <div className="rd-tyre-section">
-      {sprintStrategy && sprintStrategy.length > 0 && (
-        <div className="rd-tyre-group">
-          <span className="rd-tyre-group-label">Sprint</span>
-          <div className="rd-tyre-stints">
-            {sprintStrategy.map((stint, i) => (
-              <div key={`sprint-${i}`} className="rd-tyre-stint">
-                <span
-                  className="rd-tyre-dot"
-                  style={{ backgroundColor: compoundColor(stint.compound) }}
-                />
-                <span className="rd-tyre-name">{stint.compound}</span>
-                <span className="rd-tyre-laps">{stint.laps} laps</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      {strategy && strategy.length > 0 && (
-        <div className="rd-tyre-group">
-          <span className="rd-tyre-group-label">Race</span>
-          <div className="rd-tyre-stints">
-            {strategy.map((stint, i) => (
-              <div key={`race-${i}`} className="rd-tyre-stint">
-                <span
-                  className="rd-tyre-dot"
-                  style={{ backgroundColor: compoundColor(stint.compound) }}
-                />
-                <span className="rd-tyre-name">{stint.compound}</span>
-                <span className="rd-tyre-laps">{stint.laps} laps</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const HighlightsRow = ({ highlights }) => {
-  if (!highlights || highlights.length === 0) return null;
-  return (
-    <div className="rd-highlights">
-      {highlights.map((h) => (
-        <span key={h} className="rd-highlight-badge">{h}</span>
-      ))}
-    </div>
-  );
-};
-
-const ChampImpact = ({ championship }) => {
-  if (!championship) return <p className="rd-na">Not available — no championship data</p>;
-  const gapText =
-    championship.gapToLeader === 0
-      ? 'Leader'
-      : championship.gapToLeader > 0
-        ? `+${championship.gapToLeader}`
-        : `${championship.gapToLeader}`;
-  return (
-    <div className="rd-champ">
-      <div className="rd-champ-item">
-        <span className="rd-champ-label">Championship Position</span>
-        <span className="rd-champ-value">P{championship.position}</span>
-      </div>
-      <div className="rd-champ-item">
-        <span className="rd-champ-label">Points Total</span>
-        <span className="rd-champ-value">{championship.points}</span>
-      </div>
-      <div className="rd-champ-item">
-        <span className="rd-champ-label">Gap to Leader</span>
-        <span className={`rd-champ-value ${championship.gapToLeader === 0 ? 'rd-champ-leader' : ''}`}>
-          {gapText}
-        </span>
-      </div>
-    </div>
-  );
-};
-
 const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) => {
   if (!results) return null;
   const r = results.result;
   if (!r) return null;
 
   return (
-    <motion.div
+    <FadeIn
+      y={24}
+      duration={0.4}
       className="rd-hero"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="cal-hero-top">
         <button className="rd-back" onClick={onBack}>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <ChevronLeft size={16} />
           All Races
         </button>
         <div className="cal-nav-arrows">
@@ -127,9 +43,7 @@ const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) 
             onClick={() => prevRace && goToRace(prevRace)}
             aria-label="Previous race"
           >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <ChevronLeft />
           </button>
           <button
             className="cal-nav-btn"
@@ -137,9 +51,7 @@ const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) 
             onClick={() => nextRaceNav && goToRace(nextRaceNav)}
             aria-label="Next race"
           >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <ChevronRight />
           </button>
         </div>
       </div>
@@ -161,7 +73,10 @@ const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) 
 
       {r.position != null && (
         <div className="rd-summary">
-          <PositionDisplay position={r.position} />
+          <div className={`rd-position ${r.position === 1 ? 'rd-position--win' : ''}`}>
+            <span className="rd-position-label">Finished</span>
+            <span className="rd-position-value">P{r.position}</span>
+          </div>
           {r.points != null && <StatCard label="Points" value={r.points} />}
           {r.fastestLap && <StatCard label="Fastest Lap" value="Yes" className="rd-stat--accent" />}
           {r.driverOfTheDay && <StatCard label="Driver of the Day" value="Won" className="rd-stat--accent" />}
@@ -197,20 +112,87 @@ const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) 
 
       <div className="rd-section">
         <span className="rd-section-label">Tyre Strategy</span>
-        <TyreTimeline strategy={r.tyreStrategy} sprintStrategy={r.sprintStrategy} />
+        {(!r.tyreStrategy && !r.sprintStrategy) ? (
+          <p className="rd-na">Data not available</p>
+        ) : (
+          <div className="rd-tyre-section">
+            {r.sprintStrategy && r.sprintStrategy.length > 0 && (
+              <div className="rd-tyre-group">
+                <span className="rd-tyre-group-label">Sprint</span>
+                <div className="rd-tyre-stints">
+                  {r.sprintStrategy.map((stint, i) => (
+                    <div key={`sprint-${i}`} className="rd-tyre-stint">
+                      <span className="rd-tyre-dot" style={{ backgroundColor: compoundColor(stint.compound) }} />
+                      <span className="rd-tyre-name">{stint.compound}</span>
+                      <span className="rd-tyre-laps">{stint.laps} laps</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {r.tyreStrategy && r.tyreStrategy.length > 0 && (
+              <div className="rd-tyre-group">
+                <span className="rd-tyre-group-label">Race</span>
+                <div className="rd-tyre-stints">
+                  {r.tyreStrategy.map((stint, i) => (
+                    <div key={`race-${i}`} className="rd-tyre-stint">
+                      <span className="rd-tyre-dot" style={{ backgroundColor: compoundColor(stint.compound) }} />
+                      <span className="rd-tyre-name">{stint.compound}</span>
+                      <span className="rd-tyre-laps">{stint.laps} laps</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="rd-section">
         <span className="rd-section-label">Race Highlights</span>
-        <HighlightsRow highlights={r.highlights} />
-        {(!r.highlights || r.highlights.length === 0) && <p className="rd-na">No highlights recorded</p>}
+        {r.highlights && r.highlights.length > 0 ? (
+          <div className="rd-highlights">
+            {r.highlights.map((h) => (
+              <span key={h} className="rd-highlight-badge">{h}</span>
+            ))}
+          </div>
+        ) : (
+          <p className="rd-na">No highlights recorded</p>
+        )}
       </div>
 
       <div className="rd-section">
         <span className="rd-section-label">Championship Impact</span>
-        <ChampImpact championship={r.championship} />
+        {r.championship ? (() => {
+          const gapText =
+            r.championship.gapToLeader === 0
+              ? 'Leader'
+              : r.championship.gapToLeader > 0
+                ? `+${r.championship.gapToLeader}`
+                : `${r.championship.gapToLeader}`;
+          return (
+            <div className="rd-champ">
+              <div className="rd-champ-item">
+                <span className="rd-champ-label">Championship Position</span>
+                <span className="rd-champ-value">P{r.championship.position}</span>
+              </div>
+              <div className="rd-champ-item">
+                <span className="rd-champ-label">Points Total</span>
+                <span className="rd-champ-value">{r.championship.points}</span>
+              </div>
+              <div className="rd-champ-item">
+                <span className="rd-champ-label">Gap to Leader</span>
+                <span className={`rd-champ-value ${r.championship.gapToLeader === 0 ? 'rd-champ-leader' : ''}`}>
+                  {gapText}
+                </span>
+              </div>
+            </div>
+          );
+        })() : (
+          <p className="rd-na">Not available — no championship data</p>
+        )}
       </div>
-    </motion.div>
+    </FadeIn>
   );
 };
 

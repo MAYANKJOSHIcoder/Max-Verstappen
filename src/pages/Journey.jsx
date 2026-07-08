@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import FadeIn from '../components/FadeIn';
 import journeyData from '../data/journey.json';
 import './Journey.css';
 
@@ -22,12 +22,11 @@ const Journey = () => {
       </header>
 
       <div className="timeline">
-        <motion.div
+        <FadeIn
+          scaleY={0}
+          duration={1.2}
+          rootMargin="-100px"
           className="timeline-line"
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           style={{ transformOrigin: 'top' }}
         />
 
@@ -36,25 +35,21 @@ const Journey = () => {
           const isLeft = index % 2 === 0;
           const hasImage = !!item.image;
           return (
-            <motion.div
+            <FadeIn
               key={index}
+              x={isLeft ? -40 : 40}
+              duration={0.6}
+              delay={0.05}
+              rootMargin="-80px"
               className={`timeline-item ${isLeft ? 'left' : 'right'}`}
-              initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{
-                duration: 0.6,
-                delay: 0.05,
-                ease: [0.22, 1, 0.36, 1],
-              }}
             >
-              <motion.div
+              <FadeIn
+                scale={0}
+                duration={0.4}
+                delay={0.1}
+                rootMargin="-80px"
                 className="timeline-marker"
                 style={{ backgroundColor: color }}
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               />
               <div
                 className={`timeline-card ${hasImage ? 'has-image' : ''}`}
@@ -74,7 +69,7 @@ const Journey = () => {
                   <p className="timeline-description">{item.description}</p>
                 </div>
               </div>
-            </motion.div>
+            </FadeIn>
           );
         })}
       </div>

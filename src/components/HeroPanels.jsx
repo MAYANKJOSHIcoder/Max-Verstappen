@@ -1,26 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
 import { useOpenF1, fmtLapTime } from '../hooks/useOpenF1';
 import Countdown from './Countdown';
 import LiveDot from './LiveDot';
 import useRaceWeekend from '../hooks/useRaceWeekend';
+import FadeIn from './FadeIn';
 import './HeroPanels.css';
 
 const HeroPanels = () => {
-  const reduced = useReducedMotion();
   const navigate = useNavigate();
-  const noAnim = reduced ? { initial: false } : {};
 
   const { status, isLive, driver, lap } = useOpenF1({ season: 2026, driverNumber: 1 });
   const { currentRace, nextRace } = useRaceWeekend();
 
   return (
-    <motion.div
+    <FadeIn
+      y={24}
+      duration={0.7}
+      delay={0.7}
       className="hero-panels container"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      {...noAnim}
     >
       <div
         className="hp-card hp-card--telem"
@@ -85,7 +82,7 @@ const HeroPanels = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </FadeIn>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import FadeIn from '../components/FadeIn';
 import carsData from '../data/cars.json';
 import './Cars.css';
 
@@ -14,24 +14,22 @@ const posClass = (p) =>
   p === 1 ? 'gold' : p === 2 ? 'silver' : p === 3 ? 'bronze' : 'default';
 
 const Card = ({ children, className = '', delay = 0 }) => (
-  <motion.div
+  <FadeIn
+    y={24}
+    duration={0.55}
+    delay={delay}
+    rootMargin="-60px"
     className={`card ${className}`}
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: '-60px' }}
-    transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
   >
     {children}
-  </motion.div>
+  </FadeIn>
 );
 
 const YearSelector = ({ years, selectedYear, onYearChange }) => (
-  <motion.div
+  <FadeIn
+    y={16}
+    duration={0.5}
     className="year-selector"
-    initial={{ opacity: 0, y: 16 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
   >
     <span className="year-selector-label">Season</span>
     <div className="year-chips">
@@ -51,7 +49,7 @@ const YearSelector = ({ years, selectedYear, onYearChange }) => (
         </button>
       ))}
     </div>
-  </motion.div>
+  </FadeIn>
 );
 
 const Cars = () => {

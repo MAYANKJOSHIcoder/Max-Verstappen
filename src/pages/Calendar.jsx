@@ -1,10 +1,14 @@
 import { useState, useMemo, useRef } from 'react';
-import { motion } from 'framer-motion';
 import calendarData from '../data/calendar2026.json';
+import { ChevronLeft, ChevronRight } from '../components/Chevron';
 import CircuitMap from '../components/CircuitMap';
 import Countdown from '../components/Countdown';
 import RaceDetail from '../components/RaceDetail';
-import { formatDate } from '../utils/format';
+import FadeIn from '../components/FadeIn';
+const formatDate = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+};
 import useRaceWeekend from '../hooks/useRaceWeekend';
 import raceResults from '../data/raceResults2026.json';
 import './Calendar.css';
@@ -111,17 +115,14 @@ const Calendar = () => {
           goToRace={goToRace}
         />
       ) : previewRace ? (
-        <motion.div
+        <FadeIn
+          y={24}
+          duration={0.4}
           className="cal-hero cal-hero--preview"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="cal-hero-top">
             <button className="rd-back" onClick={() => setPreviewRound(null)}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <ChevronLeft size={16} />
               All Races
             </button>
             <div className="cal-nav-arrows">
@@ -131,9 +132,7 @@ const Calendar = () => {
                 onClick={() => prevRace && goToRace(prevRace)}
                 aria-label="Previous race"
               >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <ChevronLeft />
               </button>
               <button
                 className="cal-nav-btn"
@@ -141,9 +140,7 @@ const Calendar = () => {
                 onClick={() => nextRaceNav && goToRace(nextRaceNav)}
                 aria-label="Next race"
               >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <ChevronRight />
               </button>
             </div>
           </div>
@@ -181,14 +178,13 @@ const Calendar = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </FadeIn>
       ) : heroRace && (
-        <motion.div
+        <FadeIn
+          y={24}
+          duration={0.55}
+          rootMargin="-60px"
           className={`cal-hero ${currentRace ? 'cal-hero--current' : ''}`}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="cal-hero-top">
             <span />
@@ -199,9 +195,7 @@ const Calendar = () => {
                 onClick={() => prevRace && goToRace(prevRace)}
                 aria-label="Previous race"
               >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <ChevronLeft />
               </button>
               <button
                 className="cal-nav-btn"
@@ -209,9 +203,7 @@ const Calendar = () => {
                 onClick={() => nextRaceNav && goToRace(nextRaceNav)}
                 aria-label="Next race"
               >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <ChevronRight />
               </button>
             </div>
           </div>
@@ -248,7 +240,7 @@ const Calendar = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </FadeIn>
       )}
 
       <div className="cal-grid">
@@ -257,13 +249,13 @@ const Calendar = () => {
           const raceResult = raceResults.find((r) => r.round === race.round);
           const isSelected = selectedRound === race.round;
           return (
-            <motion.div
+            <FadeIn
               key={race.round}
+              y={20}
+              duration={0.4}
+              delay={(i % 6) * 0.05}
+              rootMargin="-40px"
               className={`cal-card cal-card--${status} ${isSelected ? 'cal-card--selected' : ''}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.4, delay: (i % 6) * 0.05, ease: [0.22, 1, 0.36, 1] }}
               onClick={() => {
                 if (raceResult?.hasResults) {
                   setSelectedRound((prev) => (prev === race.round ? null : race.round));
@@ -299,7 +291,7 @@ const Calendar = () => {
                   <CircuitMap circuit={race.circuit} size={90} />
                 </div>
               </div>
-            </motion.div>
+            </FadeIn>
           );
         })}
       </div>

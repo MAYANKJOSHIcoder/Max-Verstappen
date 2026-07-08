@@ -235,18 +235,6 @@ a:hover { color: var(--signal); }
   border: 2px solid transparent;
 }
 
-.btn--primary {
-  background: var(--red);
-  color: var(--white);
-  box-shadow: var(--glow-red);
-}
-
-.btn--primary:hover {
-  background: var(--red-deep);
-  transform: translateY(-2px);
-  color: var(--white);
-}
-
 .btn--ghost {
   background: transparent;
   color: var(--white);

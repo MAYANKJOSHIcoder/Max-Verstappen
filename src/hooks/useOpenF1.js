@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { compoundColor } from '../utils/format';
+const compoundColor = (compound) => {
+  const map = { SOFT: '#FF3333', MEDIUM: '#FFD700', HARD: '#F0F0F0', INTER: '#3EB83E', WET: '#3399FF' };
+  return map[compound] || '#888888';
+};
 
 const OPENF1 = 'https://max-verstappen-backend.onrender.com/v1';
 

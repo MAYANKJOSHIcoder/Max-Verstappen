@@ -2,52 +2,6 @@ import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
 
-/* Fallback pool — hosted on the official Formula 1 media library only. */
-const DEFAULT_IMAGES = [
-  {
-    src: '/images/championships/2024-verstappen-championship.webp',
-    alt: 'Max Verstappen with the 2024 World Championship trophy',
-    credit: 'Formula 1 Media',
-  },
-  {
-    src: '/images/championships/2023-verstappen-championship.webp',
-    alt: 'Max Verstappen celebrates the 2023 World Championship',
-    credit: 'Formula 1 Media',
-  },
-  {
-    src: '/images/championships/2022-verstappen-championship.webp',
-    alt: 'Max Verstappen with his second World Championship trophy',
-    credit: 'Formula 1 Media',
-  },
-  {
-    src: '/images/championships/2021-verstappen-championship.webp',
-    alt: 'Max Verstappen celebrates his first World Championship',
-    credit: 'Formula 1 Media',
-  },
-  {
-    src: '/images/races/2024-verstappen-dutch-gp.webp',
-    alt: 'Max Verstappen celebrates his fourth consecutive Dutch Grand Prix win',
-    credit: 'Formula 1 Media',
-  },
-  {
-    src: '/images/podiums/2024-verstappen-podium.webp',
-    alt: 'Max Verstappen on the podium at the 2024 Monaco Grand Prix',
-    credit: 'Formula 1 Media',
-  },
-  {
-    src: '/images/behind-the-scenes/2024-verstappen-fans.webp',
-    alt: 'Max Verstappen interacts with fans at the 2024 British Grand Prix',
-    credit: 'Formula 1 Media',
-  },
-];
-
-const DEFAULTS = {
-  maxVerticalRotationDeg: 5,
-  dragSensitivity: 20,
-  enlargeTransitionMs: 300,
-  segments: 35,
-};
-
 const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
 const normalizeAngle = (d) => ((d % 360) + 360) % 360;
 const wrapAngleSigned = (deg) => {
@@ -142,23 +96,23 @@ function computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, segments) {
 }
 
 export default function DomeGallery({
-  images = DEFAULT_IMAGES,
-  fit = 0.5,
+  images,
+  fit = 0.6,
   fitBasis = 'auto',
-  minRadius = 600,
+  minRadius = 420,
   maxRadius = Infinity,
   padFactor = 0.25,
-  overlayBlurColor = '#120F17',
-  maxVerticalRotationDeg = DEFAULTS.maxVerticalRotationDeg,
-  dragSensitivity = DEFAULTS.dragSensitivity,
-  enlargeTransitionMs = DEFAULTS.enlargeTransitionMs,
-  segments = DEFAULTS.segments,
+  overlayBlurColor = '#0a0a18',
+  maxVerticalRotationDeg = 6,
+  dragSensitivity = 22,
+  enlargeTransitionMs = 320,
+  segments,
   dragDampening = 2,
-  openedImageWidth = '250px',
-  openedImageHeight = '350px',
-  imageBorderRadius = '30px',
-  openedImageBorderRadius = '30px',
-  grayscale = true,
+  openedImageWidth = '320px',
+  openedImageHeight = '460px',
+  imageBorderRadius = '14px',
+  openedImageBorderRadius = '16px',
+  grayscale = false,
 }) {
   const rootRef = useRef(null);
   const mainRef = useRef(null);
@@ -192,7 +146,12 @@ export default function DomeGallery({
     document.body.classList.remove('dg-scroll-lock');
   }, []);
 
-  const items = useMemo(() => buildItems(images, segments), [images, segments]);
+  const computedSegments = useMemo(
+    () => segments ?? (images.length <= 4 ? 8 : images.length <= 8 ? 12 : 24),
+    [segments, images.length]
+  );
+
+  const items = useMemo(() => buildItems(images, computedSegments), [images, computedSegments]);
 
   const applyTransform = (xDeg, yDeg) => {
     const el = sphereRef.current;
@@ -502,7 +461,7 @@ export default function DomeGallery({
       const offsetY = getDataNumber(parent, 'offsetY', 0);
       const sizeX = getDataNumber(parent, 'sizeX', 2);
       const sizeY = getDataNumber(parent, 'sizeY', 2);
-      const parentRot = computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, segments);
+      const parentRot = computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, computedSegments);
       const parentY = normalizeAngle(parentRot.rotateY);
       const globalY = normalizeAngle(rotationRef.current.y);
       let rotY = -(parentY + globalY) % 360;
@@ -616,7 +575,7 @@ export default function DomeGallery({
         overlay.addEventListener('transitionend', onFirstEnd);
       }
     },
-    [enlargeTransitionMs, lockScroll, openedImageHeight, openedImageWidth, segments, unlockScroll]
+    [enlargeTransitionMs, lockScroll, openedImageHeight, openedImageWidth, computedSegments, unlockScroll]
   );
 
   const onTileClick = useCallback(
@@ -653,8 +612,8 @@ export default function DomeGallery({
       ref={rootRef}
       className="sphere-root"
       style={{
-        ['--segments-x']: segments,
-        ['--segments-y']: segments,
+        ['--segments-x']: computedSegments,
+        ['--segments-y']: computedSegments,
         ['--overlay-blur-color']: overlayBlurColor,
         ['--tile-radius']: imageBorderRadius,
         ['--enlarge-radius']: openedImageBorderRadius,

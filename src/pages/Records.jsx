@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import FadeIn from '../components/FadeIn';
 import recordsData from '../data/records.json';
 import './Records.css';
 
@@ -120,28 +120,18 @@ const Records = () => {
       ) : activeCategory === 'all' ? (
         Object.entries(filteredBySection).map(([cat, records]) => (
           <section key={cat} className="record-category">
-            <motion.h2
-              className="category-title"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
+            <FadeIn x={-20} duration={0.5} className="category-title" as="h2">
               {categoryLabel(cat)}
-            </motion.h2>
+            </FadeIn>
             <ul className="stat-rows">
-              <AnimatePresence>
-                {records.map(renderRow)}
-              </AnimatePresence>
+              {records.map(renderRow)}
             </ul>
           </section>
         ))
       ) : (
         <section className="record-category">
           <ul className="stat-rows">
-            <AnimatePresence>
-              {filteredRecords.map(renderRow)}
-            </AnimatePresence>
+            {filteredRecords.map(renderRow)}
           </ul>
         </section>
       )}

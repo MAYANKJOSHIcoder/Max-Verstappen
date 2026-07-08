@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import FadeIn from './FadeIn';
 import heroImage from '../assets/Hero.png';
 import './Hero.css';
 
@@ -13,9 +13,6 @@ const heroStats = [
 ];
 
 const Hero = () => {
-  const reduced = useReducedMotion();
-  const noAnim = reduced ? { initial: false } : {};
-
   return (
   <section className="hero" aria-label="Max Verstappen">
     <h1 className="sr-only">Max Verstappen</h1>
@@ -30,55 +27,36 @@ const Hero = () => {
 
         <div className="hero-overlap" aria-hidden="true">
           <div className="hero-title hero-title-fill">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              {...noAnim}
-            >
+            <FadeIn y={24} duration={0.7}>
               <span className="hero-line hero-line--max">Max</span>
               <span className="hero-line hero-line--verstappen">Verstappen</span>
-            </motion.div>
+            </FadeIn>
           </div>
 
           <div className="hero-number hero-number--image">
-            <motion.img
+            <FadeIn
+              as="img"
+              y={60}
+              scale={0.9}
+              duration={0.9}
+              delay={0.15}
               src={heroImage}
               alt="Max Verstappen"
               style={{ width: '100%', height: 'auto', display: 'block' }}
-              initial={{ opacity: 0, y: 60, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                duration: 0.9,
-                delay: 0.15,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              {...noAnim}
             />
           </div>
 
           <div className="hero-title hero-title-outline">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              {...noAnim}
-            >
+            <FadeIn y={24} duration={0.7}>
               <span className="hero-line hero-line--max">Max</span>
               <span className="hero-line hero-line--verstappen">Verstappen</span>
-            </motion.div>
+            </FadeIn>
           </div>
         </div>
       </div>
     </div>
 
-    <motion.div
-      className="hero-stats"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      {...noAnim}
-    >
+    <FadeIn y={30} duration={0.7} delay={0.5} as="div" className="hero-stats">
       <div className="hero-stats-inner container">
         {heroStats.map((s) => (
           <div className="hero-stat" key={s.label}>
@@ -87,7 +65,7 @@ const Hero = () => {
           </div>
         ))}
       </div>
-    </motion.div>
+    </FadeIn>
   </section>
   );
 };
