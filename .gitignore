@@ -36,3 +36,6 @@ opencode.json
 
 # Render F1 proxy backend
 /render
+
+# Visual regression screenshots
+screenshots

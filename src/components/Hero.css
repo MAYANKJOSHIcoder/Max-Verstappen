@@ -200,6 +200,8 @@
   }
 
   .hero-title-outline {
+    -webkit-text-stroke: 1px var(--red);
+    opacity: 1;
     transform: translate(calc(-50% - 21px), -50%);
   }
 
