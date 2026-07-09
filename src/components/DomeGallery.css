@@ -25,6 +25,7 @@
 .item,
 .item__image {
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 main.sphere-main {

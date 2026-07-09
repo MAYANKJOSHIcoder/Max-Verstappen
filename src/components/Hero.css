@@ -186,8 +186,8 @@
   }
 
   .hero-title {
-    font-size: clamp(3rem, 10vw, 6rem);
-    transform: translate(calc(-50% - 21px), -50%);
+    font-size: clamp(1.5rem, 9.5vw, 6rem);
+    transform: translate(calc(-50% - 10px), -50%);
   }
 
   .hero-overlap {
@@ -196,13 +196,13 @@
 
   .hero-number--image {
     width: clamp(190px, 40vw, 300px);
-    transform: translateX(-21px);
+    transform: translateX(-10px);
   }
 
   .hero-title-outline {
     -webkit-text-stroke: 1px var(--red);
     opacity: 1;
-    transform: translate(calc(-50% - 21px), -50%);
+    transform: translate(calc(-50% - 10px), -50%);
   }
 
   .hero-stats-inner {
