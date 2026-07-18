@@ -34,8 +34,8 @@ AGENTS.md
 # OpenCode config
 opencode.json
 
-# Render F1 proxy backend
-/render
+# Render backend env
+render/.env
 
 # Visual regression screenshots
 screenshots

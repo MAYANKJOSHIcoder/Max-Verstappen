@@ -4,7 +4,7 @@ const compoundColor = (compound) => {
   return map[compound] || '#888888';
 };
 
-const OPENF1 = 'https://max-verstappen-backend.onrender.com/v1';
+const OPENF1 = import.meta.env.VITE_OPENF1_API_URL || 'https://api.openf1.org/v1';
 
 const fmtLapTime = (seconds) => {
   if (seconds == null) return '—';
@@ -89,7 +89,7 @@ const fetchJSON = async (url, signal, retryOnce = true) => {
   return res.json();
 };
 
-export const useOpenF1 = ({ season = 2026, driverNumber = 1 } = {}) => {
+export const useOpenF1 = ({ season = 2026, driverNumber = 3 } = {}) => {
   // 1 req/tick, 12 ticks/min, never more than 1 req/sec
   const SCHEDULER_INTERVAL_MS = 5000;
   // Tab hidden → 1 req/60s to save quota

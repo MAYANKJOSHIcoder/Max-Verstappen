@@ -9,7 +9,7 @@ import './HeroPanels.css';
 const HeroPanels = () => {
   const navigate = useNavigate();
 
-  const { status, isLive, driver, lap } = useOpenF1({ season: 2026, driverNumber: 1 });
+  const { status, isLive, driver, lap } = useOpenF1({ season: 2026, driverNumber: 3 });
   const { currentRace, nextRace } = useRaceWeekend();
 
   return (
