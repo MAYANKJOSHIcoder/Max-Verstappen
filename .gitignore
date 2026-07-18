@@ -34,8 +34,8 @@ AGENTS.md
 # OpenCode config
 opencode.json
 
-# Render backend env
-render/.env
+# Render backend (separate repo: max-verstappen-backend)
+/render
 
 # Visual regression screenshots
 screenshots
