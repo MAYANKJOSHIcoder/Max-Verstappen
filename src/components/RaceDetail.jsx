@@ -1,7 +1,9 @@
 import FadeIn from './FadeIn';
 import { ChevronLeft, ChevronRight } from './Chevron';
 import CircuitMap from './CircuitMap';
+import MaxLapChart from './MaxLapChart';
 import './RaceDetail.css';
+import maxLapCharts from '../data/maxLapCharts2026.json';
 
 const compoundColor = (compound) => {
   const map = { SOFT: '#FF3333', MEDIUM: '#FFD700', HARD: '#F0F0F0', INTER: '#3EB83E', WET: '#3399FF' };
@@ -24,6 +26,7 @@ const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) 
   if (!results) return null;
   const r = results.result;
   if (!r) return null;
+  const lapChart = maxLapCharts.find((entry) => entry.round === results.round);
 
   return (
     <FadeIn
@@ -99,6 +102,17 @@ const RaceDetail = ({ race, results, onBack, prevRace, nextRaceNav, goToRace }) 
           />
         </div>
       </div>
+
+      {lapChart && lapChart.laps.length > 0 && (
+        <div className="rd-section">
+          <span className="rd-section-label">Position by Lap</span>
+          <MaxLapChart
+            raceName={race.raceName}
+            laps={lapChart.laps}
+            retired={r.position == null}
+          />
+        </div>
+      )}
 
       <div className="rd-section">
         <span className="rd-section-label">Race Statistics</span>

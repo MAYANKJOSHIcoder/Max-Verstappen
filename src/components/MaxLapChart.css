@@ -1,0 +1,138 @@
+/* ───────────────────────────────────────────────────────────
+   MaxLapChart — Max Verstappen lap-by-lap position chart
+   (dark telemetry theme: black canvas, single VER-blue line)
+   ──────────────────────────────────────────────────────────═ */
+
+.mlc {
+  background: var(--black);
+  border: 1px solid var(--grid-line);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  overflow: hidden;
+}
+
+.mlc-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mlc-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.01em;
+  fill: var(--white);
+}
+
+.mlc-subtitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--mist);
+}
+
+.mlc-grid {
+  stroke: oklch(34% 0.008 250);
+  stroke-width: 1;
+}
+
+/* Faint vertical line for every lap */
+.mlc-grid--lap {
+  stroke: oklch(23% 0.008 250);
+  stroke-width: 1;
+}
+
+/* Every 10th lap — brighter + thicker so the labelled laps stand out */
+.mlc-grid--major {
+  stroke: oklch(58% 0.012 250);
+  stroke-width: 1.8;
+}
+
+/* Final lap of the race — the thickest, brightest marker */
+.mlc-grid--final {
+  stroke: oklch(90% 0.02 70);
+  stroke-width: 2.6;
+}
+
+.mlc-axis {
+  stroke: oklch(72% 0.01 250);
+  stroke-width: 1.2;
+}
+
+.mlc-tick {
+  stroke: oklch(72% 0.01 250);
+  stroke-width: 1;
+}
+
+.mlc-tick--final {
+  stroke: oklch(90% 0.02 70);
+  stroke-width: 1.6;
+}
+
+.mlc-tick-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  fill: var(--white);
+}
+
+.mlc-tick-label--final {
+  fill: var(--white);
+  font-weight: 700;
+}
+
+/* Checkered flag at the final lap */
+.mlc-flag {
+  font-size: 15px;
+}
+
+/* Denser labels on the position axis — one per row */
+.mlc-tick-label--y {
+  font-size: 11px;
+  fill: var(--smoke);
+}
+
+.mlc-axis-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  fill: var(--white);
+}
+
+.mlc-line {
+  fill: none;
+  stroke: #ff1a1a;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.mlc-dot {
+  fill: #ff1a1a;
+}
+
+.mlc-change line {
+  stroke: #ff8080;
+  stroke-width: 1.6;
+}
+
+.mlc-driver-tag {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  fill: #ff1a1a;
+}
+
+.mlc-dnf {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  fill: var(--red);
+}
+
+@media (max-width: 768px) {
+  .mlc {
+    padding: 6px;
+  }
+}
