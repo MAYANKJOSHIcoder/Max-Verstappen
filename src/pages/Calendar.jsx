@@ -273,7 +273,9 @@ const Calendar = () => {
                   {status === 'cancelled' && 'Cancelled'}
                   {status === 'current' && 'This Week'}
                   {status === 'completed' && (raceResult?.hasResults
-                    ? `P${raceResult.result.position}`
+                    ? (raceResult.result.position != null
+                      ? `P${raceResult.result.position}`
+                      : 'DNF')
                     : 'TBD')}
                   {status === 'soon' && 'Soon'}
                   {status === 'upcoming' && 'Upcoming'}
