@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const links = [
-  { id: 'telemetry', label: 'Live Telemetry', route: '/telemetry' },
   { id: 'calendar', label: 'Calendar', route: '/calendar' },
   { id: 'highlights', label: 'Title Runs' },
   { id: 'cars', label: 'Cars' },
@@ -32,13 +31,9 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Route-based active state: if on /telemetry or /calendar, set activeId.
+  // Route-based active state: if on /calendar, set activeId.
   // Otherwise, fall back to scroll-based detection via IntersectionObserver.
   useEffect(() => {
-    if (location.pathname === '/telemetry') {
-      setActiveId('telemetry');
-      return;
-    }
     if (location.pathname === '/calendar') {
       setActiveId('calendar');
       return;

@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useOpenF1, fmtLapTime } from '../hooks/useOpenF1';
 import Countdown from './Countdown';
-import LiveDot from './LiveDot';
 import useRaceWeekend from '../hooks/useRaceWeekend';
 import FadeIn from './FadeIn';
 import './HeroPanels.css';
@@ -9,7 +7,6 @@ import './HeroPanels.css';
 const HeroPanels = () => {
   const navigate = useNavigate();
 
-  const { status, isLive, driver, lap } = useOpenF1({ season: 2026, driverNumber: 3 });
   const { currentRace, nextRace } = useRaceWeekend();
 
   return (
@@ -19,47 +16,6 @@ const HeroPanels = () => {
       delay={0.7}
       className="hero-panels container"
     >
-      <div
-        className="hp-card hp-card--telem"
-        onClick={() => navigate('/telemetry')}
-        onKeyDown={(e) => e.key === 'Enter' && navigate('/telemetry')}
-        role="button"
-        tabIndex={0}
-        aria-label="Live Telemetry"
-      >
-        <div className="hp-card-body">
-          <div className="hp-card-left">
-            <span className="eyebrow">Live Timing</span>
-            <h3 className="hp-card-title">See Live Race</h3>
-          </div>
-          <div className="hp-card-right">
-            {status === 'live' && isLive ? (
-              <div className="hp-telem-live">
-                <LiveDot />
-                <span className="hp-telem-pos">P{driver?.position || '—'}</span>
-                {lap?.lap_duration && (
-                  <span className="hp-telem-laptime">{fmtLapTime(lap.lap_duration)}</span>
-                )}
-              </div>
-            ) : currentRace ? (
-              <div className="hp-telem-next">
-                <span className="hp-telem-next-label">This Week:</span>
-                <span className="hp-telem-next-name">{currentRace.raceName}</span>
-                <span className="hp-telem-next-circuit">{currentRace.circuit}</span>
-                <div className="hp-countdown"><Countdown date={currentRace.date} /></div>
-              </div>
-            ) : nextRace ? (
-              <div className="hp-telem-next">
-                <span className="hp-telem-next-label">Next:</span>
-                <span className="hp-telem-next-name">{nextRace.raceName}</span>
-                <span className="hp-telem-next-circuit">{nextRace.circuit}</span>
-                <div className="hp-countdown"><Countdown date={nextRace.date} /></div>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </div>
-
       <div
         className="hp-card hp-card--cal"
         onClick={() => navigate('/calendar')}

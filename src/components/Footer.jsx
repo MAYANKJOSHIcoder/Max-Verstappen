@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import './Footer.css';
 
 const navLinks = [
-  { id: 'telemetry', label: 'Live Telemetry', route: '/telemetry' },
   { id: 'calendar', label: '2026 Calendar', route: '/calendar' },
   { id: 'highlights', label: 'Title Runs' },
   { id: 'cars', label: 'Cars' },

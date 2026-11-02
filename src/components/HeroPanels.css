@@ -1,5 +1,5 @@
 /* ============================================================
-   Hero Panels — Telemetry & Calendar preview cards
+   Hero Panels — Calendar preview card
    Rendered below the hero as a standalone section.
    ============================================================ */
 
@@ -24,10 +24,6 @@
 
 .hp-card:hover {
   transform: translateY(-2px);
-}
-
-.hp-card--telem:hover {
-  border-color: var(--red);
 }
 
 .hp-card--cal:hover {
@@ -73,65 +69,6 @@
   gap: 12px;
   flex-shrink: 1;
   min-width: 0;
-}
-
-/* ---- Live telemetry indicator ---- */
-
-.hp-telem-live {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.hp-telem-pos {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.3rem, 2vw, 1.8rem);
-  color: var(--yellow);
-  line-height: 1;
-}
-
-.hp-telem-laptime {
-  font-family: var(--font-mono);
-  font-size: clamp(0.75rem, 1vw, 0.85rem);
-  color: var(--smoke);
-  line-height: 1;
-}
-
-/* ---- Next race preview (telemetry card) ---- */
-
-.hp-telem-next {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  min-width: 0;
-}
-
-.hp-telem-next-label {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--mist);
-  line-height: 1;
-}
-
-.hp-telem-next-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
-  color: var(--white);
-  line-height: 1.2;
-  text-align: right;
-  white-space: normal;
-}
-
-.hp-telem-next-circuit {
-  font-size: 0.7rem;
-  color: var(--smoke);
-  line-height: 1.2;
-  text-align: right;
 }
 
 /* ---- Calendar card ---- */
