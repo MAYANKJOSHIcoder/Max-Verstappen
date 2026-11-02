@@ -5,11 +5,11 @@ import './Records.css';
 
 const CATEGORIES = {
   debut: { label: 'Debut & Age', color: 'var(--red)' },
-  season: { label: 'Season', color: 'var(--yellow)' },
-  consecutive: { label: 'Consecutive', color: 'var(--navy-soft)' },
-  career: { label: 'Career Milestones', color: 'var(--signal)' },
-  percentage: { label: 'Percentage', color: 'oklch(60% 0.12 280)' },
-  other: { label: 'Other', color: 'var(--mist)' },
+  season: { label: 'Season', color: 'var(--red)' },
+  consecutive: { label: 'Consecutive', color: 'var(--red)' },
+  career: { label: 'Career Milestones', color: 'var(--red)' },
+  percentage: { label: 'Percentage', color: 'var(--red)' },
+  other: { label: 'Other', color: 'var(--red)' },
 };
 const categoryLabel = (c) => CATEGORIES[c]?.label || c;
 const categoryColor = (c) => CATEGORIES[c]?.color || 'var(--red)';

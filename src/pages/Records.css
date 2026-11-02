@@ -164,7 +164,7 @@
   font-size: 0.72rem;
   font-weight: bold;
   color: var(--track-black);
-  background: var(--yellow);
+  background: var(--light-navy);
   padding: 3px 10px;
   border-radius: var(--radius-sm);
   white-space: nowrap;
@@ -172,15 +172,15 @@
 }
 
 .stat-row__year.is-ongoing {
-  background: var(--signal);
+  background: var(--light-navy);
 }
 
-/* ── Value (right-aligned gold number) ───────────────────── */
+/* ── Value (right-aligned blue number) ───────────────────── */
 .stat-row__value {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--yellow);
+  color: var(--light-navy);
   text-align: right;
   min-width: 120px;
   font-variant-numeric: tabular-nums;
