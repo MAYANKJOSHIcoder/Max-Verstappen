@@ -235,7 +235,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
 }
 
 .cal-status-badge--cancelled {
@@ -249,18 +249,18 @@
 }
 
 .cal-status-badge--completed {
-  background: var(--navy);
-  color: var(--smoke);
+  background: var(--red);
+  color: var(--white);
 }
 
 .cal-status-badge--soon {
-  background: var(--yellow);
-  color: var(--track-black);
+  background: var(--light-navy);
+  color: var(--white);
 }
 
 .cal-status-badge--upcoming {
-  background: var(--carbon);
-  color: var(--smoke);
+  background: var(--mist);
+  color: var(--white);
 }
 
 /* Card body — info + circuit map side by side */
