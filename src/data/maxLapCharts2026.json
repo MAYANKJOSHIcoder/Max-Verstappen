@@ -2868,26 +2868,986 @@
   {
     "round": 15,
     "raceName": "Azerbaijan Grand Prix",
-    "totalLaps": null,
-    "laps": []
+    "totalLaps": 51,
+    "laps": [
+      {
+        "lap": 1,
+        "position": 7
+      },
+      {
+        "lap": 2,
+        "position": 6
+      },
+      {
+        "lap": 3,
+        "position": 5
+      },
+      {
+        "lap": 4,
+        "position": 4
+      },
+      {
+        "lap": 5,
+        "position": 4
+      },
+      {
+        "lap": 6,
+        "position": 4
+      },
+      {
+        "lap": 7,
+        "position": 3
+      },
+      {
+        "lap": 8,
+        "position": 3
+      },
+      {
+        "lap": 9,
+        "position": 3
+      },
+      {
+        "lap": 10,
+        "position": 3
+      },
+      {
+        "lap": 11,
+        "position": 3
+      },
+      {
+        "lap": 12,
+        "position": 3
+      },
+      {
+        "lap": 13,
+        "position": 3
+      },
+      {
+        "lap": 14,
+        "position": 3
+      },
+      {
+        "lap": 15,
+        "position": 3
+      },
+      {
+        "lap": 16,
+        "position": 3
+      },
+      {
+        "lap": 17,
+        "position": 3
+      },
+      {
+        "lap": 18,
+        "position": 3
+      },
+      {
+        "lap": 19,
+        "position": 3
+      },
+      {
+        "lap": 20,
+        "position": 3
+      },
+      {
+        "lap": 21,
+        "position": 3
+      },
+      {
+        "lap": 22,
+        "position": 3
+      },
+      {
+        "lap": 23,
+        "position": 3
+      },
+      {
+        "lap": 24,
+        "position": 3
+      },
+      {
+        "lap": 25,
+        "position": 3
+      },
+      {
+        "lap": 26,
+        "position": 3
+      },
+      {
+        "lap": 27,
+        "position": 3
+      },
+      {
+        "lap": 28,
+        "position": 3
+      },
+      {
+        "lap": 29,
+        "position": 3
+      },
+      {
+        "lap": 30,
+        "position": 3
+      },
+      {
+        "lap": 31,
+        "position": 3
+      },
+      {
+        "lap": 32,
+        "position": 3
+      },
+      {
+        "lap": 33,
+        "position": 3
+      },
+      {
+        "lap": 34,
+        "position": 3
+      },
+      {
+        "lap": 35,
+        "position": 3
+      },
+      {
+        "lap": 36,
+        "position": 2
+      },
+      {
+        "lap": 37,
+        "position": 2
+      },
+      {
+        "lap": 38,
+        "position": 2
+      },
+      {
+        "lap": 39,
+        "position": 2
+      },
+      {
+        "lap": 40,
+        "position": 2
+      },
+      {
+        "lap": 41,
+        "position": 2
+      },
+      {
+        "lap": 42,
+        "position": 2
+      },
+      {
+        "lap": 43,
+        "position": 2
+      },
+      {
+        "lap": 44,
+        "position": 2
+      },
+      {
+        "lap": 45,
+        "position": 2
+      },
+      {
+        "lap": 46,
+        "position": 2
+      },
+      {
+        "lap": 47,
+        "position": 2
+      },
+      {
+        "lap": 48,
+        "position": 2
+      },
+      {
+        "lap": 49,
+        "position": 2
+      },
+      {
+        "lap": 50,
+        "position": 2
+      },
+      {
+        "lap": 51,
+        "position": 2
+      }
+    ]
   },
   {
     "round": 16,
     "raceName": "Singapore Grand Prix",
-    "totalLaps": null,
-    "laps": []
+    "totalLaps": 62,
+    "laps": [
+      {
+        "lap": 1,
+        "position": 1
+      },
+      {
+        "lap": 2,
+        "position": 1
+      },
+      {
+        "lap": 3,
+        "position": 1
+      },
+      {
+        "lap": 4,
+        "position": 1
+      },
+      {
+        "lap": 5,
+        "position": 1
+      },
+      {
+        "lap": 6,
+        "position": 1
+      },
+      {
+        "lap": 7,
+        "position": 1
+      },
+      {
+        "lap": 8,
+        "position": 1
+      },
+      {
+        "lap": 9,
+        "position": 1
+      },
+      {
+        "lap": 10,
+        "position": 1
+      },
+      {
+        "lap": 11,
+        "position": 1
+      },
+      {
+        "lap": 12,
+        "position": 1
+      },
+      {
+        "lap": 13,
+        "position": 1
+      },
+      {
+        "lap": 14,
+        "position": 1
+      },
+      {
+        "lap": 15,
+        "position": 1
+      },
+      {
+        "lap": 16,
+        "position": 1
+      },
+      {
+        "lap": 17,
+        "position": 1
+      },
+      {
+        "lap": 18,
+        "position": 1
+      },
+      {
+        "lap": 19,
+        "position": 1
+      },
+      {
+        "lap": 20,
+        "position": 1
+      },
+      {
+        "lap": 21,
+        "position": 1
+      },
+      {
+        "lap": 22,
+        "position": 1
+      },
+      {
+        "lap": 23,
+        "position": 1
+      },
+      {
+        "lap": 24,
+        "position": 1
+      },
+      {
+        "lap": 25,
+        "position": 1
+      },
+      {
+        "lap": 26,
+        "position": 1
+      },
+      {
+        "lap": 27,
+        "position": 1
+      },
+      {
+        "lap": 28,
+        "position": 1
+      },
+      {
+        "lap": 29,
+        "position": 1
+      },
+      {
+        "lap": 30,
+        "position": 1
+      },
+      {
+        "lap": 31,
+        "position": 1
+      },
+      {
+        "lap": 32,
+        "position": 1
+      },
+      {
+        "lap": 33,
+        "position": 1
+      },
+      {
+        "lap": 34,
+        "position": 1
+      },
+      {
+        "lap": 35,
+        "position": 1
+      },
+      {
+        "lap": 36,
+        "position": 1
+      },
+      {
+        "lap": 37,
+        "position": 1
+      },
+      {
+        "lap": 38,
+        "position": 1
+      },
+      {
+        "lap": 39,
+        "position": 1
+      },
+      {
+        "lap": 40,
+        "position": 1
+      },
+      {
+        "lap": 41,
+        "position": 1
+      },
+      {
+        "lap": 42,
+        "position": 1
+      },
+      {
+        "lap": 43,
+        "position": 1
+      },
+      {
+        "lap": 44,
+        "position": 1
+      },
+      {
+        "lap": 45,
+        "position": 1
+      },
+      {
+        "lap": 46,
+        "position": 1
+      },
+      {
+        "lap": 47,
+        "position": 1
+      },
+      {
+        "lap": 48,
+        "position": 1
+      },
+      {
+        "lap": 49,
+        "position": 1
+      },
+      {
+        "lap": 50,
+        "position": 1
+      },
+      {
+        "lap": 51,
+        "position": 1
+      },
+      {
+        "lap": 52,
+        "position": 1
+      },
+      {
+        "lap": 53,
+        "position": 1
+      },
+      {
+        "lap": 54,
+        "position": 1
+      },
+      {
+        "lap": 55,
+        "position": 1
+      },
+      {
+        "lap": 56,
+        "position": 1
+      },
+      {
+        "lap": 57,
+        "position": 1
+      },
+      {
+        "lap": 58,
+        "position": 1
+      },
+      {
+        "lap": 59,
+        "position": 1
+      },
+      {
+        "lap": 60,
+        "position": 1
+      },
+      {
+        "lap": 61,
+        "position": 1
+      },
+      {
+        "lap": 62,
+        "position": 1
+      }
+    ]
   },
   {
     "round": 17,
     "raceName": "United States Grand Prix",
-    "totalLaps": null,
-    "laps": []
+    "totalLaps": 56,
+    "laps": [
+      {
+        "lap": 1,
+        "position": 2
+      },
+      {
+        "lap": 2,
+        "position": 2
+      },
+      {
+        "lap": 3,
+        "position": 2
+      },
+      {
+        "lap": 4,
+        "position": 2
+      },
+      {
+        "lap": 5,
+        "position": 2
+      },
+      {
+        "lap": 6,
+        "position": 2
+      },
+      {
+        "lap": 7,
+        "position": 2
+      },
+      {
+        "lap": 8,
+        "position": 2
+      },
+      {
+        "lap": 9,
+        "position": 2
+      },
+      {
+        "lap": 10,
+        "position": 2
+      },
+      {
+        "lap": 11,
+        "position": 2
+      },
+      {
+        "lap": 12,
+        "position": 2
+      },
+      {
+        "lap": 13,
+        "position": 2
+      },
+      {
+        "lap": 14,
+        "position": 8
+      },
+      {
+        "lap": 15,
+        "position": 6
+      },
+      {
+        "lap": 16,
+        "position": 5
+      },
+      {
+        "lap": 17,
+        "position": 4
+      },
+      {
+        "lap": 18,
+        "position": 3
+      },
+      {
+        "lap": 19,
+        "position": 3
+      },
+      {
+        "lap": 20,
+        "position": 3
+      },
+      {
+        "lap": 21,
+        "position": 3
+      },
+      {
+        "lap": 22,
+        "position": 3
+      },
+      {
+        "lap": 23,
+        "position": 2
+      },
+      {
+        "lap": 24,
+        "position": 2
+      },
+      {
+        "lap": 25,
+        "position": 1
+      },
+      {
+        "lap": 26,
+        "position": 1
+      },
+      {
+        "lap": 27,
+        "position": 1
+      },
+      {
+        "lap": 28,
+        "position": 1
+      },
+      {
+        "lap": 29,
+        "position": 1
+      },
+      {
+        "lap": 30,
+        "position": 1
+      },
+      {
+        "lap": 31,
+        "position": 1
+      },
+      {
+        "lap": 32,
+        "position": 5
+      },
+      {
+        "lap": 33,
+        "position": 5
+      },
+      {
+        "lap": 34,
+        "position": 5
+      },
+      {
+        "lap": 35,
+        "position": 5
+      },
+      {
+        "lap": 36,
+        "position": 5
+      },
+      {
+        "lap": 37,
+        "position": 5
+      },
+      {
+        "lap": 38,
+        "position": 5
+      },
+      {
+        "lap": 39,
+        "position": 4
+      },
+      {
+        "lap": 40,
+        "position": 3
+      },
+      {
+        "lap": 41,
+        "position": 3
+      },
+      {
+        "lap": 42,
+        "position": 3
+      },
+      {
+        "lap": 43,
+        "position": 3
+      },
+      {
+        "lap": 44,
+        "position": 3
+      },
+      {
+        "lap": 45,
+        "position": 3
+      },
+      {
+        "lap": 46,
+        "position": 3
+      },
+      {
+        "lap": 47,
+        "position": 2
+      },
+      {
+        "lap": 48,
+        "position": 2
+      },
+      {
+        "lap": 49,
+        "position": 3
+      },
+      {
+        "lap": 50,
+        "position": 3
+      },
+      {
+        "lap": 51,
+        "position": 3
+      },
+      {
+        "lap": 52,
+        "position": 3
+      },
+      {
+        "lap": 53,
+        "position": 3
+      },
+      {
+        "lap": 54,
+        "position": 3
+      },
+      {
+        "lap": 55,
+        "position": 3
+      },
+      {
+        "lap": 56,
+        "position": 3
+      }
+    ]
   },
   {
     "round": 18,
     "raceName": "Mexico City Grand Prix",
-    "totalLaps": null,
-    "laps": []
+    "totalLaps": 71,
+    "laps": [
+      {
+        "lap": 1,
+        "position": 2
+      },
+      {
+        "lap": 2,
+        "position": 2
+      },
+      {
+        "lap": 3,
+        "position": 2
+      },
+      {
+        "lap": 4,
+        "position": 2
+      },
+      {
+        "lap": 6,
+        "position": 2
+      },
+      {
+        "lap": 7,
+        "position": 2
+      },
+      {
+        "lap": 8,
+        "position": 2
+      },
+      {
+        "lap": 9,
+        "position": 2
+      },
+      {
+        "lap": 10,
+        "position": 2
+      },
+      {
+        "lap": 11,
+        "position": 2
+      },
+      {
+        "lap": 12,
+        "position": 2
+      },
+      {
+        "lap": 13,
+        "position": 2
+      },
+      {
+        "lap": 14,
+        "position": 2
+      },
+      {
+        "lap": 15,
+        "position": 2
+      },
+      {
+        "lap": 16,
+        "position": 2
+      },
+      {
+        "lap": 17,
+        "position": 2
+      },
+      {
+        "lap": 18,
+        "position": 2
+      },
+      {
+        "lap": 19,
+        "position": 2
+      },
+      {
+        "lap": 20,
+        "position": 2
+      },
+      {
+        "lap": 21,
+        "position": 2
+      },
+      {
+        "lap": 22,
+        "position": 2
+      },
+      {
+        "lap": 23,
+        "position": 2
+      },
+      {
+        "lap": 24,
+        "position": 2
+      },
+      {
+        "lap": 25,
+        "position": 2
+      },
+      {
+        "lap": 26,
+        "position": 2
+      },
+      {
+        "lap": 27,
+        "position": 3
+      },
+      {
+        "lap": 28,
+        "position": 5
+      },
+      {
+        "lap": 29,
+        "position": 4
+      },
+      {
+        "lap": 30,
+        "position": 4
+      },
+      {
+        "lap": 31,
+        "position": 4
+      },
+      {
+        "lap": 32,
+        "position": 4
+      },
+      {
+        "lap": 33,
+        "position": 4
+      },
+      {
+        "lap": 34,
+        "position": 3
+      },
+      {
+        "lap": 35,
+        "position": 3
+      },
+      {
+        "lap": 36,
+        "position": 3
+      },
+      {
+        "lap": 37,
+        "position": 3
+      },
+      {
+        "lap": 38,
+        "position": 3
+      },
+      {
+        "lap": 39,
+        "position": 2
+      },
+      {
+        "lap": 40,
+        "position": 2
+      },
+      {
+        "lap": 41,
+        "position": 2
+      },
+      {
+        "lap": 42,
+        "position": 2
+      },
+      {
+        "lap": 43,
+        "position": 2
+      },
+      {
+        "lap": 44,
+        "position": 1
+      },
+      {
+        "lap": 45,
+        "position": 1
+      },
+      {
+        "lap": 46,
+        "position": 1
+      },
+      {
+        "lap": 47,
+        "position": 1
+      },
+      {
+        "lap": 48,
+        "position": 1
+      },
+      {
+        "lap": 49,
+        "position": 1
+      },
+      {
+        "lap": 50,
+        "position": 1
+      },
+      {
+        "lap": 51,
+        "position": 1
+      },
+      {
+        "lap": 52,
+        "position": 1
+      },
+      {
+        "lap": 53,
+        "position": 1
+      },
+      {
+        "lap": 54,
+        "position": 1
+      },
+      {
+        "lap": 55,
+        "position": 1
+      },
+      {
+        "lap": 56,
+        "position": 1
+      },
+      {
+        "lap": 57,
+        "position": 1
+      },
+      {
+        "lap": 58,
+        "position": 1
+      },
+      {
+        "lap": 59,
+        "position": 1
+      },
+      {
+        "lap": 60,
+        "position": 1
+      },
+      {
+        "lap": 61,
+        "position": 1
+      },
+      {
+        "lap": 62,
+        "position": 1
+      },
+      {
+        "lap": 63,
+        "position": 1
+      },
+      {
+        "lap": 64,
+        "position": 1
+      },
+      {
+        "lap": 65,
+        "position": 1
+      },
+      {
+        "lap": 66,
+        "position": 1
+      },
+      {
+        "lap": 67,
+        "position": 1
+      },
+      {
+        "lap": 68,
+        "position": 1
+      },
+      {
+        "lap": 69,
+        "position": 1
+      },
+      {
+        "lap": 70,
+        "position": 1
+      },
+      {
+        "lap": 71,
+        "position": 1
+      }
+    ]
   },
   {
     "round": 19,

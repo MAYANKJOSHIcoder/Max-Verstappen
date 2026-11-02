@@ -5,6 +5,9 @@ import { fileURLToPath } from 'url';
 const OPENF1 = 'https://api.openf1.org/v1';
 const DRIVER = 3;
 
+const RACE_POINTS = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1];
+const SPRINT_POINTS = [8, 7, 6, 5, 4, 3, 2, 1];
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const fmtLapTime = (seconds) => {
@@ -12,14 +15,6 @@ const fmtLapTime = (seconds) => {
   const mins = Math.floor(seconds / 60);
   const secs = (seconds % 60).toFixed(3);
   return mins > 0 ? `${mins}:${secs.padStart(6, '0')}` : secs;
-};
-
-const fmtTotal = (seconds) => {
-  if (seconds == null) return null;
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = (seconds % 60).toFixed(3);
-  return h > 0 ? `${h}:${String(m).padStart(2, '0')}:${s.padStart(6, '0')}` : `${m}:${s.padStart(6, '0')}`;
 };
 
 const daysBetween = (a, b) => Math.abs(new Date(a) - new Date(b)) / 86400000;
@@ -70,9 +65,14 @@ const buildStrategy = (laps) => {
 };
 
 const main = async () => {
+  const force = process.argv.includes('--force');
   const calendarPath = path.resolve(__dirname, '..', 'src', 'data', 'calendar2026.json');
   const outputPath = path.resolve(__dirname, '..', 'src', 'data', 'raceResults2026.json');
   const calendar = JSON.parse(fs.readFileSync(calendarPath, 'utf-8'));
+  const existing = fs.existsSync(outputPath)
+    ? JSON.parse(fs.readFileSync(outputPath, 'utf-8'))
+    : [];
+  const cached = new Map(existing.map((e) => [e.round, e]));
 
   console.log('Fetching all 2026 sessions...');
   const allSessions = await fetchJSON(`${OPENF1}/sessions?year=2026`, 'sessions');
@@ -99,7 +99,15 @@ const main = async () => {
     }
     const round = match.round;
     processedRounds.add(round);
-    const isCompleted = raceDate < new Date('2026-07-06');
+
+    const prior = cached.get(round);
+    if (!force && prior?.hasResults) {
+      console.log(`R${round}: ${match.raceName} — cached`);
+      results.push(prior);
+      continue;
+    }
+
+    const isCompleted = raceDate < new Date();
 
     if (!isCompleted) {
       console.log(`R${round}: ${match.raceName} — upcoming`);
@@ -184,13 +192,14 @@ const main = async () => {
     const speeds = (laps || []).flatMap((l) => [l.i1_speed, l.i2_speed, l.st_speed].filter((s) => s != null));
     const topSpeed = speeds.length ? Math.max(...speeds) : null;
 
-    // Race time from session bounds
-    const raceDuration = (new Date(session.date_end) - new Date(session.date_start)) / 1000;
-    const totalRaceTime = fmtTotal(raceDuration);
+    // ponytail: OpenF1 only exposes the scheduled session window, not real race time, so leave null
+    const totalRaceTime = null;
 
     const pitStops = pits?.length || 0;
     const positionsGained =
       gridPosition != null && finalPosition != null ? gridPosition - finalPosition : null;
+    const points = finalPosition != null ? (RACE_POINTS[finalPosition - 1] ?? 0) : 0;
+    const sprintPoints = sprintPos != null ? (SPRINT_POINTS[sprintPos - 1] ?? 0) : null;
 
     const tyreStrategy = (laps || []).length ? buildStrategy(laps) : null;
 
@@ -209,11 +218,11 @@ const main = async () => {
       isSprint,
       result: {
         position: finalPosition,
-        points: null,
+        points,
         gridPosition,
         qualifyingPosition: qualiPos,
         sprintPosition: sprintPos,
-        sprintPoints: null,
+        sprintPoints,
         fastestLap: null,
         driverOfTheDay: null,
         pitStops,
