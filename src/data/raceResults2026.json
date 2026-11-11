@@ -468,9 +468,30 @@
   },
   {
     "round": 19,
-    "hasResults": false,
+    "hasResults": true,
     "isSprint": false,
-    "result": null
+    "result": {
+      "position": 2,
+      "points": 18,
+      "gridPosition": 21,
+      "qualifyingPosition": 16,
+      "sprintPosition": null,
+      "sprintPoints": null,
+      "fastestLap": null,
+      "driverOfTheDay": null,
+      "pitStops": 3,
+      "bestLapTime": "1:13.131",
+      "totalRaceTime": null,
+      "topSpeed": 334,
+      "positionsGained": 19,
+      "tyreStrategy": null,
+      "sprintStrategy": null,
+      "highlights": [
+        "Podium",
+        "19 Overtakes"
+      ],
+      "championship": null
+    }
   },
   {
     "round": 20,
